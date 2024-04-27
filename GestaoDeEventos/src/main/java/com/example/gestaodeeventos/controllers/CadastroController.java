@@ -1,6 +1,9 @@
 package com.example.gestaodeeventos.controllers;
 
 import com.example.gestaodeeventos.gui.util.Constraints;
+import com.example.gestaodeeventos.gui.util.Utils;
+import com.example.gestaodeeventos.model.entities.User;
+import com.example.gestaodeeventos.model.services.UserService;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
@@ -8,9 +11,14 @@ import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextField;
 
 import java.net.URL;
+import java.time.LocalDate;
+import java.sql.Date;
 import java.util.ResourceBundle;
 
 public class CadastroController implements Initializable {
+
+    private User user;
+    private UserService service;
 
     @FXML
     private TextField cpfTextField;
@@ -29,10 +37,36 @@ public class CadastroController implements Initializable {
     @FXML
     private Button cancelarButton;
 
+    public void setUser(User user){
+        this.user = user;
+    }
+
+    public void setService(UserService service) {
+        this.service = service;
+    }
 
     @FXML
     public void cadastrar(){
-        System.out.println("Cadastrou");
+
+        user = getFormData();
+        service.saveOrUpdate(user);
+    }
+
+    private User getFormData() {
+        User user = new User();
+
+
+        user.setCpf(cpfTextField.getText());
+        user.setCep(cepTextField.getText());
+        user.setNome(nomeTextField.getText());
+        user.setEmail(emailTextField.getText());
+        LocalDate localDate = nascimentoDataField.getValue();
+        Date date = (localDate != null) ? Date.valueOf(localDate) : null;
+        user.setData_nascimento(date);
+        user.setData_nascimento(date);
+        user.setSenha(senhaTextField.getText());
+
+        return user;
     }
 
     @FXML
@@ -49,6 +83,6 @@ public class CadastroController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-
+        this.service = new UserService();
     }
 }

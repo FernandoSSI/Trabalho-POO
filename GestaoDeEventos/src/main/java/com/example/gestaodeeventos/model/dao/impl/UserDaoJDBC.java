@@ -20,7 +20,7 @@ public class UserDaoJDBC implements UserDao {
         PreparedStatement st = null;
         try {
             st = con.prepareStatement(
-                    "INSERT INTO seller "
+                    "INSERT INTO users "
                             + "(cpf, cep, nome, email, senha, data_nascimento) "
                             + "VALUES "
                             + "(?, ?, ?, ?, ?, ?)",
