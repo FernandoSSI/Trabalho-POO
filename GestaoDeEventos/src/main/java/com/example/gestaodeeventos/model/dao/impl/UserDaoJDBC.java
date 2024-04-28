@@ -21,9 +21,9 @@ public class UserDaoJDBC implements UserDao {
         try {
             st = con.prepareStatement(
                     "INSERT INTO users "
-                            + "(cpf, cep, nome, email, senha, data_nascimento) "
+                            + "(cpf, cep, nome, email, senha, data_nascimento, organizador) "
                             + "VALUES "
-                            + "(?, ?, ?, ?, ?, ?)",
+                            + "(?, ?, ?, ?, ?, ?, ?)",
                     Statement.RETURN_GENERATED_KEYS);
 
             st.setString(1, obj.getCpf());
@@ -32,8 +32,8 @@ public class UserDaoJDBC implements UserDao {
             st.setString(4, obj.getEmail());
             st.setString(5, obj.getSenha());
             st.setDate(6, new java.sql.Date(obj.getData_nascimento().getTime()));
-
-
+            st.setInt(7, obj.getOrganizador());
+            
             int rowsAffected = st.executeUpdate();
 
             if (rowsAffected > 0) {

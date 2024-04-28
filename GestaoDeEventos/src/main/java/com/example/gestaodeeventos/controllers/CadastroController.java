@@ -8,6 +8,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.DatePicker;
+import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
 
 import java.net.URL;
@@ -36,6 +37,8 @@ public class CadastroController implements Initializable {
     private Button cadastroButton;
     @FXML
     private Button cancelarButton;
+    @FXML
+    private RadioButton organizadorRadioBtn;
 
     public void setUser(User user){
         this.user = user;
@@ -65,6 +68,9 @@ public class CadastroController implements Initializable {
         user.setData_nascimento(date);
         user.setData_nascimento(date);
         user.setSenha(senhaTextField.getText());
+        if(organizadorRadioBtn.isSelected()){
+            user.setOrganizador(1);
+        }
 
         return user;
     }

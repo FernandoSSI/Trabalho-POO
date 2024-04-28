@@ -2,6 +2,7 @@ package com.example.gestaodeeventos.model.entities;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.Objects;
 
 public class User implements Serializable {
 
@@ -12,6 +13,7 @@ public class User implements Serializable {
     private String email;
     private String senha;
     private Date data_nascimento;
+    private Integer organizador = 0;
 
     public User(){
 
@@ -81,5 +83,27 @@ public class User implements Serializable {
 
     public void setData_nascimento(Date data_nascimento) {
         this.data_nascimento = data_nascimento;
+    }
+
+    public Integer getOrganizador() {
+        return organizador;
+    }
+
+    public void setOrganizador(Integer organizador) {
+        this.organizador = organizador;
+    }
+
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        User user = (User) o;
+        return Objects.equals(id, user.id) && Objects.equals(cpf, user.cpf);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, cpf);
     }
 }
