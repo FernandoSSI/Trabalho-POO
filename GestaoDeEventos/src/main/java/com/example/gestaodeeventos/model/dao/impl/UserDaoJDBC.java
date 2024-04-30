@@ -33,7 +33,7 @@ public class UserDaoJDBC implements UserDao {
             st.setString(5, obj.getSenha());
             st.setDate(6, new java.sql.Date(obj.getData_nascimento().getTime()));
             st.setInt(7, obj.getOrganizador());
-            
+
             int rowsAffected = st.executeUpdate();
 
             if (rowsAffected > 0) {

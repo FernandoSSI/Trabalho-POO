@@ -1,16 +1,22 @@
 package com.example.gestaodeeventos.controllers;
 
+import com.example.gestaodeeventos.Main;
 import com.example.gestaodeeventos.gui.util.Constraints;
 import com.example.gestaodeeventos.gui.util.Utils;
 import com.example.gestaodeeventos.model.entities.User;
 import com.example.gestaodeeventos.model.services.UserService;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
+import javafx.stage.Stage;
 
+import java.io.IOException;
 import java.net.URL;
 import java.time.LocalDate;
 import java.sql.Date;
@@ -49,10 +55,22 @@ public class CadastroController implements Initializable {
     }
 
     @FXML
-    public void cadastrar(){
+    public void cadastrar() throws IOException {
 
         user = getFormData();
         service.saveOrUpdate(user);
+
+        Stage stage = (Stage) cadastroButton.getScene().getWindow();
+        stage.close();
+
+        FXMLLoader loader = new FXMLLoader(Main.class.getResource("login.fxml"));
+        Parent root = loader.load();
+        Scene scene = new Scene(root);
+        Stage loginStage = new Stage();
+        loginStage.setScene(scene);
+        loginStage.show();
+
+
     }
 
     private User getFormData() {
