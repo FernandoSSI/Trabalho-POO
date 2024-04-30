@@ -72,6 +72,39 @@ public class UserDaoJDBC implements UserDao {
     }
 
     @Override
+    public User findByEmailAndPassword(String email, String senha){
+
+        PreparedStatement st = null;
+        try{
+            st = con.prepareStatement("SELECT * FROM users WHERE email = ? AND senha = ?");
+            st.setString(1, email);
+            st.setString(2, senha);
+            ResultSet resultSet = st.executeQuery();
+
+            if (resultSet.next()) {
+                User user = new User();
+                user.setId(resultSet.getInt("id"));
+                user.setNome(resultSet.getString("nome"));
+                user.setEmail(resultSet.getString("email"));
+                user.setSenha(resultSet.getString("senha"));
+                user.setCpf(resultSet.getString("cpf"));
+                user.setCep(resultSet.getString("cep"));
+                user.setData_nascimento(resultSet.getDate("data_nascimento"));
+                user.setOrganizador(resultSet.getInt("organizador"));
+                return user;
+            }
+
+        } catch (SQLException e){
+            throw new DbException(e.getMessage());
+        }
+        finally {
+            DB.closeStatement(st);
+        }
+
+        return null;
+    }
+
+    @Override
     public List<User> findAll() {
         return null;
     }

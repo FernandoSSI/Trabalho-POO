@@ -10,5 +10,6 @@ public interface UserDao {
     void update(User obj);
     void deleteById(Integer id);
     User findById(Integer id);
+    User findByEmailAndPassword(String email, String password);
     List<User> findAll();
 }

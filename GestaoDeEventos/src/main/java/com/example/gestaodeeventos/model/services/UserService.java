@@ -14,6 +14,17 @@ public class UserService {
         return dao.findAll();
     }
 
+    public User findByEmailAndPassword(String email, String senha){
+        User user = dao.findByEmailAndPassword(email, senha);
+
+        if (user != null){
+            return user;
+        }
+        return null;
+    }
+
+
+
     public void saveOrUpdate(User obj) {
         if (obj.getId() == null) {
             dao.insert(obj);
