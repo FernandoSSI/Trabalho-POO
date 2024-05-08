@@ -64,13 +64,16 @@ public class LoginController implements Initializable {
     }
 
     @FXML
-    public void fazerLogin(){
+    public void fazerLogin(ActionEvent event){
+
         String email = emailTextField.getText();
         String senha = senhaPasswordField.getText();
 
         user = service.findByEmailAndPassword(email, senha);
 
         if (user != null){
+            PaginaPrincipalController pagina = new PaginaPrincipalController(user);
+            pagina.abrirPagina(event);
             System.out.println("Bem vindo!");
         } else {
             errorMsg.setText("Usuário não encontrado!");
