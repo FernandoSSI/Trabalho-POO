@@ -69,8 +69,6 @@ public class CadastroController implements Initializable {
         Stage loginStage = new Stage();
         loginStage.setScene(scene);
         loginStage.show();
-
-
     }
 
     private User getFormData() {
@@ -94,8 +92,14 @@ public class CadastroController implements Initializable {
     }
 
     @FXML
-    public void cancelar(){
-        System.out.println("Cancelou");
+    public void cancelar() throws IOException{
+        
+        FXMLLoader loader = new FXMLLoader(Main.class.getResource("login.fxml"));
+        Parent root = loader.load();
+        Scene scene = new Scene(root);
+        Stage stage = (Stage) cadastroButton.getScene().getWindow();
+        stage.setScene(scene);
+        stage.show();
     }
 
     private void initializeNodes(){
