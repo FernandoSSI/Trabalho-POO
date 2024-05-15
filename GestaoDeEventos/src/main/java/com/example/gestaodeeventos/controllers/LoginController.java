@@ -7,6 +7,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.geometry.Rectangle2D;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -14,6 +15,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.stage.Screen;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -72,9 +74,29 @@ public class LoginController implements Initializable {
         user = service.findByEmailAndPassword(email, senha);
 
         if (user != null){
-            PaginaPrincipalController pagina = new PaginaPrincipalController(user);
-            pagina.abrirPagina(event);
-            System.out.println("Bem vindo!");
+            try {
+                FXMLLoader loader = new FXMLLoader(Main.class.getResource("paginaPrincipal.fxml"));
+                Parent root = loader.load();
+
+                PaginaPrincipalController paginaPrincipalController = loader.getController();
+                paginaPrincipalController.setUser(user);
+
+
+                Scene scene = new Scene(root);
+                Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+                stage.setScene(scene);
+                Rectangle2D screenSize = Screen.getPrimary().getVisualBounds();
+
+                double centerX = screenSize.getMinX() + (screenSize.getWidth() / 2);
+                double centerY = screenSize.getMinY() + (screenSize.getHeight() / 2);
+                stage.setX(centerX - (stage.getWidth() / 2));
+                stage.setY(centerY - (stage.getHeight() / 2));
+                stage.show();
+
+                paginaPrincipalController.atualizarInformacoes();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         } else {
             errorMsg.setText("Usuário não encontrado!");
         }

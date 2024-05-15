@@ -60,9 +60,15 @@ public class PaginaPrincipalController implements Initializable {
         }
     }
 
+    public void atualizarInformacoes() {
+        if (user != null) {
+            labelNome.setText(user.getNome());
+        }
+    }
+
     @Override
     public void initialize(URL uri, ResourceBundle rb) {
-        labelNome.setText(user.getNome());
+
     }
 
 
