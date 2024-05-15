@@ -6,6 +6,8 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.RadioButton?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.text.Font?>
@@ -15,6 +17,11 @@
    <left>
       <AnchorPane prefHeight="400.0" prefWidth="238.0" style="-fx-background-color: #007566;" BorderPane.alignment="CENTER">
          <children>
+            <ImageView fitHeight="462.0" fitWidth="264.0" layoutX="-22.0" layoutY="-1.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@images/M.jpg" />
+               </image>
+            </ImageView>
             <Text fill="WHITE" layoutX="27.0" layoutY="102.0" strokeType="OUTSIDE" strokeWidth="0.0" text="GEAUFC" wrappingWidth="183.6171875">
                <font>
                   <Font name="System Bold" size="47.0" />
@@ -38,7 +45,7 @@
                </font>
             </Label>
             <TextField fx:id="cepTextField" layoutX="66.0" layoutY="128.0" prefHeight="32.0" prefWidth="229.0" />
-            <Button fx:id="cadastroButton" layoutX="39.0" layoutY="369.0" mnemonicParsing="false" onAction="#cadastrar" prefHeight="31.0" prefWidth="286.0" style="-fx-border-radius: 20; -fx-background-color: #589A8D; -fx-background-radius: 20;" text="CADASTRAR" textFill="WHITE">
+            <Button fx:id="cadastroButton" layoutX="39.0" layoutY="369.0" mnemonicParsing="false" onAction="#cadastrar" prefHeight="31.0" prefWidth="286.0" style="-fx-border-radius: 20; -fx-background-color: #30618C; -fx-background-radius: 20;" text="CADASTRAR" textFill="WHITE">
                <font>
                   <Font size="15.0" />
                </font>
