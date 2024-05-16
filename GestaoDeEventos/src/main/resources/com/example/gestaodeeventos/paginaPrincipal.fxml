@@ -10,7 +10,7 @@
    <center>
       <AnchorPane prefHeight="407.0" prefWidth="749.0" BorderPane.alignment="CENTER">
          <children>
-            <Label fx:id="labelNome" layoutX="14.0" layoutY="32.0" prefHeight="46.0" prefWidth="513.0">
+            <Label fx:id="labelNome" layoutX="14.0" layoutY="32.0" prefHeight="46.0" prefWidth="787.0">
                <font>
                   <Font size="29.0" />
                </font>

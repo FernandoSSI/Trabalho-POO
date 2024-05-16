@@ -93,7 +93,7 @@ public class CadastroController implements Initializable {
 
     @FXML
     public void cancelar() throws IOException{
-        
+
         FXMLLoader loader = new FXMLLoader(Main.class.getResource("login.fxml"));
         Parent root = loader.load();
         Scene scene = new Scene(root);

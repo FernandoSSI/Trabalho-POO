@@ -62,7 +62,7 @@ public class PaginaPrincipalController implements Initializable {
 
     public void atualizarInformacoes() {
         if (user != null) {
-            labelNome.setText(user.getNome());
+            labelNome.setText("Bem vindo " + user.getNome());
         }
     }
 
