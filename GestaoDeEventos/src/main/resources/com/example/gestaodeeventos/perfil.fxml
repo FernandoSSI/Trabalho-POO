@@ -18,7 +18,7 @@
    <top>
       <AnchorPane prefHeight="45.0" prefWidth="1001.0" BorderPane.alignment="CENTER">
          <children>
-            <Label fx:id="labelNome" layoutX="205.0" layoutY="2.0" prefHeight="43.0" prefWidth="590.0" textFill="#9e9e9e">
+            <Label fx:id="labelNome" layoutX="205.0" layoutY="2.0" prefHeight="43.0" prefWidth="374.0" textFill="#9e9e9e">
                <font>
                   <Font name="System Bold" size="29.0" />
                </font>

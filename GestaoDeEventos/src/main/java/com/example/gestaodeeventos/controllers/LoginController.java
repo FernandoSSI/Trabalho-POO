@@ -74,29 +74,8 @@ public class LoginController implements Initializable {
         user = service.findByEmailAndPassword(email, senha);
 
         if (user != null){
-            try {
-                FXMLLoader loader = new FXMLLoader(Main.class.getResource("paginaPrincipal.fxml"));
-                Parent root = loader.load();
-
-                PaginaPrincipalController paginaPrincipalController = loader.getController();
-                paginaPrincipalController.setUser(user);
-
-
-                Scene scene = new Scene(root);
-                Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-                stage.setScene(scene);
-                Rectangle2D screenSize = Screen.getPrimary().getVisualBounds();
-
-                double centerX = screenSize.getMinX() + (screenSize.getWidth() / 2);
-                double centerY = screenSize.getMinY() + (screenSize.getHeight() / 2);
-                stage.setX(centerX - (stage.getWidth() / 2));
-                stage.setY(centerY - (stage.getHeight() / 2));
-                stage.show();
-
-                paginaPrincipalController.atualizarInformacoes();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
+            PaginaPrincipalController paginaPrincipalController = new PaginaPrincipalController();
+            paginaPrincipalController.abrirPagina(event, user);
         } else {
             errorMsg.setText("Usuário não encontrado!");
         }
