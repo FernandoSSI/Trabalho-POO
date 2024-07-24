@@ -19,12 +19,32 @@ public class DB {
                 Properties props = loadProperties();
                 String url = props.getProperty("dburl");
                 conn = DriverManager.getConnection(url, props);
+                createTableIfNotExists();
             }
             catch (SQLException e) {
                 throw new DbException(e.getMessage());
             }
         }
         return conn;
+    }
+
+    private static void createTableIfNotExists() {
+        String createTableSQL = "CREATE TABLE IF NOT EXISTS users (" +
+                "id INTEGER PRIMARY KEY AUTOINCREMENT, " +
+                "cpf TEXT NOT NULL, " +
+                "cep TEXT NOT NULL, " +
+                "nome TEXT NOT NULL, " +
+                "email TEXT NOT NULL, " +
+                "senha TEXT NOT NULL, " +
+                "data_nascimento DATE, " +
+                "organizador INTEGER" +
+                ");";
+
+        try (Statement stmt = conn.createStatement()) {
+            stmt.execute(createTableSQL);
+        } catch (SQLException e) {
+            throw new DbException(e.getMessage());
+        }
     }
 
     public static void closeConnection() {
@@ -42,8 +62,7 @@ public class DB {
             Properties props = new Properties();
             props.load(fs);
             return props;
-        }
-        catch (IOException e) {
+        } catch (IOException e) {
             throw new DbException(e.getMessage());
         }
     }

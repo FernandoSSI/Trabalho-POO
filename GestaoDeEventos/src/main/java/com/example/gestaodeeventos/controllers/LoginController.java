@@ -75,7 +75,7 @@ public class LoginController implements Initializable {
 
         if (user != null){
             PaginaPrincipalController paginaPrincipalController = new PaginaPrincipalController();
-            paginaPrincipalController.abrirPagina(event, user);
+            paginaPrincipalController.abrirPagina(event, user, "paginaPrincipal.fxml");
         } else {
             errorMsg.setText("Usuário não encontrado!");
         }

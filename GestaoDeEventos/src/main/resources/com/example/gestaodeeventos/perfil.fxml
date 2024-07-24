@@ -18,7 +18,7 @@
    <top>
       <AnchorPane prefHeight="45.0" prefWidth="1001.0" BorderPane.alignment="CENTER">
          <children>
-            <Label fx:id="labelNome" layoutX="205.0" layoutY="2.0" prefHeight="43.0" prefWidth="374.0" textFill="#9e9e9e">
+            <Label fx:id="labelNome" layoutX="205.0" layoutY="2.0" prefHeight="43.0" prefWidth="703.0" textFill="#9e9e9e">
                <font>
                   <Font name="System Bold" size="29.0" />
                </font>
@@ -36,7 +36,7 @@
                      </font>
                   </Label>
                   <Separator opacity="0.0" prefHeight="12.0" prefWidth="200.0" />
-                  <Button fx:id="perfilBtn" mnemonicParsing="false" prefHeight="45.0" prefWidth="200.0" style="-fx-background-color: #212B3D;" text="Perfil" textFill="WHITE">
+                  <Button fx:id="perfilBtn" mnemonicParsing="false" onAction="#abrirPerfil" prefHeight="45.0" prefWidth="200.0" style="-fx-background-color: #212B3D; -fx-border-width: 0 0 1px 0; -fx-border-color: white;" text="Perfil" textFill="WHITE">
                      <font>
                         <Font size="17.0" />
                      </font>
@@ -52,7 +52,7 @@
                      </graphic>
                   </Button>
                   <Separator opacity="0.0" prefHeight="12.0" prefWidth="200.0" />
-                  <Button fx:id="inscricoesBtn" mnemonicParsing="false" prefHeight="45.0" prefWidth="200.0" style="-fx-background-color: #212B3D;" text="Inscrições" textFill="WHITE">
+                  <Button fx:id="inscricoesBtn" mnemonicParsing="false" onAction="#abrirInscricoes" prefHeight="45.0" prefWidth="200.0" style="-fx-background-color: #212B3D;" text="Inscrições" textFill="WHITE">
                      <font>
                         <Font size="17.0" />
                      </font>
@@ -68,7 +68,7 @@
                      </graphic>
                   </Button>
                   <Separator opacity="0.0" prefHeight="12.0" prefWidth="200.0" />
-                  <Button fx:id="eventosBtn" mnemonicParsing="false" prefHeight="45.0" prefWidth="200.0" style="-fx-background-color: #212B3D;" text="Eventos" textFill="WHITE">
+                  <Button fx:id="eventosBtn" mnemonicParsing="false" onAction="#abrirEventos" prefHeight="45.0" prefWidth="200.0" style="-fx-background-color: #212B3D;" text="Eventos" textFill="WHITE">
                      <font>
                         <Font size="17.0" />
                      </font>
@@ -88,7 +88,7 @@
             </VBox>
             <VBox layoutY="515.0" prefHeight="72.0" prefWidth="200.0" style="-fx-background-color: #2F3D57;">
                <children>
-                  <Button fx:id="configBtn" mnemonicParsing="false" prefHeight="45.0" prefWidth="200.0" style="-fx-background-color: #212B3D;" text="Configurações" textFill="WHITE">
+                  <Button fx:id="configBtn" mnemonicParsing="false" onAction="#abrirConfiguracoes" prefHeight="45.0" prefWidth="200.0" style="-fx-background-color: #212B3D;" text="Configurações" textFill="WHITE">
                      <font>
                         <Font size="17.0" />
                      </font>
