@@ -5,6 +5,12 @@ public class Sala {
     private int numero;
     private String nome;
 
+    public Sala(Instituicao instituicao, int numero, String nome) {
+        this.instituicao = instituicao;
+        this.numero = numero;
+        this.nome = nome;
+    }
+
     public Instituicao getInstituicao() {
         return instituicao;
     }

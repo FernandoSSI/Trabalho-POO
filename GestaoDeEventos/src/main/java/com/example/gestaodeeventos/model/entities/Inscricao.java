@@ -5,6 +5,12 @@ public class Inscricao {
     private User participante;
     private Evento evento;
 
+    public Inscricao(long id, User participante, Evento evento) {
+        this.id = id;
+        this.participante = participante;
+        this.evento = evento;
+    }
+
     public long getId() {
         return id;
     }

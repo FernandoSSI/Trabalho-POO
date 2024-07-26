@@ -5,6 +5,12 @@ public class Feedback {
     private String comentario;
     private Evento evento;
 
+    public Feedback(User usuario, String comentario, Evento evento) {
+        this.usuario = usuario;
+        this.comentario = comentario;
+        this.evento = evento;
+    }
+
     public User getUsuario() {
         return usuario;
     }

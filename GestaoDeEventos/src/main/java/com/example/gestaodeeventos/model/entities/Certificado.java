@@ -2,8 +2,14 @@ package com.example.gestaodeeventos.model.entities;
 
 public class Certificado {
     private long id;
-    private int inscricao;
+    private Inscricao inscricao;
     private Atividade atividade;
+
+    public Certificado(long id, Inscricao inscricao, Atividade atividade) {
+        this.id = id;
+        this.inscricao = inscricao;
+        this.atividade = atividade;
+    }
 
     public long getId() {
         return id;
@@ -13,11 +19,11 @@ public class Certificado {
         this.id = id;
     }
 
-    public void setInscricao(int inscricao) {
+    public void setInscricao(Inscricao inscricao) {
         this.inscricao = inscricao;
     }
 
-    public int getInscricao() {
+    public Inscricao getInscricao() {
         return inscricao;
     }
 

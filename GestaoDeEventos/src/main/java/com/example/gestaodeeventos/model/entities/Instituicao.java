@@ -12,6 +12,19 @@ public class Instituicao {
     private int telefone;
     private String email;
 
+    public Instituicao(long id, String nome, long cnpj, String estado, String cidade, String bairro, String rua, int numeroResidencial, int telefone, String email) {
+        this.id = id;
+        this.nome = nome;
+        this.cnpj = cnpj;
+        this.estado = estado;
+        this.cidade = cidade;
+        this.bairro = bairro;
+        this.rua = rua;
+        this.numeroResidencial = numeroResidencial;
+        this.telefone = telefone;
+        this.email = email;
+    }
+
     public long getId() {
         return id;
     }

@@ -1,6 +1,7 @@
 package com.example.gestaodeeventos.model.entities;
 
 import java.util.Date;
+import java.util.List;
 
 public class Evento {
     private long id;
@@ -10,8 +11,22 @@ public class Evento {
     private Modalidade modalidade;
     private Instituicao instituicao;
     private Categoria categoria;
-    //private UsuarioOrganizador usuarioOrganizador;
+    private List<Organizador> Organizadores;
+    private List<User> participantes;
     private Date data;
+
+    public Evento(long id, String nome, int expectativaParticipantes, String mapaURL, Modalidade modalidade, Instituicao instituicao, Categoria categoria, List<Organizador> organizadores, List<User> participantes, Date data) {
+        this.id = id;
+        this.nome = nome;
+        this.expectativaParticipantes = expectativaParticipantes;
+        this.mapaURL = mapaURL;
+        this.modalidade = modalidade;
+        this.instituicao = instituicao;
+        this.categoria = categoria;
+        Organizadores = organizadores;
+        this.participantes = participantes;
+        this.data = data;
+    }
 
     public long getId(){
         return id;
@@ -69,13 +84,21 @@ public class Evento {
         this.categoria = categoria;
     }
 
-    /*public UsuarioOrganizador getUsuarioOrganizador(){
-        return usuarioOrganizador;
+    public List<Organizador> getOrganizadores() {
+        return Organizadores;
     }
 
-    public void setUsuarioOrganizador(UsuarioOrganizador usuarioOrganizador){
-        this.usuarioOrganizador = usuarioOrganizador;
-    }*/
+    public void setOrganizadores(List<Organizador> organizadores) {
+        Organizadores = organizadores;
+    }
+
+    public List<User> getParticipantes() {
+        return participantes;
+    }
+
+    public void setParticipantes(List<User> participantes) {
+        this.participantes = participantes;
+    }
 
     public Date getData(){
         return data;
