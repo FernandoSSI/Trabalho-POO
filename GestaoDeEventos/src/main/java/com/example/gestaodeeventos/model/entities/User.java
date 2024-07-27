@@ -18,6 +18,9 @@ public class User implements Serializable {
 
     private List<Evento> eventos;
 
+    public User() {
+    }
+
     public User(Integer id, String cpf, String cep, String nome, String email, String senha, Date data_nascimento, Integer organizador, List<Evento> eventos) {
         this.id = id;
         this.cpf = cpf;

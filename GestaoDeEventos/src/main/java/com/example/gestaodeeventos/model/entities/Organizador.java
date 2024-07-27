@@ -5,25 +5,25 @@ import java.util.List;
 
 public class Organizador extends User{
     private int telefone;
-    private List<Evento> eventos;
+    private List<Evento> eventosOrganizados;
 
-    public Organizador(int telefone, List<Evento> eventos) {
+    public Organizador(int telefone, List<Evento> eventosOrganizados) {
         this.telefone = telefone;
-        this.eventos = eventos;
+        this.eventosOrganizados = eventosOrganizados;
     }
 
-    public Organizador(Integer id, String cpf, String cep, String nome, String email, String senha, Date data_nascimento, int telefone, List<Evento> eventos) {
-        super(id, cpf, cep, nome, email, senha, data_nascimento);
+    public Organizador(Integer id, String cpf, String cep, String nome, String email, String senha, Date data_nascimento, Integer organizador, List<Evento> eventos, int telefone, List<Evento> eventosOrganizados) {
+        super(id, cpf, cep, nome, email, senha, data_nascimento, organizador, eventos);
         this.telefone = telefone;
-        this.eventos = eventos;
+        this.eventosOrganizados = eventosOrganizados;
     }
 
-    public List<Evento> getEventos() {
-        return eventos;
+    public List<Evento> getEventosOrganizados() {
+        return eventosOrganizados;
     }
 
-    public void setEventos(List<Evento> eventos) {
-        this.eventos = eventos;
+    public void setEventosOrganizados(List<Evento> eventosOrganizados) {
+        this.eventosOrganizados = eventosOrganizados;
     }
 
     public int getTelefone() {
