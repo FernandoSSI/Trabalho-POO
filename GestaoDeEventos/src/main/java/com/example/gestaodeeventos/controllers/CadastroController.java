@@ -84,9 +84,10 @@ public class CadastroController implements Initializable {
         user.setData_nascimento(date);
         user.setData_nascimento(date);
         user.setSenha(senhaTextField.getText());
-        if(organizadorRadioBtn.isSelected()){
 
-        }
+       /* if(organizadorRadioBtn.isSelected()){
+
+        }*/
 
         return user;
     }

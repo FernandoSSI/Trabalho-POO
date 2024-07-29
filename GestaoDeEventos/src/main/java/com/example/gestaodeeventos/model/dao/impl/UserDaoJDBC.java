@@ -22,9 +22,9 @@ public class UserDaoJDBC implements UserDao {
         try {
             st = con.prepareStatement(
                     "INSERT INTO users "
-                            + "(cpf, cep, nome, email, senha, data_nascimento, organizador) "
+                            + "(cpf, cep, nome, email, senha, data_nascimento) "
                             + "VALUES "
-                            + "(?, ?, ?, ?, ?, ?, ?)",
+                            + "(?, ?, ?, ?, ?, ?)",
                     Statement.RETURN_GENERATED_KEYS);
 
             st.setString(1, obj.getCpf());
@@ -61,7 +61,7 @@ public class UserDaoJDBC implements UserDao {
         PreparedStatement st = null;
         try {
             st = con.prepareStatement(
-                    "UPDATE users SET cpf = ?, cep = ?, nome = ?, email = ?, senha = ?, data_nascimento = ?, organizador = ? WHERE id = ?");
+                    "UPDATE users SET cpf = ?, cep = ?, nome = ?, email = ?, senha = ?, data_nascimento = ? WHERE id = ?");
 
             st.setString(1, obj.getCpf());
             st.setString(2, obj.getCep());
