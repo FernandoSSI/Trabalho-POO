@@ -14,14 +14,13 @@ public class User implements Serializable {
     private String email;
     private String senha;
     private Date data_nascimento;
-    private Integer organizador = 0;
 
     private List<Evento> eventos;
 
     public User() {
     }
 
-    public User(Integer id, String cpf, String cep, String nome, String email, String senha, Date data_nascimento, Integer organizador, List<Evento> eventos) {
+    public User(Integer id, String cpf, String cep, String nome, String email, String senha, Date data_nascimento, List<Evento> eventos) {
         this.id = id;
         this.cpf = cpf;
         this.cep = cep;
@@ -29,7 +28,6 @@ public class User implements Serializable {
         this.email = email;
         this.senha = senha;
         this.data_nascimento = data_nascimento;
-        this.organizador = organizador;
         this.eventos = eventos;
     }
 
@@ -87,14 +85,6 @@ public class User implements Serializable {
 
     public void setData_nascimento(Date data_nascimento) {
         this.data_nascimento = data_nascimento;
-    }
-
-    public Integer getOrganizador() {
-        return organizador;
-    }
-
-    public void setOrganizador(Integer organizador) {
-        this.organizador = organizador;
     }
 
     public List<Evento> getEventos() {

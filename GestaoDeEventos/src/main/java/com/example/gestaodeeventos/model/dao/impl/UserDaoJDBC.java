@@ -33,7 +33,6 @@ public class UserDaoJDBC implements UserDao {
             st.setString(4, obj.getEmail());
             st.setString(5, obj.getSenha());
             st.setDate(6, new java.sql.Date(obj.getData_nascimento().getTime()));
-            st.setInt(7, obj.getOrganizador());
 
             int rowsAffected = st.executeUpdate();
 
@@ -70,7 +69,6 @@ public class UserDaoJDBC implements UserDao {
             st.setString(4, obj.getEmail());
             st.setString(5, obj.getSenha());
             st.setDate(6, new java.sql.Date(obj.getData_nascimento().getTime()));
-            st.setInt(7, obj.getOrganizador());
             st.setInt(8, obj.getId());
 
             st.executeUpdate();
@@ -178,7 +176,6 @@ public class UserDaoJDBC implements UserDao {
         user.setCpf(resultSet.getString("cpf"));
         user.setCep(resultSet.getString("cep"));
         user.setData_nascimento(resultSet.getDate("data_nascimento"));
-        user.setOrganizador(resultSet.getInt("organizador"));
         return user;
     }
 }

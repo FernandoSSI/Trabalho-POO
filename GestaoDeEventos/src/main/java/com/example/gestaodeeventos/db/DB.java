@@ -36,8 +36,7 @@ public class DB {
                 "nome TEXT NOT NULL, " +
                 "email TEXT NOT NULL, " +
                 "senha TEXT NOT NULL, " +
-                "data_nascimento DATE, " +
-                "organizador INTEGER" +
+                "data_nascimento DATE " +
                 ");";
 
         try (Statement stmt = conn.createStatement()) {

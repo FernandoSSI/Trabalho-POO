@@ -12,10 +12,14 @@ public class Organizador extends User{
         this.eventosOrganizados = eventosOrganizados;
     }
 
-    public Organizador(Integer id, String cpf, String cep, String nome, String email, String senha, Date data_nascimento, Integer organizador, List<Evento> eventos, int telefone, List<Evento> eventosOrganizados) {
-        super(id, cpf, cep, nome, email, senha, data_nascimento, organizador, eventos);
+    public Organizador(Integer id, String cpf, String cep, String nome, String email, String senha, Date data_nascimento, List<Evento> eventos, int telefone, List<Evento> eventosOrganizados) {
+        super(id, cpf, cep, nome, email, senha, data_nascimento, eventos);
         this.telefone = telefone;
         this.eventosOrganizados = eventosOrganizados;
+    }
+
+    public Organizador() {
+
     }
 
     public List<Evento> getEventosOrganizados() {

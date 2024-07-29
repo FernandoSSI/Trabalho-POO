@@ -3,6 +3,7 @@ package com.example.gestaodeeventos.controllers;
 import com.example.gestaodeeventos.Main;
 import com.example.gestaodeeventos.gui.util.Constraints;
 import com.example.gestaodeeventos.gui.util.Utils;
+import com.example.gestaodeeventos.model.entities.Organizador;
 import com.example.gestaodeeventos.model.entities.User;
 import com.example.gestaodeeventos.model.services.UserService;
 import javafx.fxml.FXML;
@@ -74,7 +75,6 @@ public class CadastroController implements Initializable {
     private User getFormData() {
         User user = new User();
 
-
         user.setCpf(cpfTextField.getText());
         user.setCep(cepTextField.getText());
         user.setNome(nomeTextField.getText());
@@ -85,7 +85,7 @@ public class CadastroController implements Initializable {
         user.setData_nascimento(date);
         user.setSenha(senhaTextField.getText());
         if(organizadorRadioBtn.isSelected()){
-            user.setOrganizador(1);
+
         }
 
         return user;

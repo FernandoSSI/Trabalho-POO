@@ -10,8 +10,8 @@ public class Colaborador extends User{
         this.atividades = atividades;
     }
 
-    public Colaborador(Integer id, String cpf, String cep, String nome, String email, String senha, Date data_nascimento, Integer organizador, List<Evento> eventos, List<Atividade> atividades) {
-        super(id, cpf, cep, nome, email, senha, data_nascimento, organizador, eventos);
+    public Colaborador(Integer id, String cpf, String cep, String nome, String email, String senha, Date data_nascimento, List<Evento> eventos, List<Atividade> atividades) {
+        super(id, cpf, cep, nome, email, senha, data_nascimento, eventos);
         this.atividades = atividades;
     }
 
