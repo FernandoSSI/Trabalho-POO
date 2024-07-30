@@ -6,9 +6,9 @@ public class Feedback {
     private Evento evento;
 
     public Feedback(User usuario, String comentario, Evento evento) {
-        this.usuario = usuario;
-        this.comentario = comentario;
-        this.evento = evento;
+        setUsuario(usuario);
+        setComentario(comentario);
+        setEvento(evento);
     }
 
     public User getUsuario() {
@@ -16,6 +16,9 @@ public class Feedback {
     }
 
     public void setUsuario(User usuario) {
+        if (usuario == null) {
+            throw new IllegalArgumentException("Usuario cannot be null");
+        }
         this.usuario = usuario;
     }
 
@@ -24,6 +27,9 @@ public class Feedback {
     }
 
     public void setComentario(String comentario) {
+        if (comentario == null || comentario.trim().isEmpty()) {
+            throw new IllegalArgumentException("Comentario cannot be null or empty");
+        }
         this.comentario = comentario;
     }
 
@@ -32,6 +38,9 @@ public class Feedback {
     }
 
     public void setEvento(Evento evento) {
+        if (evento == null) {
+            throw new IllegalArgumentException("Evento cannot be null");
+        }
         this.evento = evento;
     }
 }

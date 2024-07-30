@@ -2,13 +2,14 @@ package com.example.gestaodeeventos.model.entities;
 
 public class Inscricao {
     private long id;
+
     private User participante;
     private Evento evento;
 
     public Inscricao(long id, User participante, Evento evento) {
-        this.id = id;
-        this.participante = participante;
-        this.evento = evento;
+        setId(id);
+        setParticipante(participante);
+        setEvento(evento);
     }
 
     public long getId() {
@@ -16,6 +17,9 @@ public class Inscricao {
     }
 
     public void setId(long id) {
+        if (id <= 0) {
+            throw new IllegalArgumentException("ID must be greater than zero");
+        }
         this.id = id;
     }
 
@@ -24,6 +28,9 @@ public class Inscricao {
     }
 
     public void setParticipante(User participante) {
+        if (participante == null) {
+            throw new IllegalArgumentException("Participante cannot be null");
+        }
         this.participante = participante;
     }
 
@@ -32,6 +39,9 @@ public class Inscricao {
     }
 
     public void setEvento(Evento evento) {
+        if (evento == null) {
+            throw new IllegalArgumentException("Evento cannot be null");
+        }
         this.evento = evento;
     }
 }

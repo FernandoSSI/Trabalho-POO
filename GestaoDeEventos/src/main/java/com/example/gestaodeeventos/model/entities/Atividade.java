@@ -4,20 +4,21 @@ import java.util.Date;
 import java.util.List;
 
 public class Atividade {
-    private Evento evento;
     private String titulo;
     private Date data;
     private String local;
+
+    private Evento evento;
     private List<Colaborador> colaboradores;
     private Certificado certificado;
 
     public Atividade(Evento evento, String titulo, Date data, String local, List<Colaborador> colaboradores, Certificado certificado) {
-        this.evento = evento;
-        this.titulo = titulo;
-        this.data = data;
-        this.local = local;
-        this.colaboradores = colaboradores;
-        this.certificado = certificado;
+        setEvento(evento);
+        setTitulo(titulo);
+        setData(data);
+        setLocal(local);
+        setColaboradores(colaboradores);
+        setCertificado(certificado);
     }
 
     public Evento getEvento() {
@@ -25,14 +26,20 @@ public class Atividade {
     }
 
     public void setEvento(Evento evento) {
+        if (evento == null) {
+            throw new IllegalArgumentException("Evento cannot be null");
+        }
         this.evento = evento;
     }
 
-    public String getTitulo(){
+    public String getTitulo() {
         return titulo;
     }
 
     public void setTitulo(String titulo) {
+        if (titulo == null || titulo.trim().isEmpty()) {
+            throw new IllegalArgumentException("Titulo cannot be null or empty");
+        }
         this.titulo = titulo;
     }
 
@@ -41,6 +48,9 @@ public class Atividade {
     }
 
     public void setData(Date data) {
+        if (data == null) {
+            throw new IllegalArgumentException("Data cannot be null");
+        }
         this.data = data;
     }
 
@@ -49,6 +59,9 @@ public class Atividade {
     }
 
     public void setLocal(String local) {
+        if (local != null && local.trim().isEmpty()) {
+            throw new IllegalArgumentException("Local cannot be empty if provided");
+        }
         this.local = local;
     }
 
@@ -57,6 +70,9 @@ public class Atividade {
     }
 
     public void setColaboradores(List<Colaborador> colaboradores) {
+        if (colaboradores != null && colaboradores.isEmpty()) {
+            throw new IllegalArgumentException("Colaboradores cannot be empty if provided");
+        }
         this.colaboradores = colaboradores;
     }
 

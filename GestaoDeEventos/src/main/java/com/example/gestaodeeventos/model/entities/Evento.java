@@ -2,94 +2,120 @@ package com.example.gestaodeeventos.model.entities;
 
 import java.util.Date;
 import java.util.List;
+import java.util.regex.Pattern;
 
 public class Evento {
     private long id;
     private String nome;
     private int expectativaParticipantes;
     private String mapaURL;
+    private Date data;
+
     private Modalidade modalidade;
     private Instituicao instituicao;
     private Categoria categoria;
-    private List<Organizador> Organizadores;
+    private List<Organizador> organizadores;
     private List<User> participantes;
-    private Date data;
 
     public Evento(long id, String nome, int expectativaParticipantes, String mapaURL, Modalidade modalidade, Instituicao instituicao, Categoria categoria, List<Organizador> organizadores, List<User> participantes, Date data) {
-        this.id = id;
-        this.nome = nome;
-        this.expectativaParticipantes = expectativaParticipantes;
-        this.mapaURL = mapaURL;
-        this.modalidade = modalidade;
-        this.instituicao = instituicao;
-        this.categoria = categoria;
-        Organizadores = organizadores;
-        this.participantes = participantes;
-        this.data = data;
+        setId(id);
+        setNome(nome);
+        setExpectativaParticipantes(expectativaParticipantes);
+        setMapaURL(mapaURL);
+        setModalidade(modalidade);
+        setInstituicao(instituicao);
+        setCategoria(categoria);
+        setOrganizadores(organizadores);
+        setParticipantes(participantes);
+        setData(data);
     }
 
-    public long getId(){
+    public long getId() {
         return id;
     }
 
-    public void setId(long id){
+    public void setId(long id) {
+        if (id <= 0) {
+            throw new IllegalArgumentException("ID must be greater than zero");
+        }
         this.id = id;
     }
 
-    public String getNome(){
+    public String getNome() {
         return nome;
     }
 
-    public void setNome(String nome){
+    public void setNome(String nome) {
+        if (nome == null || nome.trim().isEmpty()) {
+            throw new IllegalArgumentException("Nome cannot be null or empty");
+        }
         this.nome = nome;
     }
 
-    public int getExpectativaParticipantes(){
+    public int getExpectativaParticipantes() {
         return expectativaParticipantes;
     }
 
-    public void setExpectativaParticipantes(int expectativaParticipantes){
+    public void setExpectativaParticipantes(int expectativaParticipantes) {
+        if (expectativaParticipantes <= 0) {
+            throw new IllegalArgumentException("Expectativa de participantes must be greater than zero");
+        }
         this.expectativaParticipantes = expectativaParticipantes;
     }
 
-    public String getMapaURL(){
+    public String getMapaURL() {
         return mapaURL;
     }
 
-    public void setMapaURL(String mapaURL){
+    public void setMapaURL(String mapaURL) {
+        if (mapaURL == null || mapaURL.trim().isEmpty() || !Pattern.compile("^(http|https)://.*$").matcher(mapaURL).matches()) {
+            throw new IllegalArgumentException("Mapa URL must be a valid URL");
+        }
         this.mapaURL = mapaURL;
     }
 
-    public Modalidade getModalidade(){
+    public Modalidade getModalidade() {
         return modalidade;
     }
 
-    public void setModalidade(Modalidade modalidade){
+    public void setModalidade(Modalidade modalidade) {
+        if (modalidade == null) {
+            throw new IllegalArgumentException("Modalidade cannot be null");
+        }
         this.modalidade = modalidade;
     }
 
-    public Instituicao getInstituicao(){
+    public Instituicao getInstituicao() {
         return instituicao;
     }
 
-    public void setInstituicao(Instituicao instituicao){
+    public void setInstituicao(Instituicao instituicao) {
+        if (instituicao == null) {
+            throw new IllegalArgumentException("Instituicao cannot be null");
+        }
         this.instituicao = instituicao;
     }
 
-    public Categoria getCategoria(){
+    public Categoria getCategoria() {
         return categoria;
     }
 
-    public void setCategoria(Categoria categoria){
+    public void setCategoria(Categoria categoria) {
+        if (categoria == null) {
+            throw new IllegalArgumentException("Categoria cannot be null");
+        }
         this.categoria = categoria;
     }
 
     public List<Organizador> getOrganizadores() {
-        return Organizadores;
+        return organizadores;
     }
 
     public void setOrganizadores(List<Organizador> organizadores) {
-        Organizadores = organizadores;
+        if (organizadores == null || organizadores.isEmpty()) {
+            throw new IllegalArgumentException("Organizadores cannot be null or empty");
+        }
+        this.organizadores = organizadores;
     }
 
     public List<User> getParticipantes() {
@@ -100,12 +126,14 @@ public class Evento {
         this.participantes = participantes;
     }
 
-    public Date getData(){
+    public Date getData() {
         return data;
     }
 
-    public void setData(Date data){
+    public void setData(Date data) {
+        if (data == null || data.before(new Date())) {
+            throw new IllegalArgumentException("Data must be a future date");
+        }
         this.data = data;
     }
-
 }
