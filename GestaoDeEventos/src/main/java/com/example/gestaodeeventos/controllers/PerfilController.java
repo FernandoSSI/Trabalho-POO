@@ -18,7 +18,7 @@ import java.util.ResourceBundle;
 
 public class PerfilController extends PaginaController implements Initializable {
 
-    @Override
+    //@Override
     public void atualizarInformacoes() {
         if (user != null) {
             labelNome.setText("perfil do: " + user.getNome() + "!");

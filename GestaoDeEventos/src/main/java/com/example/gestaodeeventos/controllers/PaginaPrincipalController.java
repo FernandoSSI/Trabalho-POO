@@ -1,39 +1,59 @@
 package com.example.gestaodeeventos.controllers;
 
+import com.example.gestaodeeventos.Main;
+import com.example.gestaodeeventos.model.entities.Organizador;
+import com.example.gestaodeeventos.model.entities.User;
+import com.example.gestaodeeventos.model.services.OrganizadorService;
+import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.control.Label;
+import javafx.stage.Stage;
+
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-import com.example.gestaodeeventos.Main;
-import com.example.gestaodeeventos.model.entities.User;
-import javafx.event.ActionEvent;
-import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.fxml.Initializable;
-import javafx.geometry.Rectangle2D;
-import javafx.scene.Node;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.stage.Screen;
-import javafx.stage.Stage;
+public class PaginaPrincipalController extends PaginaController{
 
-public class PaginaPrincipalController extends PaginaController implements Initializable {
+    @FXML
+    private Label labelNome;
 
-    public PaginaPrincipalController() { }
+    private boolean isOrganizer;
 
-    public void atualizarInformacoes() {
-        if (user != null) {
-            labelNome.setText("Bem vindo " + user.getNome() + "!");
+    public void abrirPagina(ActionEvent event, User user, String fxml, boolean isOrganizer) {
+        try {
+            FXMLLoader loader = new FXMLLoader(Main.class.getResource(fxml));
+            Parent root = loader.load();
+            Scene scene = new Scene(root);
+
+            PaginaPrincipalController controller = loader.getController();
+            controller.setUser(user);
+            this.isOrganizer = isOrganizer;
+
+            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            stage.setScene(scene);
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
 
-    @Override
-    public void initialize(URL uri, ResourceBundle rb) {
-
+    public void setUser(User user) {
+        String welcomeMessage = "Bem-vindo(a), " + user.getNome();
+        if (user instanceof Organizador){
+            welcomeMessage += " (Organizador)";
+        }
+        labelNome.setText(welcomeMessage);
     }
 
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+        super.initialize(url, resourceBundle);
 
+
+    }
 }
-

@@ -2,11 +2,7 @@ package com.example.gestaodeeventos.db;
 
 import java.io.FileInputStream;
 import java.io.IOException;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.*;
 import java.util.Properties;
 
 public class DB {
@@ -40,7 +36,6 @@ public class DB {
 
         String createOrganizadorTableSQL = "CREATE TABLE IF NOT EXISTS organizador (" +
                 "id INTEGER PRIMARY KEY AUTOINCREMENT, " +
-                "telefone INTEGER NOT NULL, " +
                 "FOREIGN KEY (id) REFERENCES user(id)" +
                 ");";
 
@@ -166,6 +161,20 @@ public class DB {
                 throw new DbException(e.getMessage());
             }
         }
+    }
+
+    public static boolean isOrganizer(int userId) {
+        String query = "SELECT COUNT(*) FROM organizador WHERE user_id = ?";
+        try (PreparedStatement stmt = conn.prepareStatement(query)) {
+            stmt.setInt(1, userId);
+            ResultSet rs = stmt.executeQuery();
+            if (rs.next()) {
+                return rs.getInt(1) > 0;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return false;
     }
 
     private static Properties loadProperties() {

@@ -14,27 +14,23 @@ public class UserService {
         return dao.findAll();
     }
 
-    public User findByEmailAndPassword(String email, String senha){
-        User user = dao.findByEmailAndPassword(email, senha);
-
-        if (user != null){
-            return user;
-        }
-        return null;
-    }
-
-
-
     public void saveOrUpdate(User obj) {
         if (obj.getId() == null) {
             dao.insert(obj);
-        }
-        else {
+        } else {
             dao.update(obj);
         }
     }
 
+    public User findById(Integer id) {
+        return dao.findById(id);
+    }
+
     public void remove(User obj) {
         dao.deleteById(obj.getId());
+    }
+
+    public User findByEmailAndPassword(String email, String senha) {
+        return dao.findByEmailAndPassword(email, senha);
     }
 }

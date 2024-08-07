@@ -1,13 +1,14 @@
 package com.example.gestaodeeventos.controllers;
 
 import com.example.gestaodeeventos.Main;
+import com.example.gestaodeeventos.model.entities.Organizador;
 import com.example.gestaodeeventos.model.entities.User;
+import com.example.gestaodeeventos.model.services.OrganizadorService;
 import com.example.gestaodeeventos.model.services.UserService;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.geometry.Rectangle2D;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -15,7 +16,6 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
-import javafx.stage.Screen;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -25,7 +25,8 @@ import java.util.ResourceBundle;
 public class LoginController implements Initializable {
 
     private User user;
-    private UserService service;
+    private UserService userService;
+    private OrganizadorService organizadorService;
 
     @FXML
     private TextField emailTextField;
@@ -35,27 +36,22 @@ public class LoginController implements Initializable {
     private Label errorMsg;
     @FXML
     private Button loginButton;
-
     @FXML
     private Button cadastroButton;
 
-    public void setUser(User user){
+    public void setUser(User user) {
         this.user = user;
     }
 
     public void setService(UserService service) {
-        this.service = service;
+        this.userService = service;
     }
 
     @FXML
-    public void abrirTelaCadastro(ActionEvent event){
+    public void abrirTelaCadastro(ActionEvent event) {
         try {
             FXMLLoader loader = new FXMLLoader(Main.class.getResource("cadastro.fxml"));
             Parent root = loader.load();
-
-            CadastroController cadastroController = loader.getController();
-
-
             Scene scene = new Scene(root, 600, 455);
             Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
             stage.setScene(scene);
@@ -66,24 +62,40 @@ public class LoginController implements Initializable {
     }
 
     @FXML
-    public void fazerLogin(ActionEvent event){
-
+    public void fazerLogin(ActionEvent event) {
         String email = emailTextField.getText();
         String senha = senhaPasswordField.getText();
+        user = userService.findByEmailAndPassword(email, senha);
 
-        user = service.findByEmailAndPassword(email, senha);
 
-        if (user != null){
+        if (user != null) {
+            Organizador organizador = organizadorService.findById(user.getId());
+            String pagina = "paginaPrincipal.fxml";
             PaginaPrincipalController paginaPrincipalController = new PaginaPrincipalController();
-            paginaPrincipalController.abrirPagina(event, user, "paginaPrincipal.fxml");
+
+            if(organizador == null){
+                paginaPrincipalController.abrirPagina(event, user, pagina);
+
+            } else {
+                organizador.setNome(user.getNome());
+                organizador.setCpf(user.getCpf());
+                organizador.setCep(user.getCep());
+                organizador.setEmail(user.getEmail());
+                organizador.setSenha(user.getSenha());
+                organizador.setData_nascimento(user.getData_nascimento());
+
+                paginaPrincipalController.abrirPagina(event, organizador, pagina);
+
+            }
+
         } else {
             errorMsg.setText("Usuário não encontrado!");
         }
     }
 
-
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        this.service = new UserService();
+        this.userService = new UserService();
+        this.organizadorService = new OrganizadorService();
     }
 }

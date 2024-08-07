@@ -17,11 +17,11 @@ public class UserDaoJDBC implements UserDao {
         this.con=con;
     }
 
-    public void insert(User obj) {
+    public Integer insert(User obj) {
         PreparedStatement st = null;
         try {
             st = con.prepareStatement(
-                    "INSERT INTO users "
+                    "INSERT INTO user "
                             + "(cpf, cep, nome, email, senha, data_nascimento) "
                             + "VALUES "
                             + "(?, ?, ?, ?, ?, ?)",
@@ -54,6 +54,7 @@ public class UserDaoJDBC implements UserDao {
         finally {
             DB.closeStatement(st);
         }
+        return null;
     }
 
     @Override
@@ -61,7 +62,7 @@ public class UserDaoJDBC implements UserDao {
         PreparedStatement st = null;
         try {
             st = con.prepareStatement(
-                    "UPDATE users SET cpf = ?, cep = ?, nome = ?, email = ?, senha = ?, data_nascimento = ? WHERE id = ?");
+                    "UPDATE user SET cpf = ?, cep = ?, nome = ?, email = ?, senha = ?, data_nascimento = ? WHERE id = ?");
 
             st.setString(1, obj.getCpf());
             st.setString(2, obj.getCep());
@@ -85,7 +86,7 @@ public class UserDaoJDBC implements UserDao {
     public void deleteById(Integer id) {
         PreparedStatement st = null;
         try{
-            st = con.prepareStatement("DELETE FROM users WHERE id = ?");
+            st = con.prepareStatement("DELETE FROM user WHERE id = ?");
             st.setInt(1, id);
             st.executeUpdate();
         } catch (SQLException e){
@@ -101,7 +102,7 @@ public class UserDaoJDBC implements UserDao {
         PreparedStatement st = null;
         ResultSet resultSet = null;
         try{
-            st = con.prepareStatement("SELECT * FROM users WHERE id = ?");
+            st = con.prepareStatement("SELECT * FROM user WHERE id = ?");
             st.setInt(1, id);
             resultSet = st.executeQuery();
 
@@ -125,7 +126,7 @@ public class UserDaoJDBC implements UserDao {
         PreparedStatement st = null;
         ResultSet resultSet = null;
         try{
-            st = con.prepareStatement("SELECT * FROM users WHERE email = ? AND senha = ?");
+            st = con.prepareStatement("SELECT * FROM user WHERE email = ? AND senha = ?");
             st.setString(1, email);
             st.setString(2, senha);
             resultSet = st.executeQuery();
@@ -149,7 +150,7 @@ public class UserDaoJDBC implements UserDao {
         PreparedStatement st = null;
         ResultSet resultSet = null;
         try{
-            st = con.prepareStatement("SELECT * FROM users ");
+            st = con.prepareStatement("SELECT * FROM user ");
             resultSet = st.executeQuery();
 
             List<User> users = new ArrayList<>();

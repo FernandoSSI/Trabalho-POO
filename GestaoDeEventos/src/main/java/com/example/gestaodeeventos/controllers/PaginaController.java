@@ -1,6 +1,7 @@
 package com.example.gestaodeeventos.controllers;
 
 import com.example.gestaodeeventos.Main;
+import com.example.gestaodeeventos.db.DB;
 import com.example.gestaodeeventos.model.entities.User;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -75,9 +76,14 @@ public class PaginaController implements Initializable {
 
     public void atualizarInformacoes() {
         if (user != null) {
-            labelNome.setText("Bem vindo " + user.getNome() + "!");
+            String welcomeMessage = "Bem vindo " + user.getNome();
+            if (DB.isOrganizer(user.getId())) {
+                welcomeMessage += " Organizador";
+            }
+            labelNome.setText(welcomeMessage + "!");
         }
     }
+
 
     @FXML
     public void abrirPerfil(ActionEvent event){
