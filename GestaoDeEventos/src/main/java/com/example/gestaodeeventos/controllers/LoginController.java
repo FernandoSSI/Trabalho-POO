@@ -70,11 +70,10 @@ public class LoginController implements Initializable {
 
         if (user != null) {
             Organizador organizador = organizadorService.findById(user.getId());
-            String pagina = "paginaPrincipal.fxml";
             PaginaPrincipalController paginaPrincipalController = new PaginaPrincipalController();
 
             if(organizador == null){
-                paginaPrincipalController.abrirPagina(event, user, pagina);
+                paginaPrincipalController.abrirPaginaPrincipal(event, user);
 
             } else {
                 organizador.setNome(user.getNome());
@@ -84,7 +83,7 @@ public class LoginController implements Initializable {
                 organizador.setSenha(user.getSenha());
                 organizador.setData_nascimento(user.getData_nascimento());
 
-                paginaPrincipalController.abrirPagina(event, organizador, pagina);
+                paginaPrincipalController.abrirPaginaPrincipal(event, organizador);
 
             }
 

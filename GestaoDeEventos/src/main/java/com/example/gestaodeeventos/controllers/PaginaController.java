@@ -47,33 +47,6 @@ public class PaginaController implements Initializable {
         this.user = user;
     }
 
-    public void abrirPagina(ActionEvent event, User user, String arquivo){
-        try {
-            FXMLLoader loader = new FXMLLoader(Main.class.getResource(arquivo));
-            Parent root = loader.load();
-
-            PaginaPrincipalController paginaPrincipalController = loader.getController();
-            paginaPrincipalController.setUser(user);
-
-
-            Scene scene = new Scene(root);
-            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-            stage.setScene(scene);
-            Rectangle2D screenSize = Screen.getPrimary().getVisualBounds();
-
-            double centerX = screenSize.getMinX() + (screenSize.getWidth() / 2);
-            double centerY = screenSize.getMinY() + (screenSize.getHeight() / 2);
-            stage.setX(centerX - (stage.getWidth() / 2));
-            stage.setY(centerY - (stage.getHeight() / 2));
-            stage.show();
-
-            paginaPrincipalController.atualizarInformacoes();
-
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
     public void atualizarInformacoes() {
         if (user != null) {
             String welcomeMessage = "Bem vindo " + user.getNome();
@@ -84,25 +57,126 @@ public class PaginaController implements Initializable {
         }
     }
 
+    public void abrirPaginaPrincipal(ActionEvent event, User user) {
+        try {
+            Stage currentStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            double currentX = currentStage.getX();
+            double currentY = currentStage.getY();
+
+            FXMLLoader loader = new FXMLLoader(Main.class.getResource("paginaPrincipal.fxml"));
+            Parent root = loader.load();
+
+            PaginaPrincipalController paginaPrincipalController = loader.getController();
+            paginaPrincipalController.setUser(user);
+
+            Scene scene = new Scene(root);
+            Stage stage = currentStage;
+
+            stage.setScene(scene);
+
+            stage.setX(currentX);
+            stage.setY(currentY);
+
+            stage.show();
+
+            paginaPrincipalController.atualizarInformacoes();
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 
     @FXML
     public void abrirPerfil(ActionEvent event){
-        abrirPagina(event, user, "perfil.fxml");
+        try {
+            Stage currentStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            double currentX = currentStage.getX();
+            double currentY = currentStage.getY();
+
+            FXMLLoader loader = new FXMLLoader(Main.class.getResource("perfil.fxml"));
+            Parent root = loader.load();
+
+            PerfilController perfilController = loader.getController();
+            perfilController.setUser(user);
+
+            Scene scene = new Scene(root);
+            Stage stage = currentStage;
+
+            stage.setScene(scene);
+
+            stage.setX(currentX);
+            stage.setY(currentY);
+
+            stage.show();
+
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     @FXML
     public void abrirInscricoes(ActionEvent event){
-        abrirPagina(event, user, "inscricoes.fxml");
+
+        try {
+            Stage currentStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            double currentX = currentStage.getX();
+            double currentY = currentStage.getY();
+
+            FXMLLoader loader = new FXMLLoader(Main.class.getResource("inscricoes.fxml"));
+            Parent root = loader.load();
+
+            InscricoesController inscricoesController = loader.getController();
+            inscricoesController.setUser(user);
+
+            Scene scene = new Scene(root);
+            Stage stage = currentStage;
+
+            stage.setScene(scene);
+
+            stage.setX(currentX);
+            stage.setY(currentY);
+
+            stage.show();
+
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     @FXML
     public void abrirEventos(ActionEvent event){
-        abrirPagina(event, user, "eventos.fxml");
+        try {
+            Stage currentStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            double currentX = currentStage.getX();
+            double currentY = currentStage.getY();
+
+            FXMLLoader loader = new FXMLLoader(Main.class.getResource("eventos.fxml"));
+            Parent root = loader.load();
+
+            EventosController eventosController = loader.getController();
+            eventosController.setUser(user);
+
+            Scene scene = new Scene(root);
+            Stage stage = currentStage;
+
+            stage.setScene(scene);
+
+            stage.setX(currentX);
+            stage.setY(currentY);
+
+            stage.show();
+
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     @FXML
     public void abrirConfiguracoes(ActionEvent event){
-        abrirPagina(event, user, "configuracoes.fxml");
+
     }
 
     @Override

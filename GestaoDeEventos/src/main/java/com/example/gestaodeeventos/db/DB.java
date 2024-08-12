@@ -164,7 +164,7 @@ public class DB {
     }
 
     public static boolean isOrganizer(int userId) {
-        String query = "SELECT COUNT(*) FROM organizador WHERE user_id = ?";
+        String query = "SELECT COUNT(*) FROM organizador WHERE id = ?";
         try (PreparedStatement stmt = conn.prepareStatement(query)) {
             stmt.setInt(1, userId);
             ResultSet rs = stmt.executeQuery();

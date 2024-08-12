@@ -11,14 +11,14 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane prefHeight="632.0" prefWidth="1013.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.gestaodeeventos.controllers.PerfilController">
+<BorderPane prefHeight="632.0" prefWidth="1013.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.gestaodeeventos.controllers.EventosController">
    <center>
       <AnchorPane prefHeight="592.0" prefWidth="818.0" BorderPane.alignment="CENTER" />
    </center>
    <top>
       <AnchorPane prefHeight="45.0" prefWidth="1001.0" BorderPane.alignment="CENTER">
          <children>
-            <Label fx:id="labelNome" layoutX="215.0" prefHeight="43.0" prefWidth="703.0" text="PERFIL" textFill="#9e9e9e">
+            <Label layoutX="215.0" layoutY="1.0" prefHeight="43.0" prefWidth="703.0" text="EVENTOS DISPONÍVEIS" textFill="#9e9e9e">
                <font>
                   <Font name="System Bold" size="29.0" />
                </font>
@@ -36,7 +36,7 @@
                      </font>
                   </Label>
                   <Separator opacity="0.0" prefHeight="12.0" prefWidth="200.0" />
-                  <Button fx:id="perfilBtn" mnemonicParsing="false" onAction="#abrirPerfil" prefHeight="45.0" prefWidth="200.0" style="-fx-background-color: #212B3D; -fx-border-width: 0 0 1px 0; -fx-border-color: white;" text="Perfil" textFill="WHITE">
+                  <Button fx:id="perfilBtn" mnemonicParsing="false" onAction="#abrirPerfil" prefHeight="45.0" prefWidth="200.0" style="-fx-background-color: #212B3D;" text="Perfil" textFill="WHITE">
                      <font>
                         <Font size="17.0" />
                      </font>
@@ -68,7 +68,7 @@
                      </graphic>
                   </Button>
                   <Separator opacity="0.0" prefHeight="12.0" prefWidth="200.0" />
-                  <Button fx:id="eventosBtn" mnemonicParsing="false" onAction="#abrirEventos" prefHeight="45.0" prefWidth="200.0" style="-fx-background-color: #212B3D;" text="Eventos" textFill="WHITE">
+                  <Button fx:id="eventosBtn" mnemonicParsing="false" onAction="#abrirEventos" prefHeight="45.0" prefWidth="200.0" style="-fx-background-color: #212B3D; -fx-border-width: 0 0 1px 0; -fx-border-color: white;" text="Eventos" textFill="WHITE">
                      <font>
                         <Font size="17.0" />
                      </font>

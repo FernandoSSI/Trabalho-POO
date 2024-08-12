@@ -61,10 +61,8 @@ public class CadastroController implements Initializable {
     public void cadastrar() throws IOException {
         user = getFormData();
         service.saveOrUpdate(user);
-        System.out.println("User cadastrou");
 
         if (organizadorRadioBtn.isSelected()) {
-            System.out.println("Entrou no if");
             Organizador organizador = new Organizador();
 
             organizador.setId(service.findByEmailAndPassword(user.getEmail(), user.getSenha()).getId());
