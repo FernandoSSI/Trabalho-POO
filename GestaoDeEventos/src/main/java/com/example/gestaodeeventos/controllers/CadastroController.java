@@ -125,5 +125,7 @@ public class CadastroController implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
         this.service = new UserService();
         initializeNodes();
+
+
     }
 }

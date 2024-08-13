@@ -109,6 +109,7 @@ public class PaginaController implements Initializable {
 
             stage.show();
 
+            perfilController.atualizarInformacoes();
 
         } catch (IOException e) {
             e.printStackTrace();
@@ -139,6 +140,8 @@ public class PaginaController implements Initializable {
 
             stage.show();
 
+            inscricoesController.atualizarInformacoes();
+
 
         } catch (IOException e) {
             e.printStackTrace();
@@ -167,6 +170,8 @@ public class PaginaController implements Initializable {
             stage.setY(currentY);
 
             stage.show();
+
+            eventosController.atualizarInformacoes();
 
 
         } catch (IOException e) {
