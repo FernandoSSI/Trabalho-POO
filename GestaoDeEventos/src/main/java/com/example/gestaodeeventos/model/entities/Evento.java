@@ -6,18 +6,19 @@ import java.util.regex.Pattern;
 
 public class Evento {
     private long id;
-    private String nome;
-    private int expectativaParticipantes;
-    private String mapaURL;
-    private Date data;
+    private String nome; //
+    private int expectativaParticipantes; //
+    private String mapaURL; //
+    private Date data; //
+    private String descricao; //
 
-    private Modalidade modalidade;
-    private Instituicao instituicao;
-    private Categoria categoria;
-    private List<Organizador> organizadores;
+    private Modalidade modalidade; //
+    private Instituicao instituicao; //
+    private Categoria categoria; //
+    private List<Organizador> organizadores;//
     private List<User> participantes;
 
-    public Evento(long id, String nome, int expectativaParticipantes, String mapaURL, Modalidade modalidade, Instituicao instituicao, Categoria categoria, List<Organizador> organizadores, List<User> participantes, Date data) {
+    public Evento(long id, String nome, int expectativaParticipantes, String descricao, String mapaURL, Modalidade modalidade, Instituicao instituicao, Categoria categoria, List<Organizador> organizadores, List<User> participantes, Date data) {
         setId(id);
         setNome(nome);
         setExpectativaParticipantes(expectativaParticipantes);
@@ -28,6 +29,7 @@ public class Evento {
         setOrganizadores(organizadores);
         setParticipantes(participantes);
         setData(data);
+        setDescricao(descricao);
     }
 
     public long getId() {
@@ -135,5 +137,13 @@ public class Evento {
             throw new IllegalArgumentException("Data must be a future date");
         }
         this.data = data;
+    }
+
+    public String getDescricao() {
+        return descricao;
+    }
+
+    public void setDescricao(String descricao) {
+        this.descricao = descricao;
     }
 }

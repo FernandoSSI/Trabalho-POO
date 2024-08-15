@@ -7,18 +7,20 @@ public class Atividade {
     private String titulo;
     private Date data;
     private String local;
+    private String descricao;
 
     private Evento evento;
     private List<Colaborador> colaboradores;
     private Certificado certificado;
 
-    public Atividade(Evento evento, String titulo, Date data, String local, List<Colaborador> colaboradores, Certificado certificado) {
+    public Atividade(Evento evento, String titulo, Date data, String local, String descricao, List<Colaborador> colaboradores, Certificado certificado) {
         setEvento(evento);
         setTitulo(titulo);
         setData(data);
         setLocal(local);
         setColaboradores(colaboradores);
         setCertificado(certificado);
+        setDescricao(descricao);
     }
 
     public Evento getEvento() {
@@ -82,5 +84,13 @@ public class Atividade {
 
     public void setCertificado(Certificado certificado) {
         this.certificado = certificado;
+    }
+
+    public String getDescricao() {
+        return descricao;
+    }
+
+    public void setDescricao(String descricao) {
+        this.descricao = descricao;
     }
 }

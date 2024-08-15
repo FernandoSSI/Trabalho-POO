@@ -61,7 +61,8 @@ public class DB {
                 "id INTEGER PRIMARY KEY AUTOINCREMENT, " +
                 "nome TEXT NOT NULL, " +
                 "expectativaParticipantes INTEGER NOT NULL, " +
-                "mapaURL TEXT NOT NULL, " +
+                "descricao TEXT NOT NULL, " +
+                "mapaURL TEXT, " +
                 "data DATE NOT NULL, " +
                 "modalidade TEXT NOT NULL, " +
                 "instituicao_id INTEGER NOT NULL, " +
@@ -99,6 +100,7 @@ public class DB {
                 "titulo TEXT NOT NULL, " +
                 "data DATE NOT NULL, " +
                 "local TEXT, " +
+                "descricao TEXT NOT NULL, " +
                 "evento_id INTEGER NOT NULL, " +
                 "FOREIGN KEY (evento_id) REFERENCES evento(id)" +
                 ");";

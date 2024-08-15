@@ -1,0 +1,179 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.RadioButton?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<BorderPane prefHeight="632.0" prefWidth="1013.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.gestaodeeventos.controllers.CriarEventoController">
+   <center>
+      <AnchorPane prefHeight="592.0" prefWidth="818.0" BorderPane.alignment="CENTER" />
+   </center>
+   <top>
+      <AnchorPane prefHeight="45.0" prefWidth="1001.0" BorderPane.alignment="CENTER">
+         <children>
+            <Label layoutX="215.0" layoutY="1.0" prefHeight="43.0" prefWidth="703.0" text="CRIAR EVENTO" textFill="#9e9e9e">
+               <font>
+                  <Font name="System Bold" size="29.0" />
+               </font>
+            </Label>
+         </children></AnchorPane>
+   </top>
+   <left>
+      <AnchorPane prefHeight="563.0" prefWidth="196.0" BorderPane.alignment="CENTER">
+         <children>
+            <VBox fx:id="vboxMenu" layoutX="50.0" layoutY="-45.0" prefHeight="562.0" prefWidth="200.0" style="-fx-background-color: #2F3D57;" AnchorPane.bottomAnchor="70.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="-45.0">
+               <children>
+                  <Label prefHeight="0.0" prefWidth="200.0" style="-fx-text-alignment: center;" text="      GEAUFC" textAlignment="CENTER" textFill="WHITE">
+                     <font>
+                        <Font name="System Bold" size="27.0" />
+                     </font>
+                  </Label>
+                  <Separator opacity="0.0" prefHeight="12.0" prefWidth="200.0" />
+                  <Button fx:id="perfilBtn" mnemonicParsing="false" onAction="#abrirPerfil" prefHeight="45.0" prefWidth="200.0" style="-fx-background-color: #212B3D;" text="Perfil" textFill="WHITE">
+                     <font>
+                        <Font size="17.0" />
+                     </font>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </Button>
+                  <Separator opacity="0.0" prefHeight="12.0" prefWidth="200.0" />
+                  <Button fx:id="inscricoesBtn" mnemonicParsing="false" onAction="#abrirInscricoes" prefHeight="45.0" prefWidth="200.0" style="-fx-background-color: #212B3D;" text="Inscrições" textFill="WHITE">
+                     <font>
+                        <Font size="17.0" />
+                     </font>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </Button>
+                  <Separator opacity="0.0" prefHeight="12.0" prefWidth="200.0" />
+                  <Button fx:id="eventosBtn" mnemonicParsing="false" onAction="#abrirEventos" prefHeight="45.0" prefWidth="200.0" style="-fx-background-color: #212B3D;" text="Eventos" textFill="WHITE">
+                     <font>
+                        <Font size="17.0" />
+                     </font>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </Button>
+                  <Separator opacity="0.0" prefHeight="12.0" prefWidth="200.0" />
+                  <Button mnemonicParsing="false" onAction="#abrirCriarEventos" prefHeight="45.0" prefWidth="200.0" style="-fx-background-color: #212B3D; -fx-border-width: 0 0 1px 0; -fx-border-color: white;" text="Criar Eventos" textFill="WHITE">
+                     <font>
+                        <Font size="17.0" />
+                     </font>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </Button>
+               </children>
+            </VBox>
+            <VBox layoutY="515.0" prefHeight="72.0" prefWidth="200.0" style="-fx-background-color: #2F3D57;">
+               <children>
+                  <Button fx:id="configBtn" mnemonicParsing="false" onAction="#abrirConfiguracoes" prefHeight="45.0" prefWidth="200.0" style="-fx-background-color: #212B3D;" text="Configurações" textFill="WHITE">
+                     <font>
+                        <Font size="17.0" />
+                     </font>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                     <graphic>
+                        <ImageView fitHeight="25.0" fitWidth="23.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@images/settings.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </Button>
+               </children>
+            </VBox>
+         </children>
+      </AnchorPane>
+   </left>
+   <center>
+      <AnchorPane prefHeight="592.0" prefWidth="818.0" BorderPane.alignment="CENTER">
+         <children>
+            <Pane layoutX="24.0" layoutY="14.0" prefHeight="486.0" prefWidth="275.0" style="-fx-border-color: #cccccc;">
+               <children>
+                  <TextField fx:id="mapaUrlTextField" layoutX="22.0" layoutY="198.0" prefHeight="48.0" prefWidth="229.0" />
+                  <Text layoutX="22.0" layoutY="194.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Mapa do evento (URL)" wrappingWidth="228.619140625" />
+                  <TextField fx:id="expectativaTextField" layoutX="22.0" layoutY="120.0" prefHeight="48.0" prefWidth="229.0" />
+                  <Text layoutX="22.0" layoutY="115.0" strokeType="OUTSIDE" strokeWidth="0.0" text="expectativa de participantes" wrappingWidth="228.619140625" />
+                  <Text layoutX="272.0" layoutY="123.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="228.619140625" />
+                  <DatePicker fx:id="DataPickerEvento" layoutX="22.0" layoutY="279.0" prefHeight="48.0" prefWidth="229.0" />
+                  <Text layoutX="22.0" layoutY="275.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Data" wrappingWidth="228.619140625" />
+                  <Pane layoutX="21.0" layoutY="358.0" prefHeight="103.0" prefWidth="230.0" style="-fx-border-color: #cccccc;">
+                     <children>
+                        <Text layoutX="272.0" layoutY="123.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="228.619140625" />
+                        <RadioButton fx:id="presecialBtn" layoutX="20.0" layoutY="13.0" mnemonicParsing="false" text="Presencial" />
+                        <RadioButton fx:id="hibridoBtn" layoutX="20.0" layoutY="43.0" mnemonicParsing="false" text="Hibrido" />
+                        <RadioButton fx:id="remotoBtn" layoutX="19.0" layoutY="72.0" mnemonicParsing="false" text="Remoto" />
+                     </children>
+                  </Pane>
+                  <Text layoutX="22.0" layoutY="354.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Modalidade" wrappingWidth="228.619140625" />
+                  <TextField fx:id="nomeEventoTextField" layoutX="22.0" layoutY="39.0" prefHeight="48.0" prefWidth="229.0" />
+                  <Text layoutX="22.0" layoutY="34.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Nome do Evento" wrappingWidth="228.619140625" />
+               </children>
+            </Pane>
+            <Button layoutX="588.0" layoutY="519.0" mnemonicParsing="false" onAction="#criarEvento" prefHeight="45.0" prefWidth="198.0" style="-fx-background-color: #2F3D57;" text="Criar Evento" textFill="WHITE">
+               <font>
+                  <Font size="15.0" />
+               </font>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </Button>
+            <Pane layoutX="324.0" layoutY="14.0" prefHeight="214.0" prefWidth="462.0" style="-fx-border-color: #cccccc;">
+               <children>
+                  <Text layoutX="272.0" layoutY="123.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="228.619140625" />
+                  <Text layoutX="22.0" layoutY="39.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Descrição" wrappingWidth="228.619140625" />
+                  <TextArea fx:id="descricaoTextArea" layoutX="22.0" layoutY="43.0" prefHeight="146.0" prefWidth="418.0" />
+               </children>
+            </Pane>
+            <Button layoutX="324.0" layoutY="245.0" mnemonicParsing="false" onAction="#addInstituicao" prefHeight="45.0" prefWidth="220.0" style="-fx-background-color: #B2BEBF;" text="Adicionar instituição">
+               <font>
+                  <Font size="15.0" />
+               </font>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </Button>
+            <Text fx:id="nomeInstituicao" layoutX="324.0" layoutY="312.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="220.619140625" />
+            <Button layoutX="566.0" layoutY="245.0" mnemonicParsing="false" onAction="#addCategorias" prefHeight="45.0" prefWidth="220.0" style="-fx-background-color: #B2BEBF;" text="Adicionar categorias">
+               <font>
+                  <Font size="15.0" />
+               </font>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </Button>
+            <Pane layoutX="324.0" layoutY="350.0" prefHeight="150.0" prefWidth="462.0" style="-fx-border-color: #cccccc;">
+               <children>
+                  <Text layoutX="272.0" layoutY="123.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="228.619140625" />
+                  <Button layoutX="21.0" layoutY="103.0" mnemonicParsing="false" onAction="#addOrganizadores" prefHeight="23.0" prefWidth="68.0" style="-fx-background-color: #B2BEBF;" text="Add">
+                     <font>
+                        <Font size="15.0" />
+                     </font>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </Button>
+                  <TextField fx:id="CpfOrganizadores" layoutX="21.0" layoutY="39.0" prefHeight="48.0" prefWidth="229.0" />
+                  <Text layoutX="21.0" layoutY="34.0" strokeType="OUTSIDE" strokeWidth="0.0" text="CPF do organizador" wrappingWidth="228.619140625" />
+                  <Text layoutX="264.0" layoutY="34.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Organizadores:" wrappingWidth="146.619140625" />
+               </children>
+            </Pane>
+         </children></AnchorPane>
+   </center>
+</BorderPane>

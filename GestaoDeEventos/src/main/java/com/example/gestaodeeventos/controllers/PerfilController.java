@@ -100,6 +100,8 @@ public class PerfilController extends PaginaController  {
         senhaTextField.setPromptText(user.getSenha());
 
         containerLetra.requestFocus();
+
+        adicionarBotaoCriarEvento();
     }
 
     @Override
