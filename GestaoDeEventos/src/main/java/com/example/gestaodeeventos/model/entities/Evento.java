@@ -5,7 +5,7 @@ import java.util.List;
 import java.util.regex.Pattern;
 
 public class Evento {
-    private long id;
+    private Integer id;
     private String nome; //
     private int expectativaParticipantes; //
     private String mapaURL; //
@@ -18,7 +18,7 @@ public class Evento {
     private List<Organizador> organizadores;//
     private List<User> participantes;
 
-    public Evento(long id, String nome, int expectativaParticipantes, String descricao, String mapaURL, Modalidade modalidade, Instituicao instituicao, Categoria categoria, List<Organizador> organizadores, List<User> participantes, Date data) {
+    public Evento(Integer id, String nome, int expectativaParticipantes, String descricao, String mapaURL, Modalidade modalidade, Instituicao instituicao, Categoria categoria, List<Organizador> organizadores, List<User> participantes, Date data) {
         setId(id);
         setNome(nome);
         setExpectativaParticipantes(expectativaParticipantes);
@@ -32,11 +32,11 @@ public class Evento {
         setDescricao(descricao);
     }
 
-    public long getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(Integer id) {
         if (id <= 0) {
             throw new IllegalArgumentException("ID must be greater than zero");
         }

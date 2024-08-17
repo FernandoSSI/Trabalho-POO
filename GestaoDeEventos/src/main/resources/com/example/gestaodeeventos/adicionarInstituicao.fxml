@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+
+<AnchorPane prefHeight="490.0" prefWidth="682.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.gestaodeeventos.controllers.AddInstituicaoController">
+   <children>
+      <Separator layoutX="224.0" layoutY="-7.0" orientation="VERTICAL" prefHeight="502.0" prefWidth="7.0" />
+      <TextField fx:id="pesquisaInstituicaoTextField" layoutX="12.0" layoutY="44.0" prefHeight="25.0" prefWidth="204.0" promptText="EX: UFC campus Russas" />
+      <Text layoutX="13.0" layoutY="39.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Busque por instituições ja cadastradas" wrappingWidth="201.8600311279297" />
+      <ListView fx:id="listaInstituicoes" layoutX="13.0" layoutY="80.0" prefHeight="404.0" prefWidth="202.0" />
+      <Pane layoutX="239.0" layoutY="43.0" prefHeight="377.0" prefWidth="431.0" style="-fx-border-color: #cccccc;">
+         <children>
+
+            <TextField fx:id="nomeTextField" layoutX="14.0" layoutY="30.0" prefHeight="25.0" prefWidth="184.0" />
+            <TextField fx:id="cnpjTextField" layoutX="232.0" layoutY="29.0" prefHeight="25.0" prefWidth="184.0" />
+            <Text layoutX="13.0" layoutY="27.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Nome" wrappingWidth="183.47006225585938" />
+            <Text layoutX="231.0" layoutY="26.0" strokeType="OUTSIDE" strokeWidth="0.0" text="CNPJ" wrappingWidth="183.47006225585938" />
+            <TextField fx:id="estadoTextField" layoutX="13.0" layoutY="101.0" prefHeight="25.0" prefWidth="184.0" />
+            <TextField fx:id="cidadeTextField" layoutX="231.0" layoutY="100.0" prefHeight="25.0" prefWidth="184.0" />
+            <Text layoutX="12.0" layoutY="98.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Estado" wrappingWidth="183.47006225585938" />
+            <Text layoutX="230.0" layoutY="97.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Cidade" wrappingWidth="183.47006225585938" />
+            <TextField fx:id="bairroTextField" layoutX="13.0" layoutY="176.0" prefHeight="25.0" prefWidth="184.0" />
+            <TextField fx:id="ruaTextField" layoutX="231.0" layoutY="175.0" prefHeight="25.0" prefWidth="184.0" />
+            <Text layoutX="12.0" layoutY="173.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Bairro" wrappingWidth="183.47006225585938" />
+            <Text layoutX="230.0" layoutY="172.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Rua" wrappingWidth="183.47006225585938" />
+            <TextField fx:id="numeroTextField" layoutX="13.0" layoutY="261.0" prefHeight="25.0" prefWidth="184.0" />
+            <TextField fx:id="telefoneTextField" layoutX="231.0" layoutY="260.0" prefHeight="25.0" prefWidth="184.0" />
+            <Text layoutX="12.0" layoutY="258.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Numero residencial" wrappingWidth="183.47006225585938" />
+            <Text layoutX="230.0" layoutY="257.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Telefone" wrappingWidth="183.47006225585938" />
+            <TextField fx:id="emailTextField" layoutX="13.0" layoutY="334.0" prefHeight="25.0" prefWidth="184.0" />
+            <Text layoutX="12.0" layoutY="331.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Email" wrappingWidth="183.47006225585938" />
+            <Button layoutX="232.0" layoutY="334.0" mnemonicParsing="false" onAction="#CadastrarInstituicao" prefHeight="25.0" prefWidth="184.0" style="-fx-background-color: #2F3D57;" text="Cadastrar Instituicao" textFill="WHITE" />
+         </children>
+      </Pane>
+      <Text layoutX="240.0" layoutY="39.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Cadastre uma nova instituição" wrappingWidth="201.8600311279297" />
+      <Pane layoutX="239.0" layoutY="433.0" prefHeight="50.0" prefWidth="431.0" style="-fx-border-color: #cccc;">
+         <children>
+            <Text fx:id="instituicaoSelecionada" layoutX="12.0" layoutY="33.0" strokeType="OUTSIDE" strokeWidth="0.0" text="UFC campus Russas" wrappingWidth="207.47003173828125">
+               <font>
+                  <Font size="20.0" />
+               </font>
+            </Text>
+            <Button layoutX="232.0" layoutY="11.0" mnemonicParsing="false" onAction="#SelecionarInstituicao" prefHeight="25.0" prefWidth="184.0" style="-fx-background-color: #2F3D57;" text="Selecionar" textFill="WHITE" />
+         </children>
+      </Pane>
+   </children>
+</AnchorPane>

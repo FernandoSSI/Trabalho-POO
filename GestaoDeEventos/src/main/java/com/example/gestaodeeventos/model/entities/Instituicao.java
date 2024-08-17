@@ -3,18 +3,22 @@ package com.example.gestaodeeventos.model.entities;
 import java.util.regex.Pattern;
 
 public class Instituicao {
-    private long id;
+    private Integer id;
     private String nome;
     private String cnpj;
     private String estado;
     private String cidade;
     private String bairro;
     private String rua;
-    private int numeroResidencial;
-    private int telefone;
+    private String numeroResidencial;
+    private String telefone;
     private String email;
 
-    public Instituicao(long id, String nome, String cnpj, String estado, String cidade, String bairro, String rua, int numeroResidencial, int telefone, String email) {
+    public Instituicao(){
+
+    }
+
+    public Instituicao(Integer id, String nome, String cnpj, String estado, String cidade, String bairro, String rua, String numeroResidencial, String telefone, String email) {
         setId(id);
         setNome(nome);
         setCnpj(cnpj);
@@ -27,11 +31,11 @@ public class Instituicao {
         setEmail(email);
     }
 
-    public long getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(Integer id) {
         if (id <= 0) {
             throw new IllegalArgumentException("ID must be greater than zero");
         }
@@ -104,23 +108,23 @@ public class Instituicao {
         this.rua = rua;
     }
 
-    public int getNumeroResidencial() {
+    public String getNumeroResidencial() {
         return numeroResidencial;
     }
 
-    public void setNumeroResidencial(int numeroResidencial) {
-        if (numeroResidencial <= 0) {
+    public void setNumeroResidencial(String numeroResidencial) {
+        if (Integer.parseInt(numeroResidencial) <= 0) {
             throw new IllegalArgumentException("Numero residencial must be greater than zero");
         }
         this.numeroResidencial = numeroResidencial;
     }
 
-    public int getTelefone() {
+    public String getTelefone() {
         return telefone;
     }
 
-    public void setTelefone(int telefone) {
-        if (telefone <= 0) {
+    public void setTelefone(String telefone) {
+        if (Long.parseLong(telefone) <= 0) {
             throw new IllegalArgumentException("Telefone must be a positive number");
         }
         this.telefone = telefone;
@@ -136,4 +140,6 @@ public class Instituicao {
         }
         this.email = email;
     }
+
+
 }

@@ -74,8 +74,6 @@ public class CadastroController implements Initializable {
             organizador.setData_nascimento(user.getData_nascimento());
             organizador.setEventos(new ArrayList<>());
             organizador.setEventosOrganizados(new ArrayList<>());
-            System.out.println(service.findByEmailAndPassword(user.getEmail(), user.getSenha()).getId());
-            System.out.println(organizador.getId());
             OrganizadorService organizadorService = new OrganizadorService();
             organizadorService.saveOrUpdate(organizador);
         }

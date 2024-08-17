@@ -47,8 +47,8 @@ public class DB {
                 "cidade TEXT NOT NULL, " +
                 "bairro TEXT NOT NULL, " +
                 "rua TEXT NOT NULL, " +
-                "numeroResidencial INTEGER NOT NULL, " +
-                "telefone INTEGER NOT NULL, " +
+                "numeroResidencial TEXT NOT NULL, " +
+                "telefone TEXT NOT NULL, " +
                 "email TEXT NOT NULL" +
                 ");";
 
@@ -76,14 +76,6 @@ public class DB {
                 "evento_id INTEGER NOT NULL, " +
                 "PRIMARY KEY (organizador_id, evento_id), " +
                 "FOREIGN KEY (organizador_id) REFERENCES organizador(id), " +
-                "FOREIGN KEY (evento_id) REFERENCES evento(id)" +
-                ");";
-
-        String createUserEventoTableSQL = "CREATE TABLE IF NOT EXISTS user_evento (" +
-                "user_id INTEGER NOT NULL, " +
-                "evento_id INTEGER NOT NULL, " +
-                "PRIMARY KEY (user_id, evento_id), " +
-                "FOREIGN KEY (user_id) REFERENCES user(id), " +
                 "FOREIGN KEY (evento_id) REFERENCES evento(id)" +
                 ");";
 
@@ -143,7 +135,6 @@ public class DB {
             stmt.execute(createCategoriaTableSQL);
             stmt.execute(createEventoTableSQL);
             stmt.execute(createOrganizadorEventoTableSQL);
-            stmt.execute(createUserEventoTableSQL);
             stmt.execute(createInscricaoTableSQL);
             stmt.execute(createAtividadeTableSQL);
             stmt.execute(createColaboradorTableSQL);
