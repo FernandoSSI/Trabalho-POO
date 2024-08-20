@@ -2,12 +2,15 @@ package com.example.gestaodeeventos.controllers;
 
 import com.example.gestaodeeventos.model.entities.Instituicao;
 import com.example.gestaodeeventos.model.services.InstituicaoService;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
 import javafx.scene.text.Text;
+import javafx.stage.Stage;
 
 import java.net.URL;
 import java.util.List;
@@ -40,12 +43,14 @@ public class AddInstituicaoController implements Initializable {
     @FXML
     public Text instituicaoSelecionada;
 
-
     @FXML
     private TextField pesquisaInstituicaoTextField;
     @FXML
     private ListView<String> listaInstituicoes;
 
+    public Instituicao getInstituicao() {
+        return instituicao;
+    }
 
     @FXML
     public void CadastrarInstituicao(ActionEvent event) {
@@ -66,7 +71,7 @@ public class AddInstituicaoController implements Initializable {
 
             instituicaoService.saveOrUpdate(instituicao);
 
-            atualizarInformacoes();
+            atualizarInformacoes("");
 
             limparCampos();
 
@@ -90,29 +95,44 @@ public class AddInstituicaoController implements Initializable {
     public void SelecionarInstituicao(ActionEvent event) {
         String selectedItem = listaInstituicoes.getSelectionModel().getSelectedItem();
         if (selectedItem != null) {
+            instituicao = instituicaoService.findByName(selectedItem);
             instituicaoSelecionada.setText(selectedItem);
+
+            Stage stage = (Stage) listaInstituicoes.getScene().getWindow();
+            stage.close();
         }
     }
 
-    public void atualizarInformacoes() {
-        listaInstituicoes.getItems().clear();  // Limpar a lista antes de adicionar os itens novamente
+    public void atualizarInformacoes(String filtro) {
+        listaInstituicoes.getItems().clear();
         instituicoes = instituicaoService.findAll();
         for (Instituicao instituicao : instituicoes) {
-            listaInstituicoes.getItems().add(instituicao.getNome());
+            if (filtro == null || filtro.isEmpty() || instituicao.getNome().toLowerCase().contains(filtro.toLowerCase())) {
+                listaInstituicoes.getItems().add(instituicao.getNome());
+            }
         }
     }
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         this.instituicaoService = new InstituicaoService();
-        atualizarInformacoes();  // Atualizar a lista de instituições ao inicializar a tela
+        atualizarInformacoes(""); // Inicializa sem filtro
+
+        // Adiciona o listener para o campo de pesquisa
+        pesquisaInstituicaoTextField.textProperty().addListener(new ChangeListener<String>() {
+            @Override
+            public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
+                atualizarInformacoes(newValue); // Atualiza a lista com o filtro de pesquisa
+            }
+        });
 
         listaInstituicoes.setOnMouseClicked(event -> {
             String selectedItem = listaInstituicoes.getSelectionModel().getSelectedItem();
-            instituicao = instituicaoService.findByName(selectedItem);
             if (selectedItem != null) {
                 instituicaoSelecionada.setText(selectedItem);
             }
         });
     }
+
+
 }

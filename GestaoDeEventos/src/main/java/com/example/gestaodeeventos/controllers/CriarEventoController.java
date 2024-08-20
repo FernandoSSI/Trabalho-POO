@@ -22,7 +22,7 @@ import java.util.List;
 
 public class CriarEventoController extends PaginaController{
 
-    private List<Instituicao> instituicoes;
+    private Instituicao instituicao;
     private List<Categoria> categorias;
 
     @FXML
@@ -73,8 +73,8 @@ public class CriarEventoController extends PaginaController{
 
             newStage.showAndWait();
 
-            addInstituicaoController.atualizarInformacoes();
-            //instituicao = addInstituicaoController.getintituicoes()
+            instituicao = addInstituicaoController.getInstituicao();
+            nomeInstituicao.setText(instituicao.getNome());
 
         } catch (IOException e) {
             e.printStackTrace();
