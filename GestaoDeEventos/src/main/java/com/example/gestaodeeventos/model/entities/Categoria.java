@@ -4,6 +4,10 @@ public class Categoria {
     private String nome;
     private String descricao;
 
+    public Categoria(){
+
+    }
+
     public Categoria(String nome, String descricao) {
         setNome(nome);
         setDescricao(descricao);

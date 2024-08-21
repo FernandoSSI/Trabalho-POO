@@ -23,7 +23,7 @@ import java.util.List;
 public class CriarEventoController extends PaginaController{
 
     private Instituicao instituicao;
-    private List<Categoria> categorias;
+    private Categoria categoria;
 
     @FXML
     private TextField nomeEventoTextField;
@@ -37,6 +37,8 @@ public class CriarEventoController extends PaginaController{
     private TextArea descricaoTextField;
     @FXML
     private Text nomeInstituicao;
+    @FXML
+    private Text nomeCategoria;
     @FXML
     private TextField CpfOrganizadores;
 
@@ -106,9 +108,11 @@ public class CriarEventoController extends PaginaController{
             newStage.setY(currentY + 20);
 
             newStage.showAndWait();
-            //categorias = addCategoriaController.getCategorias()
 
-            addCategoriaController.atualizarInformacoes();
+            categoria = addCategoriaController.getCategoria();
+            nomeCategoria.setText(categoria.getNome());
+
+            addCategoriaController.atualizarInformacoes("");
 
         } catch (IOException e) {
             e.printStackTrace();

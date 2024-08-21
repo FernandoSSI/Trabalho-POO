@@ -1,10 +1,7 @@
 package com.example.gestaodeeventos.model.dao;
 
 import com.example.gestaodeeventos.db.DB;
-import com.example.gestaodeeventos.model.dao.impl.EventoDaoJDBC;
-import com.example.gestaodeeventos.model.dao.impl.InstituicaoDaoJDBC;
-import com.example.gestaodeeventos.model.dao.impl.OrganizadorDaoJDBC;
-import com.example.gestaodeeventos.model.dao.impl.UserDaoJDBC;
+import com.example.gestaodeeventos.model.dao.impl.*;
 
 public class DaoFactory {
 
@@ -22,6 +19,10 @@ public class DaoFactory {
 
     public static InstituicaoDao createInstituicaoDao(){
         return new InstituicaoDaoJDBC(DB.getConnection());
+    }
+
+    public static CategoriaDao createCategoriaDao(){
+        return new CategoriaDaoJDBC(DB.getConnection());
     }
 
 }
