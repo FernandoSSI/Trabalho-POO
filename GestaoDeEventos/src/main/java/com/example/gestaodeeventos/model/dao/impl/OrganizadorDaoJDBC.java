@@ -76,6 +76,7 @@ public class OrganizadorDaoJDBC implements OrganizadorDao {
 
             if (resultSet.next()) {
                 Organizador organizador = new Organizador();
+
                 organizador.setId(resultSet.getInt("id"));
                 return organizador;
             }
@@ -87,6 +88,7 @@ public class OrganizadorDaoJDBC implements OrganizadorDao {
             DB.closeResultSet(resultSet);
         }
     }
+
 
     @Override
     public List<Organizador> findAll() {

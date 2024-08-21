@@ -30,5 +30,7 @@ public class Organizador extends User {
         this.eventosOrganizados = eventosOrganizados;
     }
 
+
+
 }
 

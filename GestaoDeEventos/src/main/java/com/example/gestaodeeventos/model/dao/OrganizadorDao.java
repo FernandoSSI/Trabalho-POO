@@ -11,4 +11,6 @@ public interface OrganizadorDao {
     void deleteById(Integer id);
     Organizador findById(Integer id);
     List<Organizador> findAll();
+
+
 }

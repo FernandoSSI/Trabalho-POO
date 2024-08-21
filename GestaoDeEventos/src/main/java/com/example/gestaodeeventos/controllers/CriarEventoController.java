@@ -3,27 +3,33 @@ package com.example.gestaodeeventos.controllers;
 import com.example.gestaodeeventos.Main;
 import com.example.gestaodeeventos.model.entities.Categoria;
 import com.example.gestaodeeventos.model.entities.Instituicao;
+import com.example.gestaodeeventos.model.entities.Organizador;
+import com.example.gestaodeeventos.model.services.OrganizadorService;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.DatePicker;
-import javafx.scene.control.RadioButton;
-import javafx.scene.control.TextArea;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.text.Text;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.net.URL;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.ResourceBundle;
 
-public class CriarEventoController extends PaginaController{
+public class CriarEventoController extends PaginaController {
 
+
+    private OrganizadorService organizadorService;
     private Instituicao instituicao;
     private Categoria categoria;
+    private List<Organizador> organizadores = new ArrayList<>();
 
     @FXML
     private TextField nomeEventoTextField;
@@ -34,13 +40,11 @@ public class CriarEventoController extends PaginaController{
     @FXML
     private DatePicker DataPickerEvento;
     @FXML
-    private TextArea descricaoTextField;
-    @FXML
     private Text nomeInstituicao;
     @FXML
     private Text nomeCategoria;
     @FXML
-    private TextField CpfOrganizadores;
+    private TextField idOrganizadores;
 
     @FXML
     private RadioButton presecialBtn;
@@ -48,6 +52,10 @@ public class CriarEventoController extends PaginaController{
     private RadioButton hibridoBtn;
     @FXML
     private RadioButton remotoBtn;
+    @FXML
+    private TextArea descricaoTextArea;
+    @FXML
+    private ListView<String> listaOrganizadores;
 
     public void addInstituicao(ActionEvent event) {
         try {
@@ -124,11 +132,34 @@ public class CriarEventoController extends PaginaController{
     }
 
     public void addOrganizadores(ActionEvent event) {
+        String id = idOrganizadores.getText();
 
+        Organizador organizador = organizadorService.findById(Integer.parseInt(id));
+
+        if (organizador != null && !organizadores.contains(organizador)) {
+            listaOrganizadores.getItems().add(organizador.getNome());
+            organizadores.add(organizador);
+            System.out.println(organizadores);
+        }
+        if(organizador == null){
+            Alert alert = new Alert(Alert.AlertType.WARNING);
+            alert.setTitle("Organizador não encontrado");
+            alert.setHeaderText(null);
+            alert.setContentText("Nenhum organizador encontrado com o ID: " + id);
+            alert.showAndWait();
+        }
+
+        idOrganizadores.clear();
     }
 
     @Override
     public void atualizarInformacoes() {
+
+    }
+
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+        this.organizadorService = new OrganizadorService();
 
     }
 

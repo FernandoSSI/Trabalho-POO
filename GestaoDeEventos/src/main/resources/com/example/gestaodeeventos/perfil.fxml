@@ -47,6 +47,7 @@
                         <Font size="17.0" />
                      </font>
                   </Text>
+                  <Text fx:id="perfilId" fill="#6b6b6b" layoutX="1.0" layoutY="216.0" strokeType="OUTSIDE" strokeWidth="0.0" text="id: " textAlignment="CENTER" wrappingWidth="201.13671875" />
                </children>
             </Pane>
             <Pane layoutX="250.0" layoutY="50.0" prefHeight="296.0" prefWidth="523.0" style="-fx-border-color: #cccccc;">

@@ -19,6 +19,8 @@ import java.util.ResourceBundle;
 public class PerfilController extends PaginaController  {
 
     @FXML
+    private Text perfilId;
+    @FXML
     private Text letraInicial;
     @FXML
     private Pane containerLetra;
@@ -91,6 +93,7 @@ public class PerfilController extends PaginaController  {
         letraInicial.setText(user.getNome().charAt(0) + "");
         nomePerfil.setText(user.getNome());
         emailPerfil.setText(user.getEmail());
+        perfilId.setText("id: " + user.getId().toString());
 
         nomeTextField.setPromptText(user.getNome());
         emailTextField.setPromptText(user.getEmail());

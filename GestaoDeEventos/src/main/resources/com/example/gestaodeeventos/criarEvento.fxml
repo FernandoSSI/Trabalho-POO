@@ -4,6 +4,7 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
 <?import javafx.scene.control.RadioButton?>
 <?import javafx.scene.control.Separator?>
 <?import javafx.scene.control.TextArea?>
@@ -159,7 +160,6 @@
             </Button>
             <Pane layoutX="324.0" layoutY="350.0" prefHeight="150.0" prefWidth="462.0" style="-fx-border-color: #cccccc;">
                <children>
-                  <Text layoutX="272.0" layoutY="123.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="228.619140625" />
                   <Button layoutX="21.0" layoutY="103.0" mnemonicParsing="false" onAction="#addOrganizadores" prefHeight="23.0" prefWidth="68.0" style="-fx-background-color: #B2BEBF;" text="Add">
                      <font>
                         <Font size="15.0" />
@@ -168,9 +168,10 @@
                         <Cursor fx:constant="HAND" />
                      </cursor>
                   </Button>
-                  <TextField fx:id="CpfOrganizadores" layoutX="21.0" layoutY="39.0" prefHeight="48.0" prefWidth="229.0" />
-                  <Text layoutX="21.0" layoutY="34.0" strokeType="OUTSIDE" strokeWidth="0.0" text="CPF do organizador" wrappingWidth="228.619140625" />
+                  <TextField fx:id="idOrganizadores" layoutX="21.0" layoutY="39.0" prefHeight="48.0" prefWidth="229.0" />
+                  <Text layoutX="21.0" layoutY="34.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Id do organizador" wrappingWidth="228.619140625" />
                   <Text layoutX="264.0" layoutY="34.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Organizadores:" wrappingWidth="146.619140625" />
+                  <ListView fx:id="listaOrganizadores" layoutX="261.0" layoutY="39.0" prefHeight="99.0" prefWidth="191.0" />
                </children>
             </Pane>
             <Text fx:id="nomeCategoria" layoutX="566.0" layoutY="334.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="220.619140625" />
