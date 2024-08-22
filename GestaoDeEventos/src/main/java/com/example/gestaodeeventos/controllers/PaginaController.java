@@ -26,6 +26,7 @@ import java.util.ResourceBundle;
 public class PaginaController implements Initializable {
 
     protected User user;
+    private boolean btnAtivo = false;
 
 
     @FXML
@@ -79,6 +80,7 @@ public class PaginaController implements Initializable {
             stage.show();
 
             paginaPrincipalController.atualizarInformacoes();
+
 
         } catch (IOException e) {
             e.printStackTrace();
@@ -216,7 +218,7 @@ public class PaginaController implements Initializable {
 
     @FXML
     public void adicionarBotaoCriarEvento() {
-        if (user != null) {
+        if (user != null && btnAtivo == false) {
             if (DB.isOrganizer(user.getId())) {
                 Button novoBotao = new Button("Criar Evento");
                 novoBotao.setStyle("-fx-background-color: #212B3D; -fx-text-fill: WHITE; -fx-font-size: 17px;");
@@ -231,6 +233,8 @@ public class PaginaController implements Initializable {
                 Separator separador = new Separator();
                 separador.setOpacity(0.0);
                 vboxMenu.getChildren().add(separador);
+
+                btnAtivo = true;
             }
         }
 
