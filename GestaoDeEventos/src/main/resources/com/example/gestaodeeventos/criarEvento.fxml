@@ -112,7 +112,7 @@
                   <TextField fx:id="expectativaTextField" layoutX="22.0" layoutY="120.0" prefHeight="48.0" prefWidth="229.0" />
                   <Text layoutX="22.0" layoutY="115.0" strokeType="OUTSIDE" strokeWidth="0.0" text="expectativa de participantes" wrappingWidth="228.619140625" />
                   <Text layoutX="272.0" layoutY="123.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="228.619140625" />
-                  <DatePicker fx:id="DataPickerEvento" layoutX="22.0" layoutY="279.0" prefHeight="48.0" prefWidth="229.0" />
+                  <DatePicker fx:id="dataPickerEvento" layoutX="22.0" layoutY="279.0" prefHeight="48.0" prefWidth="229.0" />
                   <Text layoutX="22.0" layoutY="275.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Data" wrappingWidth="228.619140625" />
                   <Pane layoutX="21.0" layoutY="358.0" prefHeight="103.0" prefWidth="230.0" style="-fx-border-color: #cccccc;">
                      <children>

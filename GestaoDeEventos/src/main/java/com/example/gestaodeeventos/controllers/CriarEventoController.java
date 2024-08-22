@@ -1,9 +1,8 @@
 package com.example.gestaodeeventos.controllers;
 
 import com.example.gestaodeeventos.Main;
-import com.example.gestaodeeventos.model.entities.Categoria;
-import com.example.gestaodeeventos.model.entities.Instituicao;
-import com.example.gestaodeeventos.model.entities.Organizador;
+import com.example.gestaodeeventos.model.entities.*;
+import com.example.gestaodeeventos.model.services.EventoService;
 import com.example.gestaodeeventos.model.services.OrganizadorService;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -13,12 +12,15 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.image.Image;
 import javafx.scene.text.Text;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.net.URL;
+import java.sql.Date;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
@@ -26,6 +28,7 @@ import java.util.ResourceBundle;
 public class CriarEventoController extends PaginaController {
 
 
+    private EventoService eventoService;
     private OrganizadorService organizadorService;
     private Instituicao instituicao;
     private Categoria categoria;
@@ -38,7 +41,7 @@ public class CriarEventoController extends PaginaController {
     @FXML
     private TextField mapaUrlTextField;
     @FXML
-    private DatePicker DataPickerEvento;
+    private DatePicker dataPickerEvento;
     @FXML
     private Text nomeInstituicao;
     @FXML
@@ -56,6 +59,7 @@ public class CriarEventoController extends PaginaController {
     private TextArea descricaoTextArea;
     @FXML
     private ListView<String> listaOrganizadores;
+    private ToggleGroup modalidadeGroup;
 
     public void addInstituicao(ActionEvent event) {
         try {
@@ -127,10 +131,6 @@ public class CriarEventoController extends PaginaController {
         }
     }
 
-
-    public void criarEvento(ActionEvent event) {
-    }
-
     public void addOrganizadores(ActionEvent event) {
         String id = idOrganizadores.getText();
 
@@ -152,6 +152,40 @@ public class CriarEventoController extends PaginaController {
         idOrganizadores.clear();
     }
 
+    public void criarEvento(ActionEvent event) {
+
+        Evento evento = eventoGetFormData();
+        eventoService.saveOrUpdate(evento);
+
+        System.out.println("Tudo certo");
+
+    }
+
+    private Evento eventoGetFormData(){
+        Evento evento = new Evento();
+        evento.setNome(nomeEventoTextField.getText());
+        evento.setDescricao(descricaoTextArea.getText());
+        LocalDate localDate = dataPickerEvento.getValue();
+        Date date = (localDate != null) ? Date.valueOf(localDate) : null;
+        evento.setData(date);
+        evento.setInstituicao(instituicao);
+        evento.setExpectativaParticipantes(Integer.parseInt(expectativaTextField.getText()));
+        evento.setMapaURL(mapaUrlTextField.getText());
+        evento.setOrganizadores(organizadores);
+        evento.setCategoria(categoria);
+
+        if (presecialBtn.isSelected()) {
+            evento.setModalidade(Modalidade.PRESENCIAL);
+        } else if (hibridoBtn.isSelected()) {
+            evento.setModalidade(Modalidade.HIBRIDO);
+        } else if (remotoBtn.isSelected()) {
+            evento.setModalidade(Modalidade.ONLINE);
+        }
+
+        return evento;
+    }
+
+
     @Override
     public void atualizarInformacoes() {
 
@@ -160,6 +194,11 @@ public class CriarEventoController extends PaginaController {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         this.organizadorService = new OrganizadorService();
+        this.eventoService = new EventoService();
+        modalidadeGroup = new ToggleGroup();
+        presecialBtn.setToggleGroup(modalidadeGroup);
+        hibridoBtn.setToggleGroup(modalidadeGroup);
+        remotoBtn.setToggleGroup(modalidadeGroup);
 
     }
 

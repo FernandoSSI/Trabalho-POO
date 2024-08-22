@@ -18,6 +18,9 @@ public class Evento {
     private List<Organizador> organizadores;//
     private List<User> participantes;
 
+    public Evento() {
+    }
+
     public Evento(Integer id, String nome, int expectativaParticipantes, String descricao, String mapaURL, Modalidade modalidade, Instituicao instituicao, Categoria categoria, List<Organizador> organizadores, List<User> participantes, Date data) {
         setId(id);
         setNome(nome);

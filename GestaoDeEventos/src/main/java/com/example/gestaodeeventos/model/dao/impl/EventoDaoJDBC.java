@@ -4,6 +4,7 @@ import com.example.gestaodeeventos.db.DB;
 import com.example.gestaodeeventos.db.DbException;
 import com.example.gestaodeeventos.model.dao.EventoDao;
 import com.example.gestaodeeventos.model.entities.Evento;
+import com.example.gestaodeeventos.model.entities.Organizador;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -35,6 +36,7 @@ public class EventoDaoJDBC implements EventoDao {
             st.setInt(7, obj.getInstituicao().getId());
             st.setString(8, obj.getCategoria().getNome());
 
+
             int rowsAffected = st.executeUpdate();
 
             if (rowsAffected > 0) {
@@ -42,11 +44,37 @@ public class EventoDaoJDBC implements EventoDao {
                 if (rs.next()) {
                     int id = rs.getInt(1);
                     obj.setId(id);
+
+                    insertOrganizadores(obj);
+                    System.out.println("Evento cadastrado");
                 }
                 DB.closeResultSet(rs);
             } else {
                 throw new DbException("Erro inesperado! Nenhuma linha foi inserida.");
             }
+        } catch (SQLException e) {
+            throw new DbException(e.getMessage());
+        } finally {
+            DB.closeStatement(st);
+        }
+
+    }
+
+    public void insertOrganizadores(Evento evento) {
+        PreparedStatement st = null;
+        try {
+            st = conn.prepareStatement(
+                    "INSERT INTO organizador_evento " +
+                            "(organizador_id, evento_id) " +
+                            "VALUES (?, ?)");
+
+            for (Organizador organizador : evento.getOrganizadores()) {
+                st.setInt(1, organizador.getId());
+                st.setInt(2, evento.getId());
+                st.executeUpdate();
+            }
+
+            System.out.println("Organizadores e evento cadastrados");
         } catch (SQLException e) {
             throw new DbException(e.getMessage());
         } finally {

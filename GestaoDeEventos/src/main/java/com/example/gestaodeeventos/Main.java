@@ -3,6 +3,7 @@ package com.example.gestaodeeventos;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -18,6 +19,7 @@ public class Main extends Application {
         stage.setResizable(false);
         stage.setTitle("GEAUFC");
         stage.setScene(mainScene);
+        stage.getIcons().add(new Image(getClass().getResourceAsStream("images/letra-g.png")));
         stage.show();
     }
 
