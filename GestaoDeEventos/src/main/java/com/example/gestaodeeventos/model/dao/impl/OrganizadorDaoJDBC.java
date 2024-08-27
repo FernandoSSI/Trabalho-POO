@@ -5,6 +5,7 @@ import com.example.gestaodeeventos.db.DbException;
 import com.example.gestaodeeventos.model.dao.OrganizadorDao;
 import com.example.gestaodeeventos.model.entities.Organizador;
 import com.example.gestaodeeventos.model.entities.User;
+import com.example.gestaodeeventos.model.services.UserService;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -75,9 +76,21 @@ public class OrganizadorDaoJDBC implements OrganizadorDao {
             resultSet = st.executeQuery();
 
             if (resultSet.next()) {
-                Organizador organizador = new Organizador();
+                UserService userService = new UserService();
+                User user = userService.findById(id);
+                if (user == null) {
+                    return null;
+                }
 
-                organizador.setId(resultSet.getInt("id"));
+                Organizador organizador = new Organizador();
+                organizador.setId(user.getId());
+                organizador.setNome(user.getNome());
+                organizador.setEmail(user.getEmail());
+                organizador.setSenha(user.getSenha());
+                organizador.setCpf(user.getCpf());
+                organizador.setCep(user.getCep());
+                organizador.setData_nascimento(user.getData_nascimento());
+
                 return organizador;
             }
             return null;

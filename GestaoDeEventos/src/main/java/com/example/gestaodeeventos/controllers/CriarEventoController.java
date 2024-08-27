@@ -157,7 +157,8 @@ public class CriarEventoController extends PaginaController {
         Evento evento = eventoGetFormData();
         eventoService.saveOrUpdate(evento);
 
-        System.out.println("Tudo certo");
+        limparCampos();
+        System.out.println("Evento cadastrado");
 
     }
 
@@ -183,6 +184,20 @@ public class CriarEventoController extends PaginaController {
         }
 
         return evento;
+    }
+
+    private void limparCampos() {
+        nomeEventoTextField.clear();
+        expectativaTextField.clear();
+        mapaUrlTextField.clear();
+        dataPickerEvento.setValue(null);
+        descricaoTextArea.clear();
+        nomeInstituicao.setText("");
+        nomeCategoria.setText("");
+        idOrganizadores.clear();
+        listaOrganizadores.getItems().clear();
+        modalidadeGroup.selectToggle(null);
+        organizadores.clear();
     }
 
 

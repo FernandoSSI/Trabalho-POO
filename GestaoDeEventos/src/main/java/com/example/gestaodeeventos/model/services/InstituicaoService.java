@@ -26,4 +26,8 @@ public class InstituicaoService {
     public Instituicao findByName(String nome){
         return dao.findByName(nome);
     }
+
+    public Instituicao findById(Integer id){
+        return dao.findById(id);
+    }
 }

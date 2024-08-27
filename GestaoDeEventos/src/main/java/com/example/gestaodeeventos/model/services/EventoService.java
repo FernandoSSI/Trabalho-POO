@@ -24,4 +24,8 @@ public class EventoService {
             dao.update(obj);
         }
     }
+
+    public List<Evento> findAll(){
+        return dao.findAll();
+    }
 }

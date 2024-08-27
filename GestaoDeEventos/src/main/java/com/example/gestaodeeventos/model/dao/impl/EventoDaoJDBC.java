@@ -4,7 +4,12 @@ import com.example.gestaodeeventos.db.DB;
 import com.example.gestaodeeventos.db.DbException;
 import com.example.gestaodeeventos.model.dao.EventoDao;
 import com.example.gestaodeeventos.model.entities.Evento;
+import com.example.gestaodeeventos.model.entities.Instituicao;
 import com.example.gestaodeeventos.model.entities.Organizador;
+import com.example.gestaodeeventos.model.entities.User;
+import com.example.gestaodeeventos.model.services.CategoriaService;
+import com.example.gestaodeeventos.model.services.InstituicaoService;
+import com.example.gestaodeeventos.model.services.OrganizadorService;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -46,7 +51,6 @@ public class EventoDaoJDBC implements EventoDao {
                     obj.setId(id);
 
                     insertOrganizadores(obj);
-                    System.out.println("Evento cadastrado");
                 }
                 DB.closeResultSet(rs);
             } else {
@@ -74,7 +78,6 @@ public class EventoDaoJDBC implements EventoDao {
                 st.executeUpdate();
             }
 
-            System.out.println("Organizadores e evento cadastrados");
         } catch (SQLException e) {
             throw new DbException(e.getMessage());
         } finally {
@@ -106,4 +109,93 @@ public class EventoDaoJDBC implements EventoDao {
     public List<Evento> findByUserId(Integer id) {
         return null;
     }
+
+    @Override
+    public List<Evento> findAll() {
+        String sql = "SELECT * FROM evento";
+        try (PreparedStatement st = conn.prepareStatement(sql);
+             ResultSet rs = st.executeQuery()) {
+
+            List<Evento> list = new ArrayList<>();
+
+            while (rs.next()) {
+                Evento evento = new Evento();
+                List<Organizador> organizadores = new ArrayList<Organizador>();
+
+                evento.setId(rs.getInt("id"));
+                evento.setNome(rs.getString("nome"));
+                evento.setExpectativaParticipantes(rs.getInt("expectativaParticipantes"));
+                evento.setDescricao( rs.getString("descricao"));
+                evento.setMapaURL(rs.getString("mapaURL"));
+                evento.setData(rs.getDate("data"));
+                evento.setCategoria(new CategoriaService().findByName(rs.getString("categoria_nome")));
+                evento.setInstituicao(new InstituicaoService().findById(rs.getInt("instituicao_id")));
+                evento.setOrganizadores(findOrganizadores(evento.getId()));
+                evento.setParticipantes(findParticipantesByEventoId(evento.getId()));
+
+                list.add(evento);
+            }
+            return list;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    private List<Organizador> findOrganizadores(Integer eventoId){
+        PreparedStatement st = null;
+        ResultSet rs = null;
+        try {
+            Connection conn = DB.getConnection();
+            st = conn.prepareStatement(
+                    "SELECT organizador.* FROM organizador " +
+                            "INNER JOIN organizador_evento " +
+                            "ON organizador.id = organizador_evento.organizador_id " +
+                            "WHERE organizador_evento.evento_id = ?");
+
+            st.setInt(1, eventoId);
+            rs = st.executeQuery();
+
+            List<Organizador> organizadores = new ArrayList<>();
+
+            while (rs.next()) {
+                OrganizadorService organizadorService = new OrganizadorService();
+                Organizador organizador = organizadorService.findById(rs.getInt("id"));
+                organizadores.add(organizador);
+            }
+            return organizadores;
+        } catch (SQLException e) {
+            throw new DbException(e.getMessage());
+        } finally {
+            DB.closeResultSet(rs);
+            DB.closeStatement(st);
+        }
+    }
+
+    private List<User> findParticipantesByEventoId(int eventoId) {
+        String sql = "SELECT u.id, u.nome, u.email " +
+                "FROM inscricao i " +
+                "INNER JOIN user u ON i.user_id = u.id " +
+                "WHERE i.evento_id = ?";
+
+        try (PreparedStatement st = conn.prepareStatement(sql)) {
+            st.setInt(1, eventoId);
+            try (ResultSet rs = st.executeQuery()) {
+                List<User> participantes = new ArrayList<>();
+                while (rs.next()) {
+                    User user = new User();
+                    user.setId(rs.getInt("id"));
+                    user.setNome(rs.getString("nome"));
+                    user.setEmail(rs.getString("email"));
+                    participantes.add(user);
+                }
+                return participantes;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+
 }

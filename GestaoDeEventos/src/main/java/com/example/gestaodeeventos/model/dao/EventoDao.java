@@ -12,4 +12,6 @@ public interface EventoDao {
     Evento findById(Integer id);
     List<Evento> findAllByOrgId(Integer id);
     List<Evento> findByUserId(Integer id);
+    List<Evento> findAll();
+
 }

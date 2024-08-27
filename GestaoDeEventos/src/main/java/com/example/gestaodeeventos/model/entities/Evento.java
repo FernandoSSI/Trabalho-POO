@@ -136,9 +136,9 @@ public class Evento {
     }
 
     public void setData(Date data) {
-        if (data == null || data.before(new Date())) {
+        /*if (data == null || data.before(new Date())) {
             throw new IllegalArgumentException("Data must be a future date");
-        }
+        }*/
         this.data = data;
     }
 
