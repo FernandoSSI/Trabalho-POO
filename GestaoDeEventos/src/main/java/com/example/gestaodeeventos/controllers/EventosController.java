@@ -4,22 +4,36 @@ import com.example.gestaodeeventos.model.entities.Evento;
 import com.example.gestaodeeventos.model.entities.Instituicao;
 import com.example.gestaodeeventos.model.services.EventoService;
 import com.example.gestaodeeventos.model.services.OrganizadorService;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
-import javafx.scene.control.ListView;
-import javafx.scene.control.ToggleGroup;
+import javafx.scene.control.*;
+import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.layout.GridPane;
+import javafx.scene.layout.Pane;
+import javafx.scene.paint.Color;
+import javafx.scene.text.Font;
+import javafx.scene.text.Text;
+import javafx.scene.text.TextAlignment;
 
 import java.net.URL;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
+import java.util.Random;
 import java.util.ResourceBundle;
 
 public class EventosController extends PaginaController{
+    private static final Random RANDOM = new Random();
 
     private EventoService eventoService;
 
     @FXML
-    private ListView eventosList;
+    private GridPane eventosGrid;
 
-    /*instituicoes = instituicaoService.findAll();
+    /*
+    Filtro
+    instituicoes = instituicaoService.findAll();
         for (
     Instituicao instituicao : instituicoes) {
         if (filtro == null || filtro.isEmpty() || instituicao.getNome().toLowerCase().contains(filtro.toLowerCase())) {
@@ -29,10 +43,93 @@ public class EventosController extends PaginaController{
 
     @Override
     public void atualizarInformacoes() {
+
+        eventosGrid.getChildren().clear();
+
         List<Evento> eventos = eventoService.findAll();
+        int col = 0;
+        int row = 0;
+
         for (Evento evento : eventos) {
-                eventosList.getItems().add(evento.getNome());
+            Pane eventPane = createEventPane(evento);
+            eventosGrid.add(eventPane, col, row);
+
+            col++;
+            if (col == 3) {
+                col = 0;
+                row++;
+            }
         }
+    }
+
+    private Pane createEventPane(Evento evento) {
+        Pane eventPane = new Pane();
+        eventPane.setMaxSize(197.0, 168.0);
+        eventPane.setStyle("-fx-border-color: #434343;");
+
+        Text eventNameText = new Text(evento.getNome());
+        eventNameText.setLayoutX(1.0);
+        eventNameText.setLayoutY(124.0);
+        eventNameText.setTextAlignment(TextAlignment.CENTER);
+        eventNameText.setWrappingWidth(195.0);
+        eventNameText.setFont(new Font("System Bold", 14.0));
+
+        Separator separator = new Separator();
+        separator.setLayoutX(1.0);
+        separator.setLayoutY(102.0);
+        separator.setPrefSize(195.0, 4.0);
+
+        Text institutionText = new Text(evento.getInstituicao().getNome());
+        institutionText.setLayoutY(142.0);
+        institutionText.setTextAlignment(TextAlignment.CENTER);
+        institutionText.setWrappingWidth(196.0);
+
+        SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+        String dateStr = dateFormat.format(evento.getData());
+        Text dateText = new Text(dateStr);
+        dateText.setFill(javafx.scene.paint.Color.valueOf("#434343"));
+        dateText.setLayoutY(159.0);
+        dateText.setTextAlignment(TextAlignment.CENTER);
+        dateText.setWrappingWidth(196.0);
+
+        Pane imagePane = new Pane();
+        imagePane.setLayoutX(1.0);
+        imagePane.setLayoutY(1.0);
+        imagePane.setPrefSize(195.0, 101.0);
+        Color pastelColor = getRandomPastelColor();
+        imagePane.setStyle("-fx-background-color: "+ toRgbString(pastelColor) + ";");
+
+        eventPane.getChildren().addAll(imagePane, eventNameText, separator, institutionText, dateText);
+
+        // Configurar evento de clique
+        eventPane.setOnMouseClicked(event -> {
+            System.out.println("Evento clicado: " + evento.getNome());
+            // Aqui você pode abrir a página de detalhes do evento
+        });
+
+        return eventPane;
+    }
+
+
+
+    // gerador de cores aleatorias
+    private Color getRandomPastelColor() {
+        float r = getRandomPastelComponent();
+        float g = getRandomPastelComponent();
+        float b = getRandomPastelComponent();
+        return Color.rgb((int)(r * 255), (int)(g * 255), (int)(b * 255));
+    }
+
+    private  float getRandomPastelComponent() {
+        // Pastel colors are generally light, so we use a high value for the components
+        return 0.5f + RANDOM.nextFloat() * 0.5f;
+    }
+
+    private String toRgbString(Color color) {
+        return String.format("#%02X%02X%02X",
+                (int)(color.getRed() * 255),
+                (int)(color.getGreen() * 255),
+                (int)(color.getBlue() * 255));
     }
 
 

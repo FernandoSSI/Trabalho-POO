@@ -54,7 +54,7 @@ public class PaginaController implements Initializable {
     }
 
     public void atualizarInformacoes() {
-        adicionarBotaoCriarEvento();
+
     }
 
     public void abrirPaginaPrincipal(ActionEvent event, User user) {
@@ -80,6 +80,8 @@ public class PaginaController implements Initializable {
             stage.show();
 
             paginaPrincipalController.atualizarInformacoes();
+            paginaPrincipalController.adicionarBotaoCriarEvento();
+
 
 
         } catch (IOException e) {
@@ -111,6 +113,7 @@ public class PaginaController implements Initializable {
             stage.show();
 
             perfilController.atualizarInformacoes();
+            perfilController.adicionarBotaoCriarEvento();
 
         } catch (IOException e) {
             e.printStackTrace();
@@ -142,6 +145,7 @@ public class PaginaController implements Initializable {
             stage.show();
 
             inscricoesController.atualizarInformacoes();
+            inscricoesController.adicionarBotaoCriarEvento();
 
 
         } catch (IOException e) {
@@ -173,6 +177,7 @@ public class PaginaController implements Initializable {
             stage.show();
 
             eventosController.atualizarInformacoes();
+            eventosController.adicionarBotaoCriarEvento();
 
 
         } catch (IOException e) {
