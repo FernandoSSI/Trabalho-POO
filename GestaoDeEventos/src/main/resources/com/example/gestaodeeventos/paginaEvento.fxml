@@ -1,0 +1,187 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<BorderPane prefHeight="632.0" prefWidth="1013.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.gestaodeeventos.controllers.PaginaEventoController">
+    <center>
+        <AnchorPane prefHeight="592.0" prefWidth="818.0" BorderPane.alignment="CENTER">
+         <children>
+            <ImageView fitHeight="230.0" fitWidth="339.0" layoutX="33.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true" smooth="false">
+               <image>
+                  <Image url="@images/pexels-jibarofoto-2774556.jpg" />
+               </image>
+            </ImageView>
+            <Label layoutX="33.0" layoutY="253.0" prefHeight="24.0" prefWidth="257.0" text="DESCRIÇÃO DO EVENTO">
+               <font>
+                  <Font name="System Bold" size="20.0" />
+               </font>
+            </Label>
+            <Text fx:id="descricaoEvento" layoutX="33.0" layoutY="301.0" strokeType="OUTSIDE" strokeWidth="0.0" text="ssssssss" wrappingWidth="296.13671875">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Text>
+            <Separator layoutX="25.0" layoutY="399.0" prefHeight="5.0" prefWidth="366.0" />
+            <Label layoutX="27.0" layoutY="418.0" prefHeight="24.0" prefWidth="257.0" text="LOCAL">
+               <font>
+                  <Font name="System Bold" size="20.0" />
+               </font>
+            </Label>
+            <Text fx:id="instituicaoText" layoutX="26.0" layoutY="471.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="297.13671875">
+               <font>
+                  <Font name="System Bold" size="16.0" />
+               </font>
+            </Text>
+            <Text fx:id="endereco" layoutX="26.0" layoutY="490.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="296.13671875" />
+            <Text fx:id="cidade" layoutX="25.0" layoutY="507.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="299.13671875" />
+            <Separator layoutX="410.0" layoutY="8.0" orientation="VERTICAL" prefHeight="572.0" prefWidth="0.0" />
+            <Text fx:id="categoria" layoutX="33.0" layoutY="385.0" strokeType="OUTSIDE" strokeWidth="0.0" text="categoria: " wrappingWidth="296.13671875">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Text>
+            <Pane fx:id="inscricaoPane" layoutX="453.0" layoutY="14.0" prefHeight="395.0" prefWidth="318.0" style="-fx-background-color: #ffff; -fx-border-radius: 20; -fx-background-radius: 20;" visible="false">
+               <children>
+                  <Pane prefHeight="47.0" prefWidth="319.0" style="-fx-background-color: #2F3D57; -fx-background-radius: 20 20 0 0; -fx-border-radius: 20 20 0 0;">
+                     <children>
+                        <Text fx:id="inscricaoTitulo" fill="WHITE" layoutX="5.0" layoutY="32.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Inscrição - " textAlignment="CENTER" wrappingWidth="308.40625">
+                           <font>
+                              <Font name="System Bold" size="19.0" />
+                           </font>
+                        </Text>
+                     </children>
+                  </Pane>
+                  <Text fx:id="nomeParticipante" layoutX="6.0" layoutY="93.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Participante: " wrappingWidth="306.13671875">
+                     <font>
+                        <Font size="20.0" />
+                     </font>
+                  </Text>
+                  <Text fx:id="inscricaoId" layoutX="6.0" layoutY="126.0" strokeType="OUTSIDE" strokeWidth="0.0" text="inscrição: " wrappingWidth="306.13671875">
+                     <font>
+                        <Font size="20.0" />
+                     </font>
+                  </Text>
+                  <Pane layoutY="368.0" opacity="0.82" prefHeight="27.0" prefWidth="319.0" style="-fx-background-color: #2F3D57; -fx-background-radius: 0 0 20 20; -fx-border-radius: 0 0 20 20;">
+                     <children>
+                        <Text fill="WHITE" layoutX="5.0" layoutY="18.0" strokeType="OUTSIDE" strokeWidth="0.0" text="GEA System" textAlignment="CENTER" wrappingWidth="308.40625">
+                           <font>
+                              <Font name="System Bold" size="12.0" />
+                           </font>
+                        </Text>
+                     </children>
+                  </Pane>
+                  <ImageView fitHeight="193.0" fitWidth="222.0" layoutX="63.0" layoutY="148.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@images/3949749-200.png" />
+                     </image>
+                  </ImageView>
+               </children>
+            </Pane>
+            <Text fx:id="linkLabel" layoutX="27.0" layoutY="555.0" strokeType="OUTSIDE" strokeWidth="0.0" text="link do mapa:" />
+            <Text fx:id="mapaUrl" fill="#4076ff" layoutX="104.0" layoutY="555.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="286.13671875">
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor></Text>
+            <Button fx:id="inscrevaseBtn" layoutX="461.0" layoutY="518.0" mnemonicParsing="false" onAction="#inscrever" prefHeight="50.0" prefWidth="314.0" style="-fx-background-color: #2F3D57; -fx-background-radius: 20; -fx-border-radius: 20;" text="INSCREVA-SE!" textFill="WHITE">
+               <font>
+                  <Font size="18.0" />
+               </font>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </Button>
+         </children></AnchorPane>
+    </center>
+    <top>
+        <AnchorPane prefHeight="45.0" prefWidth="1001.0" BorderPane.alignment="CENTER">
+            <children>
+                <Label fx:id="nomeEvento" layoutX="246.0" layoutY="1.0" prefHeight="43.0" prefWidth="672.0" text="SESCOMP" textFill="#9e9e9e">
+                    <font>
+                        <Font name="System Bold" size="29.0" />
+                    </font>
+                </Label>
+            <Button fx:id="voltarBtn" layoutX="201.0" layoutY="1.0" mnemonicParsing="false" onAction="#voltar" prefHeight="43.0" prefWidth="40.0" style="-fx-background-color: none;" text="&lt;" textFill="#9e9e9e">
+               <font>
+                  <Font name="System Bold" size="19.0" />
+               </font>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </Button>
+            </children>
+      </AnchorPane>
+    </top>
+    <left>
+        <AnchorPane prefHeight="563.0" prefWidth="196.0" BorderPane.alignment="CENTER">
+            <children>
+                <VBox fx:id="vboxMenu" layoutX="50.0" layoutY="-45.0" prefHeight="562.0" prefWidth="200.0" style="-fx-background-color: #2F3D57;" AnchorPane.bottomAnchor="70.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="-45.0">
+                    <children>
+                        <Label prefHeight="0.0" prefWidth="200.0" style="-fx-text-alignment: center;" text="      GEAUFC" textAlignment="CENTER" textFill="WHITE">
+                            <font>
+                                <Font name="System Bold" size="27.0" />
+                            </font>
+                        </Label>
+                        <Separator opacity="0.0" prefHeight="12.0" prefWidth="200.0" />
+                        <Button fx:id="perfilBtn" mnemonicParsing="false" onAction="#abrirPerfil" prefHeight="45.0" prefWidth="200.0" style="-fx-background-color: #212B3D;" text="Perfil" textFill="WHITE">
+                            <font>
+                                <Font size="17.0" />
+                            </font>
+                            <cursor>
+                                <Cursor fx:constant="HAND" />
+                            </cursor>
+                        </Button>
+                        <Separator opacity="0.0" prefHeight="12.0" prefWidth="200.0" />
+                        <Button fx:id="inscricoesBtn" mnemonicParsing="false" onAction="#abrirInscricoes" prefHeight="45.0" prefWidth="200.0" style="-fx-background-color: #212B3D;" text="Inscrições" textFill="WHITE">
+                            <font>
+                                <Font size="17.0" />
+                            </font>
+                            <cursor>
+                                <Cursor fx:constant="HAND" />
+                            </cursor>
+                        </Button>
+                        <Separator opacity="0.0" prefHeight="12.0" prefWidth="200.0" />
+                        <Button fx:id="eventosBtn" mnemonicParsing="false" onAction="#abrirEventos" prefHeight="45.0" prefWidth="200.0" style="-fx-background-color: #212B3D; -fx-border-width: 0 0 1px 0; -fx-border-color: white;" text="Eventos" textFill="WHITE">
+                            <font>
+                                <Font size="17.0" />
+                            </font>
+                            <cursor>
+                                <Cursor fx:constant="HAND" />
+                            </cursor>
+                        </Button>
+                        <Separator opacity="0.0" prefHeight="12.0" prefWidth="200.0" />
+                    </children>
+                </VBox>
+                <VBox layoutY="515.0" prefHeight="72.0" prefWidth="200.0" style="-fx-background-color: #2F3D57;">
+                    <children>
+                        <Button fx:id="configBtn" mnemonicParsing="false" onAction="#abrirConfiguracoes" prefHeight="45.0" prefWidth="200.0" style="-fx-background-color: #212B3D;" text="Configurações" textFill="WHITE">
+                            <font>
+                                <Font size="17.0" />
+                            </font>
+                            <cursor>
+                                <Cursor fx:constant="HAND" />
+                            </cursor>
+                            <graphic>
+                                <ImageView fitHeight="25.0" fitWidth="23.0" pickOnBounds="true" preserveRatio="true">
+                                    <image>
+                                        <Image url="@images/settings.png" />
+                                    </image>
+                                </ImageView>
+                            </graphic>
+                        </Button>
+                    </children>
+                </VBox>
+            </children>
+        </AnchorPane>
+    </left>
+</BorderPane>

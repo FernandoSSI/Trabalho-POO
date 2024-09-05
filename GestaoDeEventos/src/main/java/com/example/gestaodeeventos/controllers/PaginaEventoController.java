@@ -1,0 +1,140 @@
+package com.example.gestaodeeventos.controllers;
+
+import com.example.gestaodeeventos.Main;
+import com.example.gestaodeeventos.model.entities.Evento;
+import com.example.gestaodeeventos.model.entities.Modalidade;
+import com.example.gestaodeeventos.model.services.EventoService;
+import com.example.gestaodeeventos.model.services.UserService;
+import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.layout.Pane;
+import javafx.scene.text.Text;
+import javafx.stage.Stage;
+
+import java.io.IOException;
+import java.net.URL;
+import java.util.ResourceBundle;
+
+public class PaginaEventoController extends PaginaController{
+
+
+    private Evento evento;
+    private EventoService eventoService;
+    private UserService userService;
+    //private InscricaoService inscricaoService;
+
+    @FXML
+    private Text descricaoEvento;
+    @FXML
+    private Text instituicaoText;
+    @FXML
+    private Text endereco;
+    @FXML
+    private Text cidade;
+    @FXML
+    private Text categoria;
+    @FXML
+    private Text inscricaoTitulo;
+    @FXML
+    private Text nomeParticipante;
+    @FXML
+    private Text inscricaoId;
+    @FXML
+    private Text mapaUrl;
+    @FXML
+    private Text linkLabel;
+    @FXML
+    private Button inscrevaseBtn;
+    @FXML
+    private Label nomeEvento;
+    @FXML
+    private Button voltarBtn;
+    @FXML
+    private Pane inscricaoPane;
+
+    public Evento getEvento() {
+        return evento;
+    }
+
+    public void setEvento(Evento evento) {
+        this.evento = evento;
+    }
+
+    public void voltar(ActionEvent event) {
+        try {
+            Stage currentStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            double currentX = currentStage.getX();
+            double currentY = currentStage.getY();
+
+            FXMLLoader loader = new FXMLLoader(Main.class.getResource("eventos.fxml"));
+            Parent root = loader.load();
+
+            EventosController eventosController = loader.getController();
+            eventosController.setUser(user);
+
+            Scene scene = new Scene(root);
+            Stage stage = currentStage;
+
+            stage.setScene(scene);
+
+            stage.setX(currentX);
+            stage.setY(currentY);
+
+            stage.show();
+
+            eventosController.atualizarInformacoes();
+            eventosController.adicionarBotaoCriarEvento();
+
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+    }
+
+    public void inscrever(ActionEvent event) {
+        inscricaoPane.setVisible(true);
+
+    }
+
+    @Override
+    public void atualizarInformacoes(){
+        if (evento != null){
+            nomeEvento.setText(evento.getNome());
+            descricaoEvento.setText(evento.getDescricao());
+            categoria.setText(categoria.getText() + evento.getCategoria().getNome());
+            System.out.println(evento.getModalidade());
+            if (evento.getModalidade() == Modalidade.HIBRIDO || evento.getModalidade() == Modalidade.PRESENCIAL ){
+                instituicaoText.setText(evento.getInstituicao().getNome());
+                endereco.setText(evento.getInstituicao().getBairro() + ", " + evento.getInstituicao().getRua()+ ", " + evento.getInstituicao().getNumeroResidencial());
+                cidade.setText(evento.getInstituicao().getCidade() + ", " + evento.getInstituicao().getEstado());
+                mapaUrl.setText(evento.getMapaURL());
+            } else {
+                instituicaoText.setText("Evento Online");
+                linkLabel.setText("");
+            }
+            inscricaoTitulo.setText(inscricaoTitulo.getText() + evento.getNome());
+            nomeParticipante.setText(nomeParticipante.getText() + user.getNome());
+            //inscricaoId.setText();
+
+
+
+        }
+    }
+
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+        this.eventoService = new EventoService();
+        this.userService = new UserService();
+
+
+    }
+
+
+}

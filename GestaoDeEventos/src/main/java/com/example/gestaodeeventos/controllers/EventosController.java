@@ -1,21 +1,24 @@
 package com.example.gestaodeeventos.controllers;
 
+import com.example.gestaodeeventos.Main;
 import com.example.gestaodeeventos.model.entities.Evento;
-import com.example.gestaodeeventos.model.entities.Instituicao;
 import com.example.gestaodeeventos.model.services.EventoService;
-import com.example.gestaodeeventos.model.services.OrganizadorService;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Cursor;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
-import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextAlignment;
+import javafx.stage.Stage;
 
+import java.io.IOException;
 import java.net.URL;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -64,6 +67,7 @@ public class EventosController extends PaginaController{
 
     private Pane createEventPane(Evento evento) {
         Pane eventPane = new Pane();
+        eventPane.setCursor(Cursor.HAND);
         eventPane.setMaxSize(197.0, 168.0);
         eventPane.setStyle("-fx-border-color: #434343;");
 
@@ -103,8 +107,32 @@ public class EventosController extends PaginaController{
 
         // Configurar evento de clique
         eventPane.setOnMouseClicked(event -> {
-            System.out.println("Evento clicado: " + evento.getNome());
-            // Aqui você pode abrir a página de detalhes do evento
+            try {
+                Stage currentStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+                double currentX = currentStage.getX();
+                double currentY = currentStage.getY();
+
+                FXMLLoader loader = new FXMLLoader(Main.class.getResource("PaginaEvento.fxml"));
+                Parent root = loader.load();
+
+                PaginaEventoController paginaEventoController = loader.getController();
+                paginaEventoController.setUser(user);
+                paginaEventoController.setEvento(evento);
+
+                Scene scene = new Scene(root);
+                Stage stage = currentStage;
+                stage.setScene(scene);
+                stage.setX(currentX);
+                stage.setY(currentY);
+                stage.show();
+
+                paginaEventoController.atualizarInformacoes();
+                paginaEventoController.adicionarBotaoCriarEvento();
+
+
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         });
 
         return eventPane;

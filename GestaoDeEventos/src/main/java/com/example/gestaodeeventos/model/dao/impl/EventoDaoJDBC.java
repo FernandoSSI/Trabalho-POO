@@ -3,10 +3,7 @@ package com.example.gestaodeeventos.model.dao.impl;
 import com.example.gestaodeeventos.db.DB;
 import com.example.gestaodeeventos.db.DbException;
 import com.example.gestaodeeventos.model.dao.EventoDao;
-import com.example.gestaodeeventos.model.entities.Evento;
-import com.example.gestaodeeventos.model.entities.Instituicao;
-import com.example.gestaodeeventos.model.entities.Organizador;
-import com.example.gestaodeeventos.model.entities.User;
+import com.example.gestaodeeventos.model.entities.*;
 import com.example.gestaodeeventos.model.services.CategoriaService;
 import com.example.gestaodeeventos.model.services.InstituicaoService;
 import com.example.gestaodeeventos.model.services.OrganizadorService;
@@ -132,6 +129,10 @@ public class EventoDaoJDBC implements EventoDao {
                 evento.setInstituicao(new InstituicaoService().findById(rs.getInt("instituicao_id")));
                 evento.setOrganizadores(findOrganizadores(evento.getId()));
                 evento.setParticipantes(findParticipantesByEventoId(evento.getId()));
+
+                String modalidadeString = rs.getString("modalidade");
+                Modalidade modalidade = Modalidade.valueOf(modalidadeString.toUpperCase());
+                evento.setModalidade(modalidade);
 
                 list.add(evento);
             }
