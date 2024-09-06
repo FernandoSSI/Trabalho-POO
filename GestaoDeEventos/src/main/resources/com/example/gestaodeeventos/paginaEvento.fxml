@@ -57,7 +57,7 @@
                      <children>
                         <Text fx:id="inscricaoTitulo" fill="WHITE" layoutX="5.0" layoutY="32.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Inscrição - " textAlignment="CENTER" wrappingWidth="308.40625">
                            <font>
-                              <Font name="System Bold" size="19.0" />
+                              <Font name="System Bold" size="15.0" />
                            </font>
                         </Text>
                      </children>

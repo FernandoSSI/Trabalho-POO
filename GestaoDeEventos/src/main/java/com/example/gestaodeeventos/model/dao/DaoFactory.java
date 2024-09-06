@@ -25,4 +25,8 @@ public class DaoFactory {
         return new CategoriaDaoJDBC(DB.getConnection());
     }
 
+    public static InscricaoDaoJDBC createInscricaoDao(){
+        return new InscricaoDaoJDBC(DB.getConnection());
+    }
+
 }

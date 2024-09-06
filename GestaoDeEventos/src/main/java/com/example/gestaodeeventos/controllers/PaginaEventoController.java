@@ -2,8 +2,10 @@ package com.example.gestaodeeventos.controllers;
 
 import com.example.gestaodeeventos.Main;
 import com.example.gestaodeeventos.model.entities.Evento;
+import com.example.gestaodeeventos.model.entities.Inscricao;
 import com.example.gestaodeeventos.model.entities.Modalidade;
 import com.example.gestaodeeventos.model.services.EventoService;
+import com.example.gestaodeeventos.model.services.InscricaoService;
 import com.example.gestaodeeventos.model.services.UserService;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -27,7 +29,7 @@ public class PaginaEventoController extends PaginaController{
     private Evento evento;
     private EventoService eventoService;
     private UserService userService;
-    //private InscricaoService inscricaoService;
+    private InscricaoService inscricaoService;
 
     @FXML
     private Text descricaoEvento;
@@ -99,6 +101,13 @@ public class PaginaEventoController extends PaginaController{
     }
 
     public void inscrever(ActionEvent event) {
+        if(inscricaoService.findInscricaoById(user.getId(), evento.getId()) == null){
+            Inscricao inscricao = new Inscricao();
+            inscricao.setEvento(evento);
+            inscricao.setParticipante(user);
+            inscricaoService.createInscricao(inscricao);
+        }
+
         inscricaoPane.setVisible(true);
 
     }
@@ -123,6 +132,11 @@ public class PaginaEventoController extends PaginaController{
             nomeParticipante.setText(nomeParticipante.getText() + user.getNome());
             //inscricaoId.setText();
 
+            if(inscricaoService.findInscricaoById(user.getId(), evento.getId()) != null){
+                inscricaoPane.setVisible(true);
+                inscrevaseBtn.setDisable(true);
+                inscrevaseBtn.setVisible(false);
+            }
 
 
         }
@@ -132,7 +146,7 @@ public class PaginaEventoController extends PaginaController{
     public void initialize(URL url, ResourceBundle resourceBundle) {
         this.eventoService = new EventoService();
         this.userService = new UserService();
-
+        this.inscricaoService = new InscricaoService();
 
     }
 

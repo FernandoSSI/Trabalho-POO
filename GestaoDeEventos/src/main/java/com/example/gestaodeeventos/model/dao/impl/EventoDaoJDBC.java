@@ -94,7 +94,41 @@ public class EventoDaoJDBC implements EventoDao {
 
     @Override
     public Evento findById(Integer id) {
-        return null;
+        PreparedStatement st = null;
+        ResultSet rs = null;
+        try {
+            st = conn.prepareStatement("SELECT * FROM evento WHERE id = ?");
+            st.setInt(1, id);
+            rs = st.executeQuery();
+
+            if (rs.next()) {
+                Evento evento = new Evento();
+                evento.setId(rs.getInt("id"));
+                evento.setNome(rs.getString("nome"));
+                evento.setExpectativaParticipantes(rs.getInt("expectativaParticipantes"));
+                evento.setDescricao(rs.getString("descricao"));
+                evento.setMapaURL(rs.getString("mapaURL"));
+                evento.setData(rs.getDate("data"));
+                evento.setCategoria(new CategoriaService().findByName(rs.getString("categoria_nome")));
+                evento.setInstituicao(new InstituicaoService().findById(rs.getInt("instituicao_id")));
+                evento.setOrganizadores(findOrganizadores(evento.getId()));
+                evento.setParticipantes(findParticipantesByEventoId(evento.getId()));
+
+                String modalidadeString = rs.getString("modalidade");
+                if (modalidadeString != null) {
+                    Modalidade modalidade = Modalidade.valueOf(modalidadeString.toUpperCase());
+                    evento.setModalidade(modalidade);
+                }
+
+                return evento;
+            }
+            return null;
+        } catch (SQLException e) {
+            throw new DbException(e.getMessage());
+        } finally {
+            DB.closeStatement(st);
+            DB.closeResultSet(rs);
+        }
     }
 
     @Override

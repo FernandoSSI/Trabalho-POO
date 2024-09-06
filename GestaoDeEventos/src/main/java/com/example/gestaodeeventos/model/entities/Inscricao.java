@@ -1,26 +1,17 @@
 package com.example.gestaodeeventos.model.entities;
 
 public class Inscricao {
-    private Integer id;
 
     private User participante;
     private Evento evento;
 
-    public Inscricao(Integer id, User participante, Evento evento) {
-        setId(id);
+    public Inscricao() {
+
+    }
+
+    public Inscricao(User participante, Evento evento) {
         setParticipante(participante);
         setEvento(evento);
-    }
-
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        if (id <= 0) {
-            throw new IllegalArgumentException("ID must be greater than zero");
-        }
-        this.id = id;
     }
 
     public User getParticipante() {
