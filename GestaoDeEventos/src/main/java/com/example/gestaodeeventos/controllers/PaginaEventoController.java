@@ -62,6 +62,7 @@ public class PaginaEventoController extends PaginaController{
 
     public Evento getEvento() {
         return evento;
+
     }
 
     public void setEvento(Evento evento) {
@@ -118,7 +119,6 @@ public class PaginaEventoController extends PaginaController{
             nomeEvento.setText(evento.getNome());
             descricaoEvento.setText(evento.getDescricao());
             categoria.setText(categoria.getText() + evento.getCategoria().getNome());
-            System.out.println(evento.getModalidade());
             if (evento.getModalidade() == Modalidade.HIBRIDO || evento.getModalidade() == Modalidade.PRESENCIAL ){
                 instituicaoText.setText(evento.getInstituicao().getNome());
                 endereco.setText(evento.getInstituicao().getBairro() + ", " + evento.getInstituicao().getRua()+ ", " + evento.getInstituicao().getNumeroResidencial());

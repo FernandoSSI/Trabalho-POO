@@ -149,7 +149,7 @@ public class EventosController extends PaginaController{
     }
 
     private  float getRandomPastelComponent() {
-        // Pastel colors are generally light, so we use a high value for the components
+
         return 0.5f + RANDOM.nextFloat() * 0.5f;
     }
 
