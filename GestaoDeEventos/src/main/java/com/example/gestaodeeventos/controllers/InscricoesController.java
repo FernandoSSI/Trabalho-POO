@@ -81,12 +81,12 @@ public class InscricoesController extends PaginaController{
                 double currentX = currentStage.getX();
                 double currentY = currentStage.getY();
 
-                FXMLLoader loader = new FXMLLoader(Main.class.getResource("PaginaEvento.fxml"));
+                FXMLLoader loader = new FXMLLoader(Main.class.getResource("PaginaInscricao.fxml"));
                 Parent root = loader.load();
 
-                PaginaEventoController paginaEventoController = loader.getController();
-                paginaEventoController.setUser(user);
-                paginaEventoController.setEvento(evento);
+                PaginaInscricaoController paginaInscricaoController = loader.getController();
+                paginaInscricaoController.setUser(user);
+                paginaInscricaoController.setEvento(evento);
 
                 Scene scene = new Scene(root);
                 Stage stage = currentStage;
@@ -95,8 +95,8 @@ public class InscricoesController extends PaginaController{
                 stage.setY(currentY);
                 stage.show();
 
-                paginaEventoController.atualizarInformacoes();
-                paginaEventoController.adicionarBotaoCriarEvento();
+                paginaInscricaoController.atualizarInformacoes();
+                paginaInscricaoController.adicionarBotaoCriarEvento();
 
 
             } catch (IOException e) {

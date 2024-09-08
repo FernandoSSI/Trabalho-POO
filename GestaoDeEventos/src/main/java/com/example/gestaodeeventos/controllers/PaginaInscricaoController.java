@@ -15,6 +15,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.TextArea;
 import javafx.scene.layout.Pane;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
@@ -23,22 +24,14 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class PaginaEventoController extends PaginaController{
+public class PaginaInscricaoController extends PaginaController{
+
 
 
     private Evento evento;
     private InscricaoService inscricaoService;
 
-    @FXML
-    private Text descricaoEvento;
-    @FXML
-    private Text instituicaoText;
-    @FXML
-    private Text endereco;
-    @FXML
-    private Text cidade;
-    @FXML
-    private Text categoria;
+
     @FXML
     private Text inscricaoTitulo;
     @FXML
@@ -46,17 +39,16 @@ public class PaginaEventoController extends PaginaController{
     @FXML
     private Text inscricaoId;
     @FXML
-    private Text mapaUrl;
-    @FXML
-    private Text linkLabel;
-    @FXML
-    private Button inscrevaseBtn;
-    @FXML
     private Label nomeEvento;
     @FXML
     private Button voltarBtn;
     @FXML
     private Pane inscricaoPane;
+    @FXML
+    private Button resgatarCertificados;
+    @FXML
+    private TextArea feedbackTextArea;
+
 
     public Evento getEvento() {
         return evento;
@@ -115,29 +107,16 @@ public class PaginaEventoController extends PaginaController{
     public void atualizarInformacoes(){
         if (evento != null){
             nomeEvento.setText(evento.getNome());
-            descricaoEvento.setText(evento.getDescricao());
-            categoria.setText(categoria.getText() + evento.getCategoria().getNome());
-            if (evento.getModalidade() == Modalidade.HIBRIDO || evento.getModalidade() == Modalidade.PRESENCIAL ){
-                instituicaoText.setText(evento.getInstituicao().getNome());
-                endereco.setText(evento.getInstituicao().getBairro() + ", " + evento.getInstituicao().getRua()+ ", " + evento.getInstituicao().getNumeroResidencial());
-                cidade.setText(evento.getInstituicao().getCidade() + ", " + evento.getInstituicao().getEstado());
-                mapaUrl.setText(evento.getMapaURL());
-            } else {
-                instituicaoText.setText("Evento Online");
-                linkLabel.setText("");
-            }
             inscricaoTitulo.setText(inscricaoTitulo.getText() + evento.getNome());
             nomeParticipante.setText(nomeParticipante.getText() + user.getNome());
             //inscricaoId.setText();
 
             if(inscricaoService.findInscricaoById(user.getId(), evento.getId()) != null){
                 inscricaoPane.setVisible(true);
-                inscrevaseBtn.setDisable(true);
-                inscrevaseBtn.setVisible(false);
             }
-
-
         }
+
+
     }
 
     @Override
@@ -146,5 +125,44 @@ public class PaginaEventoController extends PaginaController{
 
     }
 
+    public void resgatarCertificados(ActionEvent event) {
 
+    }
+
+    public void enviarFeedback(ActionEvent event) {
+
+    }
+
+    public void cancelarInscricao(ActionEvent event) {
+        try {
+            inscricaoService.deleteInscricaoById(user.getId(), evento.getId());
+            Stage currentStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            double currentX = currentStage.getX();
+            double currentY = currentStage.getY();
+
+            FXMLLoader loader = new FXMLLoader(Main.class.getResource("inscricoes.fxml"));
+            Parent root = loader.load();
+
+            InscricoesController inscricoesController = loader.getController();
+            inscricoesController.setUser(user);
+
+            Scene scene = new Scene(root);
+            Stage stage = currentStage;
+
+            stage.setScene(scene);
+
+            stage.setX(currentX);
+            stage.setY(currentY);
+
+            stage.show();
+
+            inscricoesController.atualizarInformacoes();
+            inscricoesController.adicionarBotaoCriarEvento();
+
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        
+    }
 }
