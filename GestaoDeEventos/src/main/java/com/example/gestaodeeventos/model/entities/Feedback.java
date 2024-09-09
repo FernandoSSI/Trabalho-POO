@@ -1,14 +1,29 @@
 package com.example.gestaodeeventos.model.entities;
 
 public class Feedback {
+    private Integer id;
     private User usuario;
     private String comentario;
     private Evento evento;
 
-    public Feedback(User usuario, String comentario, Evento evento) {
+    public Feedback(){
+
+    }
+
+    public Feedback(Integer id, User usuario, String comentario, Evento evento) {
+
         setUsuario(usuario);
         setComentario(comentario);
         setEvento(evento);
+        setId(id);
+    }
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
     }
 
     public User getUsuario() {

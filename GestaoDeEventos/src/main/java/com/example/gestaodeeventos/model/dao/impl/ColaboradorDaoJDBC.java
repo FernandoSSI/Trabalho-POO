@@ -2,7 +2,8 @@ package com.example.gestaodeeventos.model.dao.impl;
 
 import com.example.gestaodeeventos.db.DB;
 import com.example.gestaodeeventos.db.DbException;
-import com.example.gestaodeeventos.model.dao.OrganizadorDao;
+import com.example.gestaodeeventos.model.dao.ColaboradorDao;
+import com.example.gestaodeeventos.model.entities.Colaborador;
 import com.example.gestaodeeventos.model.entities.Organizador;
 import com.example.gestaodeeventos.model.entities.User;
 import com.example.gestaodeeventos.model.services.UserService;
@@ -11,20 +12,20 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class OrganizadorDaoJDBC implements OrganizadorDao {
+public class ColaboradorDaoJDBC implements ColaboradorDao {
 
     private Connection con;
 
-    public OrganizadorDaoJDBC(Connection con) {
+    public ColaboradorDaoJDBC(Connection con) {
         this.con = con;
     }
 
     @Override
-    public void insert(Organizador obj) {
+    public void insert(Colaborador obj) {
         PreparedStatement st = null;
         try {
             st = con.prepareStatement(
-                    "INSERT INTO organizador (id) VALUES (?)",
+                    "INSERT INTO colaborador (id) VALUES (?)",
                     Statement.RETURN_GENERATED_KEYS);
 
             st.setInt(1, obj.getId());
@@ -49,14 +50,15 @@ public class OrganizadorDaoJDBC implements OrganizadorDao {
     }
 
     @Override
-    public void update(Organizador obj) {
+    public void update(Colaborador obj) {
+
     }
 
     @Override
     public void deleteById(Integer id) {
         PreparedStatement st = null;
         try {
-            st = con.prepareStatement("DELETE FROM organizador WHERE id = ?");
+            st = con.prepareStatement("DELETE FROM colaborador WHERE id = ?");
             st.setInt(1, id);
             st.executeUpdate();
         } catch (SQLException e) {
@@ -67,11 +69,11 @@ public class OrganizadorDaoJDBC implements OrganizadorDao {
     }
 
     @Override
-    public Organizador findById(Integer id) {
+    public Colaborador findById(Integer id) {
         PreparedStatement st = null;
         ResultSet resultSet = null;
         try {
-            st = con.prepareStatement("SELECT * FROM organizador WHERE id = ?");
+            st = con.prepareStatement("SELECT * FROM colaborador WHERE id = ?");
             st.setInt(1, id);
             resultSet = st.executeQuery();
 
@@ -82,16 +84,16 @@ public class OrganizadorDaoJDBC implements OrganizadorDao {
                     return null;
                 }
 
-                Organizador organizador = new Organizador();
-                organizador.setId(user.getId());
-                organizador.setNome(user.getNome());
-                organizador.setEmail(user.getEmail());
-                organizador.setSenha(user.getSenha());
-                organizador.setCpf(user.getCpf());
-                organizador.setCep(user.getCep());
-                organizador.setData_nascimento(user.getData_nascimento());
+                Colaborador colaborador = new Colaborador();
+                colaborador.setId(user.getId());
+                colaborador.setNome(user.getNome());
+                colaborador.setEmail(user.getEmail());
+                colaborador.setSenha(user.getSenha());
+                colaborador.setCpf(user.getCpf());
+                colaborador.setCep(user.getCep());
+                colaborador.setData_nascimento(user.getData_nascimento());
 
-                return organizador;
+                return colaborador;
             }
             return null;
         } catch (SQLException e) {
@@ -102,22 +104,21 @@ public class OrganizadorDaoJDBC implements OrganizadorDao {
         }
     }
 
-
     @Override
-    public List<Organizador> findAll() {
+    public List<Colaborador> findAll() {
         PreparedStatement st = null;
         ResultSet resultSet = null;
         try {
-            st = con.prepareStatement("SELECT * FROM organizador");
+            st = con.prepareStatement("SELECT * FROM colaborador");
             resultSet = st.executeQuery();
 
-            List<Organizador> organizadores = new ArrayList<>();
+            List<Colaborador> colaboradores = new ArrayList<>();
             while (resultSet.next()) {
-                Organizador organizador = new Organizador();
-                organizador.setId(resultSet.getInt("id"));
-                organizadores.add(organizador);
+                Colaborador colaborador = new Colaborador();
+                colaborador.setId(resultSet.getInt("id"));
+                colaboradores.add(colaborador);
             }
-            return organizadores;
+            return colaboradores;
         } catch (SQLException e) {
             throw new DbException(e.getMessage());
         } finally {
@@ -125,5 +126,4 @@ public class OrganizadorDaoJDBC implements OrganizadorDao {
             DB.closeResultSet(resultSet);
         }
     }
-
 }

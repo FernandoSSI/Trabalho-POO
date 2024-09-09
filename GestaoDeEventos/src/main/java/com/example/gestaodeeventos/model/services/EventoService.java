@@ -2,9 +2,7 @@ package com.example.gestaodeeventos.model.services;
 
 import com.example.gestaodeeventos.model.dao.DaoFactory;
 import com.example.gestaodeeventos.model.dao.EventoDao;
-import com.example.gestaodeeventos.model.dao.UserDao;
 import com.example.gestaodeeventos.model.entities.Evento;
-import com.example.gestaodeeventos.model.entities.User;
 
 import java.util.List;
 
@@ -23,6 +21,10 @@ public class EventoService {
         } else {
             dao.update(obj);
         }
+    }
+
+    public Evento findById(Integer id){
+        return dao.findById(id);
     }
 
     public List<Evento> findAll(){

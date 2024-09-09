@@ -127,7 +127,7 @@
                             </cursor>
                         </Button>
                         <Separator opacity="0.0" prefHeight="12.0" prefWidth="200.0" />
-                        <Button fx:id="inscricoesBtn" mnemonicParsing="false" onAction="#abrirInscricoes" prefHeight="45.0" prefWidth="200.0" style="-fx-background-color: #212B3D;" text="Inscrições" textFill="WHITE">
+                        <Button fx:id="inscricoesBtn" mnemonicParsing="false" onAction="#abrirInscricoes" prefHeight="45.0" prefWidth="200.0" style="-fx-background-color: #212B3D; -fx-border-width: 0 0 1px 0; -fx-border-color: white;" text="Inscrições" textFill="WHITE">
                             <font>
                                 <Font size="17.0" />
                             </font>
@@ -136,7 +136,7 @@
                             </cursor>
                         </Button>
                         <Separator opacity="0.0" prefHeight="12.0" prefWidth="200.0" />
-                        <Button fx:id="eventosBtn" mnemonicParsing="false" onAction="#abrirEventos" prefHeight="45.0" prefWidth="200.0" style="-fx-background-color: #212B3D; -fx-border-width: 0 0 1px 0; -fx-border-color: white;" text="Eventos" textFill="WHITE">
+                        <Button fx:id="eventosBtn" mnemonicParsing="false" onAction="#abrirEventos" prefHeight="45.0" prefWidth="200.0" style="-fx-background-color: #212B3D;" text="Eventos" textFill="WHITE">
                             <font>
                                 <Font size="17.0" />
                             </font>

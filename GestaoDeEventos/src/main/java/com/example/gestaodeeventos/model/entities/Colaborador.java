@@ -6,6 +6,10 @@ import java.util.List;
 public class Colaborador extends User {
     private List<Atividade> atividades;
 
+    public Colaborador(){
+
+    }
+
     public Colaborador(List<Atividade> atividades) {
         setAtividades(atividades);
     }

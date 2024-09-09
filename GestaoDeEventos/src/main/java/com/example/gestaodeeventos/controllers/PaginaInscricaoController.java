@@ -2,9 +2,11 @@ package com.example.gestaodeeventos.controllers;
 
 import com.example.gestaodeeventos.Main;
 import com.example.gestaodeeventos.model.entities.Evento;
+import com.example.gestaodeeventos.model.entities.Feedback;
 import com.example.gestaodeeventos.model.entities.Inscricao;
 import com.example.gestaodeeventos.model.entities.Modalidade;
 import com.example.gestaodeeventos.model.services.EventoService;
+import com.example.gestaodeeventos.model.services.FeedbackService;
 import com.example.gestaodeeventos.model.services.InscricaoService;
 import com.example.gestaodeeventos.model.services.UserService;
 import javafx.event.ActionEvent;
@@ -26,10 +28,11 @@ import java.util.ResourceBundle;
 
 public class PaginaInscricaoController extends PaginaController{
 
-
+    private InscricaoService inscricaoService;
+    private FeedbackService feedbackService;
 
     private Evento evento;
-    private InscricaoService inscricaoService;
+
 
 
     @FXML
@@ -65,11 +68,11 @@ public class PaginaInscricaoController extends PaginaController{
             double currentX = currentStage.getX();
             double currentY = currentStage.getY();
 
-            FXMLLoader loader = new FXMLLoader(Main.class.getResource("eventos.fxml"));
+            FXMLLoader loader = new FXMLLoader(Main.class.getResource("inscricoes.fxml"));
             Parent root = loader.load();
 
-            EventosController eventosController = loader.getController();
-            eventosController.setUser(user);
+            InscricoesController inscricoesController = loader.getController();
+            inscricoesController.setUser(user);
 
             Scene scene = new Scene(root);
             Stage stage = currentStage;
@@ -81,8 +84,8 @@ public class PaginaInscricaoController extends PaginaController{
 
             stage.show();
 
-            eventosController.atualizarInformacoes();
-            eventosController.adicionarBotaoCriarEvento();
+            inscricoesController.atualizarInformacoes();
+            inscricoesController.adicionarBotaoCriarEvento();
 
 
         } catch (IOException e) {
@@ -119,19 +122,6 @@ public class PaginaInscricaoController extends PaginaController{
 
     }
 
-    @Override
-    public void initialize(URL url, ResourceBundle resourceBundle) {
-        this.inscricaoService = new InscricaoService();
-
-    }
-
-    public void resgatarCertificados(ActionEvent event) {
-
-    }
-
-    public void enviarFeedback(ActionEvent event) {
-
-    }
 
     public void cancelarInscricao(ActionEvent event) {
         try {
@@ -163,6 +153,28 @@ public class PaginaInscricaoController extends PaginaController{
         } catch (IOException e) {
             e.printStackTrace();
         }
-        
+
     }
+
+    public void resgatarCertificados(ActionEvent event) {
+
+    }
+
+    public void enviarFeedback(ActionEvent event) {
+        String text = feedbackTextArea.getText();
+        Feedback feedback = new Feedback();
+        feedback.setComentario(text);
+        feedback.setEvento(evento);
+        feedback.setUsuario(user);
+        feedbackService.saveOrUpdate(feedback);
+        feedbackTextArea.clear();
+    }
+
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+        this.inscricaoService = new InscricaoService();
+        this.feedbackService = new FeedbackService();
+
+    }
+
 }

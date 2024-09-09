@@ -4,6 +4,7 @@ import java.util.Date;
 import java.util.List;
 
 public class Atividade {
+    private Integer id;
     private String titulo;
     private Date data;
     private String local;
@@ -13,7 +14,12 @@ public class Atividade {
     private List<Colaborador> colaboradores;
     private Certificado certificado;
 
-    public Atividade(Evento evento, String titulo, Date data, String local, String descricao, List<Colaborador> colaboradores, Certificado certificado) {
+    public Atividade(){
+
+    }
+
+    public Atividade(Integer id, Evento evento, String titulo, Date data, String local, String descricao, List<Colaborador> colaboradores, Certificado certificado) {
+        setId(id);
         setEvento(evento);
         setTitulo(titulo);
         setData(data);
@@ -21,6 +27,14 @@ public class Atividade {
         setColaboradores(colaboradores);
         setCertificado(certificado);
         setDescricao(descricao);
+    }
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
     }
 
     public Evento getEvento() {
