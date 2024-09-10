@@ -116,8 +116,39 @@ public class FeedbackDaoJDBC implements FeedbackDao {
     }
 
     @Override
-    public List<Feedback> findAllByEventId(Integer id) {
-       return null;
+    public List<Feedback> findAllByEventId(Integer eventoId) {
+        PreparedStatement st = null;
+        ResultSet rs = null;
+
+        String sql = "SELECT f.*, u.nome AS usuario_nome " +
+                "FROM feedback f " +
+                "INNER JOIN user u ON f.user_id = u.id " +
+                "WHERE f.evento_id = ?";
+
+        try  {
+            st = conn.prepareStatement(sql);
+            st.setInt(1, eventoId);
+             rs = st.executeQuery();
+            List<Feedback> feedbacks = new ArrayList<>();
+
+            while (rs.next()) {
+                Feedback feedback = new Feedback();
+                feedback.setId(rs.getInt("id"));
+                feedback.setUsuario(new UserService().findById(rs.getInt("user_id")));
+                feedback.setEvento(new EventoService().findById(rs.getInt("evento_id")));
+                feedback.setComentario(rs.getString("comentario"));
+
+                feedbacks.add(feedback);
+            }
+            return feedbacks;
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return null;
+        } finally {
+            closeResultSet(rs);
+            closeStatement(st);
+        }
     }
 
     private Feedback instantiateFeedback(ResultSet rs) throws SQLException {

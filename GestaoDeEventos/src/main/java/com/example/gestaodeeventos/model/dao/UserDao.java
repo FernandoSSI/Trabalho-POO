@@ -12,4 +12,6 @@ public interface UserDao {
     User findById(Integer id);
     User findByEmailAndPassword(String email, String password);
     List<User> findAll();
+
+    List<User> findAllByEventId(int eventId);
 }

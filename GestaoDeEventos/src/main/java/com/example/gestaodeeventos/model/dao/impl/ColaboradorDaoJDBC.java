@@ -4,7 +4,6 @@ import com.example.gestaodeeventos.db.DB;
 import com.example.gestaodeeventos.db.DbException;
 import com.example.gestaodeeventos.model.dao.ColaboradorDao;
 import com.example.gestaodeeventos.model.entities.Colaborador;
-import com.example.gestaodeeventos.model.entities.Organizador;
 import com.example.gestaodeeventos.model.entities.User;
 import com.example.gestaodeeventos.model.services.UserService;
 
@@ -126,4 +125,40 @@ public class ColaboradorDaoJDBC implements ColaboradorDao {
             DB.closeResultSet(resultSet);
         }
     }
+
+    @Override
+    public List<Colaborador> findAllByEventId(int eventId) {
+        List<Colaborador> colaboradores = new ArrayList<>();
+        String sql = "SELECT c.* FROM colaborador c " +
+                "INNER JOIN atividade_colaborador ac ON c.id = ac.colaborador_id " +
+                "INNER JOIN atividade a ON ac.atividade_id = a.id " +
+                "WHERE a.evento_id = ?";
+
+        try (PreparedStatement stmt = con.prepareStatement(sql)) {
+            stmt.setInt(1, eventId);
+            ResultSet rs = stmt.executeQuery();
+            while (rs.next()) {
+                UserService userService = new UserService();
+                User user = userService.findById(rs.getInt("id"));
+                if (user == null) {
+                    return null;
+                }
+                Colaborador colaborador = new Colaborador();
+                colaborador.setId(user.getId());
+                colaborador.setNome(user.getNome());
+                colaborador.setEmail(user.getEmail());
+                colaborador.setSenha(user.getSenha());
+                colaborador.setCpf(user.getCpf());
+                colaborador.setCep(user.getCep());
+                colaborador.setData_nascimento(user.getData_nascimento());
+
+                colaboradores.add(colaborador);
+            }
+        } catch (SQLException e) {
+            throw new DbException(e.getMessage());
+        }
+
+        return colaboradores;
+    }
+
 }

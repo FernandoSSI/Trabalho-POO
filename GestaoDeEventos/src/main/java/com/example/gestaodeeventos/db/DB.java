@@ -170,6 +170,20 @@ public class DB {
         return false;
     }
 
+    public static boolean isColaborator(Integer id) {
+        String query = "SELECT COUNT(*) FROM colaborador WHERE id = ?";
+        try (PreparedStatement stmt = conn.prepareStatement(query)) {
+            stmt.setInt(1, id);
+            ResultSet rs = stmt.executeQuery();
+            if (rs.next()) {
+                return rs.getInt(1) > 0;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
+
     private static Properties loadProperties() {
         try (FileInputStream fs = new FileInputStream("db.properties")) {
             Properties props = new Properties();
@@ -199,4 +213,6 @@ public class DB {
             }
         }
     }
+
+
 }

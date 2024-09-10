@@ -9,11 +9,12 @@ import java.util.List;
 public class AtividadeService {
     private AtividadeDao dao = DaoFactory.createAtividadeDao();
 
-    public void saveOrUpdate(Atividade obj) {
+    public Integer saveOrUpdate(Atividade obj) {
         if (obj.getId() == null) {
-            dao.insert(obj);
+            return dao.insert(obj);
         } else {
             dao.update(obj);
+            return obj.getId();
         }
     }
 

@@ -24,8 +24,8 @@ import java.util.ResourceBundle;
 public class PaginaController implements Initializable {
 
     protected User user;
-    private boolean btnAtivo = false;
-
+    private boolean btnAddCriarEventoAtivo = false;
+    private boolean btnEventosOrganizados = false;
 
     @FXML
     protected Label labelNome;
@@ -79,6 +79,7 @@ public class PaginaController implements Initializable {
 
             paginaPrincipalController.atualizarInformacoes();
             paginaPrincipalController.adicionarBotaoCriarEvento();
+            paginaPrincipalController.adicionarBotaoEventosOrganizados();
 
 
 
@@ -112,6 +113,7 @@ public class PaginaController implements Initializable {
 
             perfilController.atualizarInformacoes();
             perfilController.adicionarBotaoCriarEvento();
+            perfilController.adicionarBotaoEventosOrganizados();
 
         } catch (IOException e) {
             e.printStackTrace();
@@ -144,6 +146,7 @@ public class PaginaController implements Initializable {
 
             inscricoesController.atualizarInformacoes();
             inscricoesController.adicionarBotaoCriarEvento();
+            inscricoesController.adicionarBotaoEventosOrganizados();
 
 
         } catch (IOException e) {
@@ -176,6 +179,7 @@ public class PaginaController implements Initializable {
 
             eventosController.atualizarInformacoes();
             eventosController.adicionarBotaoCriarEvento();
+            eventosController.adicionarBotaoEventosOrganizados();
 
 
         } catch (IOException e) {
@@ -207,6 +211,8 @@ public class PaginaController implements Initializable {
             stage.show();
 
             criarEventoController.atualizarInformacoes();
+            criarEventoController.adicionarBotaoCriarEvento();
+            criarEventoController.adicionarBotaoEventosOrganizados();
 
 
         } catch (IOException e) {
@@ -221,16 +227,113 @@ public class PaginaController implements Initializable {
 
     @FXML
     public void adicionarBotaoCriarEvento() {
-        if (user != null && btnAtivo == false) {
+        if (user != null && btnAddCriarEventoAtivo == false) {
             if (DB.isOrganizer(user.getId())) {
                 Button novoBotao = new Button("Criar Evento");
-                novoBotao.setStyle("-fx-background-color: #212B3D; -fx-text-fill: WHITE; -fx-font-size: 17px;");
+                if(this instanceof CriarEventoController){
+                    novoBotao.setStyle("-fx-background-color: #212B3D; -fx-text-fill: WHITE; -fx-font-size: 17px; -fx-border-width: 0 0 1px 0; -fx-border-color: white;");
+                } else {
+                    novoBotao.setStyle("-fx-background-color: #212B3D; -fx-text-fill: WHITE; -fx-font-size: 17px;");
+                }
                 novoBotao.setPrefHeight(45.0);
                 novoBotao.setPrefWidth(200.0);
 
                 novoBotao.setCursor(Cursor.HAND);
 
                 novoBotao.setOnAction(this::abrirCriarEventos);
+
+                vboxMenu.getChildren().add(novoBotao);
+                Separator separador = new Separator();
+                separador.setPrefHeight(12);
+                separador.setPrefWidth(200);
+                separador.setOpacity(0.0);
+                vboxMenu.getChildren().add(separador);
+
+                btnAddCriarEventoAtivo = true;
+            }
+        }
+
+    }
+
+    @FXML
+    public void adicionarBotaoEventosOrganizados() {
+        if (user != null && btnEventosOrganizados == false) {
+            if (DB.isOrganizer(user.getId()) || DB.isColaborator(user.getId())) {
+                Button novoBotao = new Button("Eventos organizados");
+                if(this instanceof EventosOrganizadosController){
+                    novoBotao.setStyle("-fx-background-color: #212B3D; -fx-text-fill: WHITE; -fx-font-size: 17px; -fx-border-width: 0 0 1px 0; -fx-border-color: white;");
+                } else {
+                    novoBotao.setStyle("-fx-background-color: #212B3D; -fx-text-fill: WHITE; -fx-font-size: 17px;");
+                }
+
+                novoBotao.setPrefHeight(45.0);
+                novoBotao.setPrefWidth(200.0);
+
+                novoBotao.setCursor(Cursor.HAND);
+
+                novoBotao.setOnAction(this::abrirEventosOrganizados);
+
+
+
+
+
+                vboxMenu.getChildren().add(novoBotao);
+                Separator separador = new Separator();
+                separador.setPrefHeight(12);
+                separador.setPrefWidth(200);
+                separador.setOpacity(0.0);
+                vboxMenu.getChildren().add(separador);
+
+                btnEventosOrganizados = true;
+            }
+        }
+
+    }
+
+    public void abrirEventosOrganizados (ActionEvent event) {
+        try {
+            Stage currentStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            double currentX = currentStage.getX();
+            double currentY = currentStage.getY();
+
+            FXMLLoader loader = new FXMLLoader(Main.class.getResource("eventosOrganizados.fxml"));
+            Parent root = loader.load();
+
+            EventosOrganizadosController eventosOrganizadosController = loader.getController();
+            eventosOrganizadosController.setUser(user);
+
+            Scene scene = new Scene(root);
+            Stage stage = currentStage;
+
+            stage.setScene(scene);
+
+            stage.setX(currentX);
+            stage.setY(currentY);
+
+            stage.show();
+
+            eventosOrganizadosController.atualizarInformacoes();
+            eventosOrganizadosController.adicionarBotaoCriarEvento();
+            eventosOrganizadosController.adicionarBotaoEventosOrganizados();
+
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    /*@FXML
+    public void adicionarBotaoCertificados() {
+        if (user != null && btnAtivo == false) {
+            if (DB.isOrganizer(user.getId())) {
+                Button novoBotao = new Button("Meus certificados");
+                novoBotao.setStyle("-fx-background-color: #212B3D; -fx-text-fill: WHITE; -fx-font-size: 17px;");
+                novoBotao.setPrefHeight(45.0);
+                novoBotao.setPrefWidth(200.0);
+
+                novoBotao.setCursor(Cursor.HAND);
+
+                novoBotao.setOnAction(this::abrirCertificados);
 
                 vboxMenu.getChildren().add(novoBotao);
                 Separator separador = new Separator();
@@ -242,6 +345,12 @@ public class PaginaController implements Initializable {
         }
 
     }
+
+    private void abrirCertificados(ActionEvent event) {
+    }*/
+
+
+
 
 
 

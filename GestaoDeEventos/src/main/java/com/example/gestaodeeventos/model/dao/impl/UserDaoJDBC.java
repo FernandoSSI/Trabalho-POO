@@ -168,6 +168,27 @@ public class UserDaoJDBC implements UserDao {
         }
     }
 
+    @Override
+    public List<User> findAllByEventId(int eventId) {
+        List<User> users = new ArrayList<>();
+        String sql = "SELECT u.* FROM user u " +
+                "INNER JOIN inscricao i ON u.id = i.user_id " +
+                "WHERE i.evento_id = ?";
+
+        try (PreparedStatement stmt = con.prepareStatement(sql)) {
+            stmt.setInt(1, eventId);
+            ResultSet rs = stmt.executeQuery();
+            while (rs.next()) {
+                User user = instantiateUser(rs);
+                users.add(user);
+            }
+        } catch (SQLException e) {
+            throw new DbException(e.getMessage());
+        }
+
+        return users;
+    }
+
     private User instantiateUser(ResultSet resultSet) throws SQLException {
         User user = new User();
         user.setId(resultSet.getInt("id"));

@@ -2,6 +2,7 @@ package com.example.gestaodeeventos.model.dao.impl;
 
 import com.example.gestaodeeventos.model.dao.AtividadeDao;
 import com.example.gestaodeeventos.model.entities.Atividade;
+import com.example.gestaodeeventos.model.entities.Colaborador;
 import com.example.gestaodeeventos.model.entities.Evento;
 import com.example.gestaodeeventos.model.services.EventoService;
 
@@ -18,23 +19,37 @@ public class AtividadeDaoJDBC implements AtividadeDao {
     }
 
     @Override
-    public void insert(Atividade obj) {
-        String sql = "INSERT INTO atividade (titulo, data, local, descricao, evento_id) VALUES (?, ?, ?, ?, ?)";
+    public int insert(Atividade obj) {
+        String sqlAtividade = "INSERT INTO atividade (titulo, data, local, descricao, evento_id) VALUES (?, ?, ?, ?, ?)";
+        String sqlAtividadeColaborador = "INSERT INTO atividade_colaborador (atividade_id, colaborador_id) VALUES (?, ?)";
+        int generatedId = -1;
 
-        try (PreparedStatement st = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
-            st.setString(1, obj.getTitulo());
-            st.setDate(2, new java.sql.Date(obj.getData().getTime()));
-            st.setString(3, obj.getLocal());
-            st.setString(4, obj.getDescricao());
-            st.setInt(5, obj.getEvento().getId());
+        try (PreparedStatement stAtividade = conn.prepareStatement(sqlAtividade, Statement.RETURN_GENERATED_KEYS)) {
+            // Inserir a atividade
+            stAtividade.setString(1, obj.getTitulo());
+            stAtividade.setDate(2, new java.sql.Date(obj.getData().getTime()));
+            stAtividade.setString(3, obj.getLocal());
+            stAtividade.setString(4, obj.getDescricao());
+            stAtividade.setInt(5, obj.getEvento().getId());
 
-            int affectedRows = st.executeUpdate();
+            int affectedRows = stAtividade.executeUpdate();
 
             if (affectedRows > 0) {
-                try (ResultSet rs = st.getGeneratedKeys()) {
+                try (ResultSet rs = stAtividade.getGeneratedKeys()) {
                     if (rs.next()) {
-                        obj.setId(rs.getInt(1));
+                        generatedId = rs.getInt(1);
+                        obj.setId(generatedId); // Atualizar o objeto Atividade com o ID gerado
                     }
+                }
+
+                // Inserir as relações na tabela atividade_colaborador
+                try (PreparedStatement stAtividadeColaborador = conn.prepareStatement(sqlAtividadeColaborador)) {
+                    for (Colaborador colaborador : obj.getColaboradores()) {
+                        stAtividadeColaborador.setInt(1, generatedId);
+                        stAtividadeColaborador.setInt(2, colaborador.getId());
+                        stAtividadeColaborador.addBatch(); // Adiciona a inserção no batch
+                    }
+                    stAtividadeColaborador.executeBatch(); // Executa todas as inserções em um único batch
                 }
             } else {
                 throw new SQLException("Failed to insert atividade, no rows affected.");
@@ -42,7 +57,10 @@ public class AtividadeDaoJDBC implements AtividadeDao {
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
+
+        return generatedId;
     }
+
 
     @Override
     public void update(Atividade obj) {

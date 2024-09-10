@@ -9,9 +9,9 @@ public interface EventoDao {
     void insert(Evento obj);
     void update(Evento obj);
     void deleteById(Integer id);
+    void deleteOrganizadores(Integer eventoId);
     Evento findById(Integer id);
     List<Evento> findAllByOrgId(Integer id);
-    List<Evento> findByUserId(Integer id);
     List<Evento> findAll();
 
 }

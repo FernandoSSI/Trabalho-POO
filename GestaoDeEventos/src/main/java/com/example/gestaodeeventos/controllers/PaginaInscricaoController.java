@@ -48,8 +48,6 @@ public class PaginaInscricaoController extends PaginaController{
     @FXML
     private Pane inscricaoPane;
     @FXML
-    private Button resgatarCertificados;
-    @FXML
     private TextArea feedbackTextArea;
 
 
@@ -153,10 +151,6 @@ public class PaginaInscricaoController extends PaginaController{
         } catch (IOException e) {
             e.printStackTrace();
         }
-
-    }
-
-    public void resgatarCertificados(ActionEvent event) {
 
     }
 

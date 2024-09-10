@@ -44,4 +44,9 @@ public class ColaboradorService {
     public void remove(Colaborador obj) {
         dao.deleteById(obj.getId());
     }
+
+
+    public List<Colaborador> findAllByEventId(int eventId) {
+        return dao.findAllByEventId(eventId);
+    }
 }

@@ -84,12 +84,74 @@ public class EventoDaoJDBC implements EventoDao {
 
     @Override
     public void update(Evento obj) {
+        PreparedStatement st = null;
+        try {
+            st = conn.prepareStatement(
+                    "UPDATE evento " +
+                            "SET nome = ?, expectativaParticipantes = ?, descricao = ?, mapaURL = ?, data = ?, modalidade = ?, instituicao_id = ?, categoria_nome = ? " +
+                            "WHERE id = ?");
 
+            st.setString(1, obj.getNome());
+            st.setInt(2, obj.getExpectativaParticipantes());
+            st.setString(3, obj.getDescricao());
+            st.setString(4, obj.getMapaURL());
+            st.setDate(5, new java.sql.Date(obj.getData().getTime()));
+            st.setString(6, obj.getModalidade().toString());
+            st.setInt(7, obj.getInstituicao().getId());
+            st.setString(8, obj.getCategoria().getNome());
+            st.setInt(9, obj.getId());
+
+            st.executeUpdate();
+
+            // Atualizar a relação de organizadores
+            deleteOrganizadores(obj.getId());
+            insertOrganizadores(obj);
+
+        } catch (SQLException e) {
+            throw new DbException(e.getMessage());
+        } finally {
+            DB.closeStatement(st);
+        }
     }
 
     @Override
     public void deleteById(Integer id) {
+        PreparedStatement st = null;
+        try {
+            // Deletar relação de organizadores
+            deleteOrganizadores(id);
 
+            // Deletar evento
+            st = conn.prepareStatement("DELETE FROM evento WHERE id = ?");
+
+            st.setInt(1, id);
+            int rowsAffected = st.executeUpdate();
+
+            if (rowsAffected == 0) {
+                throw new DbException("Nenhum evento encontrado com o ID: " + id);
+            }
+
+        } catch (SQLException e) {
+            throw new DbException(e.getMessage());
+        } finally {
+            DB.closeStatement(st);
+        }
+    }
+
+    @Override
+    public void deleteOrganizadores(Integer eventoId) {
+        PreparedStatement st = null;
+        try {
+            st = conn.prepareStatement("DELETE FROM organizador_evento WHERE evento_id = ?");
+
+            st.setInt(1, eventoId);
+            st.executeUpdate();
+
+        } catch (SQLException e) {
+            throw new DbException(e.getMessage());
+        } finally {
+            DB.closeStatement(st);
+        }
     }
 
     @Override
@@ -133,13 +195,48 @@ public class EventoDaoJDBC implements EventoDao {
 
     @Override
     public List<Evento> findAllByOrgId(Integer id) {
-        return null;
+        PreparedStatement st = null;
+        ResultSet rs = null;
+        try {
+            st = conn.prepareStatement(
+                    "SELECT e.* FROM evento e " +
+                            "INNER JOIN organizador_evento oe ON e.id = oe.evento_id " +
+                            "WHERE oe.organizador_id = ?");
+
+            st.setInt(1, id);
+            rs = st.executeQuery();
+
+            List<Evento> list = new ArrayList<>();
+
+            while (rs.next()) {
+                Evento evento = new Evento();
+                evento.setId(rs.getInt("id"));
+                evento.setNome(rs.getString("nome"));
+                evento.setExpectativaParticipantes(rs.getInt("expectativaParticipantes"));
+                evento.setDescricao(rs.getString("descricao"));
+                evento.setMapaURL(rs.getString("mapaURL"));
+                evento.setData(rs.getDate("data"));
+                evento.setCategoria(new CategoriaService().findByName(rs.getString("categoria_nome")));
+                evento.setInstituicao(new InstituicaoService().findById(rs.getInt("instituicao_id")));
+                evento.setOrganizadores(findOrganizadores(evento.getId()));
+                evento.setParticipantes(findParticipantesByEventoId(evento.getId()));
+
+                String modalidadeString = rs.getString("modalidade");
+                Modalidade modalidade = Modalidade.valueOf(modalidadeString.toUpperCase());
+                evento.setModalidade(modalidade);
+
+                list.add(evento);
+            }
+            return list;
+        } catch (SQLException e) {
+            throw new DbException(e.getMessage());
+        } finally {
+            DB.closeStatement(st);
+            DB.closeResultSet(rs);
+        }
     }
 
-    @Override
-    public List<Evento> findByUserId(Integer id) {
-        return null;
-    }
+
 
     @Override
     public List<Evento> findAll() {

@@ -12,20 +12,18 @@ public class Atividade {
 
     private Evento evento;
     private List<Colaborador> colaboradores;
-    private Certificado certificado;
 
     public Atividade(){
 
     }
 
-    public Atividade(Integer id, Evento evento, String titulo, Date data, String local, String descricao, List<Colaborador> colaboradores, Certificado certificado) {
+    public Atividade(Integer id, Evento evento, String titulo, Date data, String local, String descricao, List<Colaborador> colaboradores) {
         setId(id);
         setEvento(evento);
         setTitulo(titulo);
         setData(data);
         setLocal(local);
         setColaboradores(colaboradores);
-        setCertificado(certificado);
         setDescricao(descricao);
     }
 
@@ -90,14 +88,6 @@ public class Atividade {
             throw new IllegalArgumentException("Colaboradores cannot be empty if provided");
         }
         this.colaboradores = colaboradores;
-    }
-
-    public Certificado getCertificado() {
-        return certificado;
-    }
-
-    public void setCertificado(Certificado certificado) {
-        this.certificado = certificado;
     }
 
     public String getDescricao() {

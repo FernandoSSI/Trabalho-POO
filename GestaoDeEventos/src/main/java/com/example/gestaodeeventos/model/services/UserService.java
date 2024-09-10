@@ -33,4 +33,10 @@ public class UserService {
     public User findByEmailAndPassword(String email, String senha) {
         return dao.findByEmailAndPassword(email, senha);
     }
+
+    public List<User> findAllByEventId(int eventId) {
+        return dao.findAllByEventId(eventId);
+    }
+
+
 }

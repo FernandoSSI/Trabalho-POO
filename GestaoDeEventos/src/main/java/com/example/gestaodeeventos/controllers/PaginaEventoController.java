@@ -91,6 +91,7 @@ public class PaginaEventoController extends PaginaController{
 
             eventosController.atualizarInformacoes();
             eventosController.adicionarBotaoCriarEvento();
+            eventosController.adicionarBotaoEventosOrganizados();
 
 
         } catch (IOException e) {

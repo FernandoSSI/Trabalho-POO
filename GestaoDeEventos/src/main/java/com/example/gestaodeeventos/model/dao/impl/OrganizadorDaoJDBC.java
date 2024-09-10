@@ -126,4 +126,38 @@ public class OrganizadorDaoJDBC implements OrganizadorDao {
         }
     }
 
+    @Override
+    public List<Organizador> findAllByEventId(int eventId) {
+        List<Organizador> organizadores = new ArrayList<>();
+        String sql = "SELECT o.* FROM organizador o " +
+                "INNER JOIN organizador_evento oe ON o.id = oe.organizador_id " +
+                "WHERE oe.evento_id = ?";
+
+        try (PreparedStatement stmt = con.prepareStatement(sql)) {
+            stmt.setInt(1, eventId);
+            ResultSet rs = stmt.executeQuery();
+            while (rs.next()) {
+                UserService userService = new UserService();
+                User user = userService.findById(rs.getInt("id"));
+                if (user == null) {
+                    return null;
+                }
+                Organizador organizador = new Organizador();
+                organizador.setId(user.getId());
+                organizador.setNome(user.getNome());
+                organizador.setEmail(user.getEmail());
+                organizador.setSenha(user.getSenha());
+                organizador.setCpf(user.getCpf());
+                organizador.setCep(user.getCep());
+                organizador.setData_nascimento(user.getData_nascimento());
+
+                organizadores.add(organizador);
+            }
+        } catch (SQLException e) {
+            throw new DbException(e.getMessage());
+        }
+
+        return organizadores;
+    }
+
 }

@@ -13,4 +13,5 @@ public interface OrganizadorDao {
     List<Organizador> findAll();
 
 
+    List<Organizador> findAllByEventId(int eventId);
 }

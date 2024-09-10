@@ -2,9 +2,7 @@ package com.example.gestaodeeventos.controllers;
 
 import com.example.gestaodeeventos.Main;
 import com.example.gestaodeeventos.model.entities.Evento;
-import com.example.gestaodeeventos.model.entities.Inscricao;
 import com.example.gestaodeeventos.model.services.EventoService;
-import com.example.gestaodeeventos.model.services.InscricaoService;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Cursor;
@@ -27,12 +25,35 @@ import java.util.List;
 import java.util.Random;
 import java.util.ResourceBundle;
 
-public class InscricoesController extends PaginaController{
+public class EventosOrganizadosController extends PaginaController{
     private static final Random RANDOM = new Random();
-    private InscricaoService inscricaoService;
+
+    private EventoService eventoService;
 
     @FXML
     private GridPane eventosGrid;
+
+    @Override
+    public void atualizarInformacoes() {
+
+
+        eventosGrid.getChildren().clear();
+
+        List<Evento> eventos = eventoService.findAllByOrgId(user.getId());
+        int col = 0;
+        int row = 0;
+
+        for (Evento evento : eventos) {
+            Pane eventPane = createEventPane(evento);
+            eventosGrid.add(eventPane, col, row);
+
+            col++;
+            if (col == 3) {
+                col = 0;
+                row++;
+            }
+        }
+    }
 
     private Pane createEventPane(Evento evento) {
         Pane eventPane = new Pane();
@@ -81,12 +102,12 @@ public class InscricoesController extends PaginaController{
                 double currentX = currentStage.getX();
                 double currentY = currentStage.getY();
 
-                FXMLLoader loader = new FXMLLoader(Main.class.getResource("PaginaInscricao.fxml"));
+                FXMLLoader loader = new FXMLLoader(Main.class.getResource("eventoOrganizado.fxml"));
                 Parent root = loader.load();
 
-                PaginaInscricaoController paginaInscricaoController = loader.getController();
-                paginaInscricaoController.setUser(user);
-                paginaInscricaoController.setEvento(evento);
+                EventoOrganizadoController eventoOrganizadoController = loader.getController();
+                eventoOrganizadoController.setUser(user);
+                eventoOrganizadoController.setEvento(evento);
 
                 Scene scene = new Scene(root);
                 Stage stage = currentStage;
@@ -95,9 +116,10 @@ public class InscricoesController extends PaginaController{
                 stage.setY(currentY);
                 stage.show();
 
-                paginaInscricaoController.atualizarInformacoes();
-                paginaInscricaoController.adicionarBotaoCriarEvento();
-                paginaInscricaoController.adicionarBotaoEventosOrganizados();
+                eventoOrganizadoController.adicionarBotaoCriarEvento();
+                eventoOrganizadoController.adicionarBotaoEventosOrganizados();
+                eventoOrganizadoController.atualizarInformacoes();
+
 
 
             } catch (IOException e) {
@@ -108,6 +130,9 @@ public class InscricoesController extends PaginaController{
         return eventPane;
     }
 
+
+
+    // gerador de cores aleatorias
     private Color getRandomPastelColor() {
         float r = getRandomPastelComponent();
         float g = getRandomPastelComponent();
@@ -115,7 +140,8 @@ public class InscricoesController extends PaginaController{
         return Color.rgb((int)(r * 255), (int)(g * 255), (int)(b * 255));
     }
 
-    private float getRandomPastelComponent() {
+    private  float getRandomPastelComponent() {
+
         return 0.5f + RANDOM.nextFloat() * 0.5f;
     }
 
@@ -126,29 +152,11 @@ public class InscricoesController extends PaginaController{
                 (int)(color.getBlue() * 255));
     }
 
-    @Override
-    public void atualizarInformacoes(){
-        eventosGrid.getChildren().clear();
-
-        List<Inscricao> inscricoes = inscricaoService.findAllInscricoesByUserId(user.getId());
-        int col = 0;
-        int row = 0;
-
-        for (Inscricao inscricao : inscricoes) {
-            Pane eventPane = createEventPane(inscricao.getEvento());
-            eventosGrid.add(eventPane, col, row);
-
-            col++;
-            if (col == 3) {
-                col = 0;
-                row++;
-            }
-        }
-    }
-
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        this.inscricaoService = new InscricaoService();
+        this.eventoService = new EventoService();
     }
+
+
 }

@@ -43,4 +43,8 @@ public class OrganizadorService {
     public void remove(Organizador obj) {
         dao.deleteById(obj.getId());
     }
+
+    public List<Organizador> findAllByEventId(int eventId) {
+        return dao.findAllByEventId(eventId);
+    }
 }

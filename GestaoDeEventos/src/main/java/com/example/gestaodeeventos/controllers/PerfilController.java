@@ -1,7 +1,9 @@
 package com.example.gestaodeeventos.controllers;
 
 import com.example.gestaodeeventos.gui.util.Constraints;
+import com.example.gestaodeeventos.model.entities.Inscricao;
 import com.example.gestaodeeventos.model.entities.User;
+import com.example.gestaodeeventos.model.services.InscricaoService;
 import com.example.gestaodeeventos.model.services.UserService;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -45,6 +47,7 @@ public class PerfilController extends PaginaController  {
     private TextField senhaTextField;
 
     private UserService userService;
+    private InscricaoService inscricaoService;
 
     private User getFormData() {
         User user = this.user;
@@ -101,15 +104,23 @@ public class PerfilController extends PaginaController  {
         cepTextField.setPromptText(user.getCep());
         nascimentoDatepicker.setPromptText(user.getData_nascimento().toString());
         senhaTextField.setPromptText(user.getSenha());
+        int cont = 0;
+        for(Inscricao inscricao : inscricaoService.findAllInscricoesByUserId(user.getId())){
+            cont += 1;
+        }
+        numeroInscricoes.setText(cont + "");
 
         containerLetra.requestFocus();
 
+
         adicionarBotaoCriarEvento();
+        adicionarBotaoEventosOrganizados();
     }
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         this.userService = new UserService();
+        this.inscricaoService = new InscricaoService();
         initializeNodes();
 
     }
