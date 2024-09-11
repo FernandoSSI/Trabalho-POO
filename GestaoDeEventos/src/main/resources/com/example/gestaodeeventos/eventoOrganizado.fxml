@@ -36,7 +36,7 @@
                   <Font name="System Bold" size="21.0" />
                </font>
             </Text>
-            <ListView fx:id="listaFeedbacks" layoutX="428.0" layoutY="295.0" prefHeight="260.0" prefWidth="368.0" />
+            <ListView fx:id="listaFeedbacks" layoutX="428.0" layoutY="295.0" prefHeight="207.0" prefWidth="368.0" />
             <Text layoutX="39.0" layoutY="23.0" strokeType="OUTSIDE" strokeWidth="0.0" text="PARTICIPANTES">
                <font>
                   <Font name="System Bold" size="21.0" />
@@ -55,6 +55,11 @@
                </font>
             </Text>
             <ListView fx:id="listaColaboradores" layoutX="39.0" layoutY="440.0" prefHeight="114.0" prefWidth="368.0" />
+            <Button layoutX="663.0" layoutY="516.0" mnemonicParsing="false" onAction="#deletarEvento" prefHeight="38.0" prefWidth="133.0" style="-fx-background-color: #802922;" text="deletar evento" textFill="WHITE">
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </Button>
             </children></AnchorPane>
     </center>
     <top>

@@ -30,4 +30,8 @@ public class EventoService {
     public List<Evento> findAll(){
         return dao.findAll();
     }
+
+    public void deleteById(Integer id){
+        dao.deleteById(id);
+    }
 }

@@ -38,13 +38,13 @@
                   <Font name="System Bold" size="20.0" />
                </font>
             </Label>
-            <Text fx:id="instituicaoText" layoutX="26.0" layoutY="471.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="297.13671875">
+            <Text fx:id="instituicaoText" layoutX="26.0" layoutY="471.0" strokeType="OUTSIDE" strokeWidth="0.0" text="sadadasdad" wrappingWidth="297.13671875">
                <font>
                   <Font name="System Bold" size="16.0" />
                </font>
             </Text>
-            <Text fx:id="endereco" layoutX="26.0" layoutY="490.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="296.13671875" />
-            <Text fx:id="cidade" layoutX="25.0" layoutY="507.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="299.13671875" />
+            <Text fx:id="endereco" layoutX="26.0" layoutY="490.0" strokeType="OUTSIDE" strokeWidth="0.0" text="asdasdadasd" wrappingWidth="296.13671875" />
+            <Text fx:id="cidade" layoutX="25.0" layoutY="507.0" strokeType="OUTSIDE" strokeWidth="0.0" text="asdasdadaasd" wrappingWidth="299.13671875" />
             <Separator layoutX="410.0" layoutY="8.0" orientation="VERTICAL" prefHeight="572.0" prefWidth="0.0" />
             <Text fx:id="categoria" layoutX="33.0" layoutY="385.0" strokeType="OUTSIDE" strokeWidth="0.0" text="categoria: " wrappingWidth="296.13671875">
                <font>
@@ -109,6 +109,12 @@
                   <Cursor fx:constant="HAND" />
                </cursor>
             </Button>
+            <Text fx:id="linkLabel1" layoutX="26.0" layoutY="531.0" strokeType="OUTSIDE" strokeWidth="0.0" text="data:" />
+            <Text fx:id="dataText" layoutX="59.0" layoutY="530.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="286.13671875">
+               <cursor>
+                  <Cursor fx:constant="DEFAULT" />
+               </cursor>
+            </Text>
          </children></AnchorPane>
     </center>
     <top>

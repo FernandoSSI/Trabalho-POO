@@ -18,6 +18,8 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.net.URL;
+import java.text.SimpleDateFormat;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.ResourceBundle;
 
@@ -85,7 +87,9 @@ public class AtividadeEventoController extends PaginaController{
         nomeAtividade.setText(atividade.getTitulo());
         descricao.setText(atividade.getDescricao());
         local.setText(evento.getInstituicao().getNome() + ", " + atividade.getLocal());
-        data.setText(atividade.getData().toString());
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+        String dataFormatada = sdf.format(atividade.getData());
+        data.setText(dataFormatada);
 
         List<Colaborador> colaboradores = colaboradorService.findByAtividadeId(atividade.getId());
         for(Colaborador colaborador : colaboradores){

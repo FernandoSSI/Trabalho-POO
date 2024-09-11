@@ -9,10 +9,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.ListCell;
-import javafx.scene.control.ListView;
+import javafx.scene.control.*;
 import javafx.scene.layout.Pane;
 import javafx.scene.text.Text;
 import javafx.stage.Modality;
@@ -244,5 +241,41 @@ public class EventoOrganizadoController extends PaginaController{
         this.userService = new UserService();
         this.atividadeService = new AtividadeService();
 
+    }
+
+    public void deletarEvento(ActionEvent event) {
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setTitle("Confirmação de Deleção");
+        alert.setHeaderText("Você está prestes a deletar o evento.");
+        alert.setContentText("Tem certeza que deseja continuar?");
+
+        ButtonType result = alert.showAndWait().orElse(ButtonType.CANCEL);
+
+        if (result == ButtonType.OK) {
+            eventoService.deleteById(evento.getId());
+            try {
+                // Carrega a nova tela substituindo a atual
+                FXMLLoader loader = new FXMLLoader(Main.class.getResource("eventosOrganizados.fxml"));
+                Parent root = loader.load();
+
+                EventosOrganizadosController eventosOrganizadosController = loader.getController();
+                eventosOrganizadosController.setUser(user);
+                eventosOrganizadosController.atualizarInformacoes();
+
+                eventosOrganizadosController.adicionarBotaoEventosOrganizados();
+                eventosOrganizadosController.adicionarBotaoCriarEvento();
+
+                // Obtém o estágio atual e substitui a cena
+                Stage currentStage = (Stage) listaAtividades.getScene().getWindow();
+                Scene newScene = new Scene(root);
+
+                currentStage.setScene(newScene);
+                currentStage.setTitle("Detalhes da Atividade");
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        } else {
+            System.out.println("Deleção cancelada");
+        }
     }
 }

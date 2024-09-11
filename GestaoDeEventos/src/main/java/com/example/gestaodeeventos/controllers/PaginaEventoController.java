@@ -21,10 +21,12 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.net.URL;
+import java.text.SimpleDateFormat;
 import java.util.List;
 import java.util.ResourceBundle;
 
 public class PaginaEventoController extends PaginaController{
+
 
 
     private Evento evento;
@@ -54,6 +56,8 @@ public class PaginaEventoController extends PaginaController{
     private Label nomeEvento;
     @FXML
     private Pane inscricaoPane;
+    @FXML
+    private Text dataText;
 
     public Evento getEvento() {
         return evento;
@@ -117,6 +121,11 @@ public class PaginaEventoController extends PaginaController{
             nomeEvento.setText(evento.getNome());
             descricaoEvento.setText(evento.getDescricao());
             categoria.setText(categoria.getText() + evento.getCategoria().getNome());
+
+            SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+            String dataFormatada = sdf.format(evento.getData());
+            dataText.setText(dataFormatada);
+
             if (evento.getModalidade() == Modalidade.HIBRIDO || evento.getModalidade() == Modalidade.PRESENCIAL ){
                 instituicaoText.setText(evento.getInstituicao().getNome());
                 endereco.setText(evento.getInstituicao().getBairro() + ", " + evento.getInstituicao().getRua()+ ", " + evento.getInstituicao().getNumeroResidencial());
