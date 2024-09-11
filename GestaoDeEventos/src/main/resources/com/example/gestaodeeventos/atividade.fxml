@@ -2,45 +2,97 @@
 
 <?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
 <?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
-<?import javafx.scene.layout.ColumnConstraints?>
-<?import javafx.scene.layout.GridPane?>
-<?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
 
 <BorderPane prefHeight="632.0" prefWidth="1013.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.gestaodeeventos.controllers.AtividadeController">
     <center>
         <AnchorPane prefHeight="592.0" prefWidth="818.0" BorderPane.alignment="CENTER">
             <children>
-                <GridPane fx:id="eventosGrid" hgap="20.0" layoutX="87.0" layoutY="21.0" prefHeight="544.0" prefWidth="637.0" vgap="20.0">
-                    <columnConstraints>
-                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="392.0" minWidth="10.0" prefWidth="389.0" />
-                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="411.0" minWidth="10.0" prefWidth="392.0" />
-                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="411.0" minWidth="10.0" prefWidth="392.0" />
-                    </columnConstraints>
-                    <rowConstraints>
-                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                    </rowConstraints>
-                </GridPane>
+                <Text layoutX="407.0" layoutY="23.0" strokeType="OUTSIDE" strokeWidth="0.0" text="PARTICIPANTES">
+                    <font>
+                        <Font name="System Bold" size="21.0" />
+                    </font>
+                </Text>
+                <ListView fx:id="listaParticipantes" layoutX="407.0" layoutY="39.0" prefHeight="200.0" prefWidth="368.0" />
+                <Text layoutX="407.0" layoutY="281.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Colaboradores">
+                    <font>
+                        <Font name="System Bold" size="21.0" />
+                    </font>
+                </Text>
+                <ListView fx:id="listaColaboradores" layoutX="407.0" layoutY="294.0" prefHeight="188.0" prefWidth="368.0" />
+            <Separator layoutX="375.0" layoutY="14.0" orientation="VERTICAL" prefHeight="556.0" prefWidth="0.0" />
+            <Text layoutX="23.0" layoutY="35.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Título" wrappingWidth="257.67578125">
+               <font>
+                  <Font name="System Bold" size="18.0" />
+               </font>
+            </Text>
+            <TextField fx:id="tituloTextField" layoutX="22.0" layoutY="40.0" prefHeight="25.0" prefWidth="259.0" />
+            <Text layoutX="23.0" layoutY="99.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Descrição" wrappingWidth="257.67578125">
+               <font>
+                  <Font name="System Bold" size="18.0" />
+               </font>
+            </Text>
+            <TextArea fx:id="descricaoTextArea" layoutX="22.0" layoutY="106.0" prefHeight="200.0" prefWidth="259.0" />
+            <Text layoutX="23.0" layoutY="340.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Local" wrappingWidth="257.67578125">
+               <font>
+                  <Font name="System Bold" size="18.0" />
+               </font>
+            </Text>
+            <TextField fx:id="localTextField" layoutX="22.0" layoutY="345.0" prefHeight="25.0" prefWidth="259.0" />
+            <Text layoutX="23.0" layoutY="408.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Data" wrappingWidth="257.67578125">
+               <font>
+                  <Font name="System Bold" size="18.0" />
+               </font>
+            </Text>
+            <DatePicker fx:id="datePicker" layoutX="23.0" layoutY="421.0" prefHeight="25.0" prefWidth="257.0" />
+            <Button layoutX="412.0" layoutY="520.0" mnemonicParsing="false" onAction="#emitirCertificados" prefHeight="25.0" prefWidth="366.0" style="-fx-background-color: #2F3D57;" text="Emitir certificados dos participantes" textFill="WHITE">
+               <font>
+                  <Font size="18.0" />
+               </font>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </Button>
+            <Button layoutX="23.0" layoutY="520.0" mnemonicParsing="false" onAction="#updateAtividade" prefHeight="39.0" prefWidth="258.0" style="-fx-background-color: #2F3D57;" text="Update atividade" textFill="WHITE">
+               <font>
+                  <Font size="18.0" />
+               </font>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </Button>
             </children></AnchorPane>
     </center>
     <top>
         <AnchorPane prefHeight="45.0" prefWidth="1001.0" BorderPane.alignment="CENTER">
             <children>
-                <Label layoutX="215.0" layoutY="1.0" prefHeight="43.0" prefWidth="703.0" text="EVENTOS DISPONÍVEIS" textFill="#9e9e9e">
+                <Label fx:id="nomeAtividade" layoutX="246.0" layoutY="1.0" prefHeight="43.0" prefWidth="672.0" text="SESCOMP" textFill="#9e9e9e">
                     <font>
                         <Font name="System Bold" size="29.0" />
                     </font>
                 </Label>
-            </children></AnchorPane>
+                <Button fx:id="voltarBtn" layoutX="201.0" layoutY="1.0" mnemonicParsing="false" onAction="#voltar" prefHeight="43.0" prefWidth="40.0" style="-fx-background-color: none;" text="&lt;" textFill="#9e9e9e">
+                    <font>
+                        <Font name="System Bold" size="19.0" />
+                    </font>
+                    <cursor>
+                        <Cursor fx:constant="HAND" />
+                    </cursor>
+                </Button>
+            </children>
+        </AnchorPane>
     </top>
     <left>
         <AnchorPane prefHeight="563.0" prefWidth="196.0" BorderPane.alignment="CENTER">
@@ -71,7 +123,7 @@
                             </cursor>
                         </Button>
                         <Separator opacity="0.0" prefHeight="12.0" prefWidth="200.0" />
-                        <Button fx:id="eventosBtn" mnemonicParsing="false" onAction="#abrirEventos" prefHeight="45.0" prefWidth="200.0" style="-fx-background-color: #212B3D; -fx-border-width: 0 0 1px 0; -fx-border-color: white;" text="Eventos" textFill="WHITE">
+                        <Button fx:id="eventosBtn" mnemonicParsing="false" onAction="#abrirEventos" prefHeight="45.0" prefWidth="200.0" style="-fx-background-color: #212B3D;" text="Eventos" textFill="WHITE">
                             <font>
                                 <Font size="17.0" />
                             </font>

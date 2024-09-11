@@ -11,6 +11,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.scene.layout.Pane;
 import javafx.scene.text.Text;
@@ -19,8 +20,10 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.HashSet;
 import java.util.List;
 import java.util.ResourceBundle;
+import java.util.Set;
 
 public class EventoOrganizadoController extends PaginaController{
 
@@ -42,7 +45,7 @@ public class EventoOrganizadoController extends PaginaController{
     @FXML
     private ListView<String> listaColaboradores;
     @FXML
-    private ListView<String> listaAtividades;
+    private ListView<Atividade> listaAtividades;
 
 
 
@@ -129,10 +132,9 @@ public class EventoOrganizadoController extends PaginaController{
             double currentY = currentStage.getY();
             newStage.setX(currentX + 20);
             newStage.setY(currentY + 20);
+            newStage.setOnHiding(event1 -> atualizarInformacoes());
 
             newStage.showAndWait();
-
-
 
 
         } catch (IOException e) {
@@ -144,6 +146,7 @@ public class EventoOrganizadoController extends PaginaController{
         List<Feedback> feedbacks = feedbackService.findAllByEventId(eventId);
         for (Feedback feedback : feedbacks) {
             listaFeedbacks.getItems().add(feedback.getComentario());
+
         }
     }
 
@@ -156,6 +159,7 @@ public class EventoOrganizadoController extends PaginaController{
 
     private void putOrganizadores(Integer eventId){
         List<Organizador> organizadores = organizadorService.findAllByEventId(eventId);
+
         for (Organizador organizador : organizadores) {
             listaOrganizadores.getItems().add(organizador.getNome());
         }
@@ -163,16 +167,69 @@ public class EventoOrganizadoController extends PaginaController{
 
     private void putColaboradores(Integer eventId){
         List<Colaborador> colaboradores = colaboradorService.findAllByEventId(eventId);
+        Set<String> colaboradoresUnicos = new HashSet<>();
+
         for (Colaborador colaborador : colaboradores) {
-            listaColaboradores.getItems().add(colaborador.getNome());
+            if (colaboradoresUnicos.add(colaborador.getNome())){
+                listaColaboradores.getItems().add(colaborador.getNome());
+            }
         }
     }
 
     private void putAtividades(Integer eventId){
         List<Atividade> atividades = atividadeService.findByEventoId(eventId);
-        for(Atividade atividade: atividades){
-            listaAtividades.getItems().add(atividade.getTitulo());
-        }
+
+        // Limpa a ListView existente
+        listaAtividades.getItems().clear();
+
+        // Define o cell factory para criar uma ListCell personalizada
+        listaAtividades.setCellFactory(listView -> {
+            ListCell<Atividade> cell = new ListCell<>() {
+                @Override
+                protected void updateItem(Atividade atividade, boolean empty) {
+                    super.updateItem(atividade, empty);
+
+                    if (empty || atividade == null) {
+                        setText(null);
+                        setGraphic(null);
+                    } else {
+                        setText(atividade.getTitulo());
+
+                        // Adiciona um listener para abrir a tela de detalhes ao clicar
+                        setOnMouseClicked(event -> {
+                            try {
+                                // Carrega a nova tela substituindo a atual
+                                FXMLLoader loader = new FXMLLoader(Main.class.getResource("atividade.fxml"));
+                                Parent root = loader.load();
+
+                                AtividadeController atividadeController = loader.getController();
+                                atividadeController.setUser(user);
+                                atividadeController.setAtividade(atividade);
+                                atividadeController.setEvento(evento);
+                                atividadeController.atualizarInformacoes();
+
+                                atividadeController.adicionarBotaoEventosOrganizados();
+                                atividadeController.adicionarBotaoCriarEvento();
+
+                                // Obtém o estágio atual e substitui a cena
+                                Stage currentStage = (Stage) listaAtividades.getScene().getWindow();
+                                Scene newScene = new Scene(root);
+
+                                currentStage.setScene(newScene);
+                                currentStage.setTitle("Detalhes da Atividade");
+                            } catch (IOException e) {
+                                e.printStackTrace();
+                            }
+                        });
+                    }
+                }
+            };
+
+            return cell;
+        });
+
+        // Adiciona as atividades à ListView
+        listaAtividades.getItems().addAll(atividades);
     }
 
 

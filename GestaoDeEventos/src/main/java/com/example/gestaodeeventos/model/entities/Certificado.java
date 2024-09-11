@@ -6,6 +6,10 @@ public class Certificado {
     private Inscricao inscricao;
     private Atividade atividade;
 
+    public Certificado(){
+
+    }
+
     public Certificado(Integer id, Inscricao inscricao, Atividade atividade) {
         setId(id);
         setInscricao(inscricao);
