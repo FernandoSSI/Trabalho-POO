@@ -12,6 +12,7 @@ public class CertificadoService {
 
     public void saveOrUpdate(Certificado obj) {
         if (obj.getId() == null) {
+            System.out.println("service:" + obj.getAtividade().getTitulo());
             dao.insert(obj);
         } else {
             dao.update(obj);

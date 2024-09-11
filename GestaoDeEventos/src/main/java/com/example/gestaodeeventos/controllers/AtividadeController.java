@@ -72,11 +72,7 @@ public class AtividadeController extends PaginaController{
             Certificado certificado = new Certificado();
             certificado.setAtividade(atividade);
             certificado.setInscricao(i);
-
-            if (certificadoService.findByAtividadeAndUser(atividade.getId(), i.getParticipante().getId()) != null){
-                certificadoService.saveOrUpdate(certificado);
-            }
-
+            certificadoService.saveOrUpdate(certificado);
         }
 
         Alerts.showAlert(
@@ -109,6 +105,7 @@ public class AtividadeController extends PaginaController{
             stage.setY(currentY);
             stage.show();
 
+            eventoOrganizadoController.adicionarBotaoMeusCertificados();
             eventoOrganizadoController.adicionarBotaoCriarEvento();
             eventoOrganizadoController.adicionarBotaoEventosOrganizados();
             eventoOrganizadoController.atualizarInformacoes();

@@ -90,6 +90,7 @@ public class PaginaEventoController extends PaginaController{
 
             stage.show();
 
+            eventosController.adicionarBotaoMeusCertificados();
             eventosController.atualizarInformacoes();
             eventosController.adicionarBotaoCriarEvento();
             eventosController.adicionarBotaoEventosOrganizados();
@@ -179,9 +180,11 @@ public class PaginaEventoController extends PaginaController{
 
             stage.show();
 
+            listaAtividadesController.adicionarBotaoMeusCertificados();
             listaAtividadesController.atualizarInformacoes();
             listaAtividadesController.adicionarBotaoCriarEvento();
             listaAtividadesController.adicionarBotaoEventosOrganizados();
+
 
         } catch (IOException e) {
             e.printStackTrace();

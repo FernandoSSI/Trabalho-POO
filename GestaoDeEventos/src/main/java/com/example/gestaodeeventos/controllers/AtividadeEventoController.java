@@ -68,6 +68,7 @@ public class AtividadeEventoController extends PaginaController{
             listaAtividadesController.setEvento(evento);
             listaAtividadesController.atualizarInformacoes();
 
+            listaAtividadesController.adicionarBotaoMeusCertificados();
             listaAtividadesController.adicionarBotaoEventosOrganizados();
             listaAtividadesController.adicionarBotaoCriarEvento();
 

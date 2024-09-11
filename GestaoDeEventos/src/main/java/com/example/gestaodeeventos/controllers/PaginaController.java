@@ -26,6 +26,7 @@ public class PaginaController implements Initializable {
     protected User user;
     private boolean btnAddCriarEventoAtivo = false;
     private boolean btnEventosOrganizados = false;
+    private boolean btnCertificados = false;
 
     @FXML
     protected Label labelNome;
@@ -77,9 +78,12 @@ public class PaginaController implements Initializable {
 
             stage.show();
 
+            paginaPrincipalController.adicionarBotaoMeusCertificados();
             paginaPrincipalController.atualizarInformacoes();
+
             paginaPrincipalController.adicionarBotaoCriarEvento();
             paginaPrincipalController.adicionarBotaoEventosOrganizados();
+
 
 
 
@@ -111,9 +115,12 @@ public class PaginaController implements Initializable {
 
             stage.show();
 
+            perfilController.adicionarBotaoMeusCertificados();
             perfilController.atualizarInformacoes();
+
             perfilController.adicionarBotaoCriarEvento();
             perfilController.adicionarBotaoEventosOrganizados();
+
 
         } catch (IOException e) {
             e.printStackTrace();
@@ -145,8 +152,10 @@ public class PaginaController implements Initializable {
             stage.show();
 
             inscricoesController.atualizarInformacoes();
+            inscricoesController.adicionarBotaoMeusCertificados();
             inscricoesController.adicionarBotaoCriarEvento();
             inscricoesController.adicionarBotaoEventosOrganizados();
+
 
 
         } catch (IOException e) {
@@ -178,8 +187,10 @@ public class PaginaController implements Initializable {
             stage.show();
 
             eventosController.atualizarInformacoes();
+            eventosController.adicionarBotaoMeusCertificados();
             eventosController.adicionarBotaoCriarEvento();
             eventosController.adicionarBotaoEventosOrganizados();
+
 
 
         } catch (IOException e) {
@@ -211,8 +222,77 @@ public class PaginaController implements Initializable {
             stage.show();
 
             criarEventoController.atualizarInformacoes();
+            criarEventoController.adicionarBotaoMeusCertificados();
             criarEventoController.adicionarBotaoCriarEvento();
             criarEventoController.adicionarBotaoEventosOrganizados();
+
+
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @FXML
+    public void adicionarBotaoMeusCertificados() {
+        if (user != null && btnCertificados == false) {
+
+                Button novoBotao = new Button("Meus certificados");
+                if(this instanceof MeusCertificadosController){
+                    novoBotao.setStyle("-fx-background-color: #212B3D; -fx-text-fill: WHITE; -fx-font-size: 17px; -fx-border-width: 0 0 1px 0; -fx-border-color: white;");
+                } else {
+                    novoBotao.setStyle("-fx-background-color: #212B3D; -fx-text-fill: WHITE; -fx-font-size: 17px;");
+                }
+
+                novoBotao.setPrefHeight(45.0);
+                novoBotao.setPrefWidth(200.0);
+
+                novoBotao.setCursor(Cursor.HAND);
+
+                novoBotao.setOnAction(this::abrirMeusCertificados);
+
+
+                vboxMenu.getChildren().add(novoBotao);
+                Separator separador = new Separator();
+                separador.setPrefHeight(12);
+                separador.setPrefWidth(200);
+                separador.setOpacity(0.0);
+                vboxMenu.getChildren().add(separador);
+
+                btnCertificados = true;
+
+        }
+
+    }
+
+    @FXML
+    public void abrirMeusCertificados(ActionEvent event){
+        try {
+            Stage currentStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            double currentX = currentStage.getX();
+            double currentY = currentStage.getY();
+
+            FXMLLoader loader = new FXMLLoader(Main.class.getResource("meusCertificados.fxml"));
+            Parent root = loader.load();
+
+            MeusCertificadosController meusCertificadosController = loader.getController();
+            meusCertificadosController.setUser(user);
+
+            Scene scene = new Scene(root);
+            Stage stage = currentStage;
+
+            stage.setScene(scene);
+
+            stage.setX(currentX);
+            stage.setY(currentY);
+
+            stage.show();
+
+            meusCertificadosController.atualizarInformacoes();
+            meusCertificadosController.adicionarBotaoMeusCertificados();
+            meusCertificadosController.adicionarBotaoCriarEvento();
+            meusCertificadosController.adicionarBotaoEventosOrganizados();
+
 
 
         } catch (IOException e) {
@@ -313,46 +393,16 @@ public class PaginaController implements Initializable {
             stage.show();
 
             eventosOrganizadosController.atualizarInformacoes();
+            eventosOrganizadosController.adicionarBotaoMeusCertificados();
             eventosOrganizadosController.adicionarBotaoCriarEvento();
             eventosOrganizadosController.adicionarBotaoEventosOrganizados();
+
 
 
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
-
-    /*@FXML
-    public void adicionarBotaoCertificados() {
-        if (user != null && btnAtivo == false) {
-            if (DB.isOrganizer(user.getId())) {
-                Button novoBotao = new Button("Meus certificados");
-                novoBotao.setStyle("-fx-background-color: #212B3D; -fx-text-fill: WHITE; -fx-font-size: 17px;");
-                novoBotao.setPrefHeight(45.0);
-                novoBotao.setPrefWidth(200.0);
-
-                novoBotao.setCursor(Cursor.HAND);
-
-                novoBotao.setOnAction(this::abrirCertificados);
-
-                vboxMenu.getChildren().add(novoBotao);
-                Separator separador = new Separator();
-                separador.setOpacity(0.0);
-                vboxMenu.getChildren().add(separador);
-
-                btnAtivo = true;
-            }
-        }
-
-    }
-
-    private void abrirCertificados(ActionEvent event) {
-    }*/
-
-
-
-
-
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {

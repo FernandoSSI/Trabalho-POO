@@ -96,8 +96,10 @@ public class InscricoesController extends PaginaController{
                 stage.show();
 
                 paginaInscricaoController.atualizarInformacoes();
+                paginaInscricaoController.adicionarBotaoMeusCertificados();
                 paginaInscricaoController.adicionarBotaoCriarEvento();
                 paginaInscricaoController.adicionarBotaoEventosOrganizados();
+
 
 
             } catch (IOException e) {

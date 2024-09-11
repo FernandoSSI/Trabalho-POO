@@ -33,6 +33,7 @@ public class CertificadoDaoJDBC implements CertificadoDao {
                 try (ResultSet rs = st.getGeneratedKeys()) {
                     if (rs.next()) {
                         obj.setId(rs.getInt(1));
+                        System.out.println("foi criado");
                     }
                 }
             } else {

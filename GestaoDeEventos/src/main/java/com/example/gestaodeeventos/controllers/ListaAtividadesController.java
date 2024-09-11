@@ -63,8 +63,10 @@ public class ListaAtividadesController extends PaginaController{
             stage.show();
 
             paginaEventoController.atualizarInformacoes();
+            paginaEventoController.adicionarBotaoMeusCertificados();
             paginaEventoController.adicionarBotaoCriarEvento();
             paginaEventoController.adicionarBotaoEventosOrganizados();
+
 
 
         } catch (IOException e) {
@@ -110,8 +112,10 @@ public class ListaAtividadesController extends PaginaController{
                                 atividadeEventoController.setEvento(evento);
                                 atividadeEventoController.atualizarInformacoes();
 
+                                atividadeEventoController.adicionarBotaoMeusCertificados();
                                 atividadeEventoController.adicionarBotaoEventosOrganizados();
                                 atividadeEventoController.adicionarBotaoCriarEvento();
+
 
                                 // Obtém o estágio atual e substitui a cena
                                 Stage currentStage = (Stage) listaAtividades.getScene().getWindow();

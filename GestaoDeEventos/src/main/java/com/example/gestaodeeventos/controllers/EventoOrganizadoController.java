@@ -82,8 +82,10 @@ public class EventoOrganizadoController extends PaginaController{
             stage.show();
 
             eventosOrganizadosController.atualizarInformacoes();
+            eventosOrganizadosController.adicionarBotaoMeusCertificados();
             eventosOrganizadosController.adicionarBotaoCriarEvento();
             eventosOrganizadosController.adicionarBotaoEventosOrganizados();
+
 
 
         } catch (IOException e) {
@@ -205,8 +207,10 @@ public class EventoOrganizadoController extends PaginaController{
                                 atividadeController.setEvento(evento);
                                 atividadeController.atualizarInformacoes();
 
+                                atividadeController.adicionarBotaoMeusCertificados();
                                 atividadeController.adicionarBotaoEventosOrganizados();
                                 atividadeController.adicionarBotaoCriarEvento();
+
 
                                 // Obtém o estágio atual e substitui a cena
                                 Stage currentStage = (Stage) listaAtividades.getScene().getWindow();
@@ -262,8 +266,10 @@ public class EventoOrganizadoController extends PaginaController{
                 eventosOrganizadosController.setUser(user);
                 eventosOrganizadosController.atualizarInformacoes();
 
+                eventosOrganizadosController.adicionarBotaoMeusCertificados();
                 eventosOrganizadosController.adicionarBotaoEventosOrganizados();
                 eventosOrganizadosController.adicionarBotaoCriarEvento();
+
 
                 // Obtém o estágio atual e substitui a cena
                 Stage currentStage = (Stage) listaAtividades.getScene().getWindow();

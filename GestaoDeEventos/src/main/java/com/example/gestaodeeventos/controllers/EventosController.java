@@ -127,8 +127,10 @@ public class EventosController extends PaginaController{
                 stage.show();
 
                 paginaEventoController.atualizarInformacoes();
+                paginaEventoController.adicionarBotaoMeusCertificados();
                 paginaEventoController.adicionarBotaoCriarEvento();
                 paginaEventoController.adicionarBotaoEventosOrganizados();
+
 
 
             } catch (IOException e) {

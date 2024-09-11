@@ -12,6 +12,7 @@ public class PaginaPrincipalController extends PaginaController{
 
     public void atualizarInformacoes() {
         adicionarBotaoCriarEvento();
+
     }
 
 }

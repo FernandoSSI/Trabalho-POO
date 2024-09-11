@@ -116,9 +116,11 @@ public class EventosOrganizadosController extends PaginaController{
                 stage.setY(currentY);
                 stage.show();
 
+                eventoOrganizadoController.adicionarBotaoMeusCertificados();
                 eventoOrganizadoController.adicionarBotaoCriarEvento();
                 eventoOrganizadoController.adicionarBotaoEventosOrganizados();
                 eventoOrganizadoController.atualizarInformacoes();
+
 
 
 

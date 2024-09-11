@@ -82,9 +82,11 @@ public class PaginaInscricaoController extends PaginaController{
 
             stage.show();
 
+            inscricoesController.adicionarBotaoMeusCertificados();
             inscricoesController.atualizarInformacoes();
             inscricoesController.adicionarBotaoCriarEvento();
             inscricoesController.adicionarBotaoEventosOrganizados();
+
 
 
         } catch (IOException e) {
@@ -148,6 +150,7 @@ public class PaginaInscricaoController extends PaginaController{
             inscricoesController.atualizarInformacoes();
             inscricoesController.adicionarBotaoCriarEvento();
             inscricoesController.adicionarBotaoEventosOrganizados();
+            inscricoesController.adicionarBotaoMeusCertificados();
 
 
         } catch (IOException e) {
