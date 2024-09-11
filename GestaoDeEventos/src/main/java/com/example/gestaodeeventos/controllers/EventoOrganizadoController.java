@@ -59,6 +59,7 @@ public class EventoOrganizadoController extends PaginaController{
         this.evento = evento;
     }
 
+    // funcao para voltar pra pagina de eventos organizados
     public void voltar(ActionEvent event) {
         try {
             Stage currentStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
@@ -107,6 +108,7 @@ public class EventoOrganizadoController extends PaginaController{
     }
 
 
+    // funcao para abrir a pagina de adicionar atividades ao evento
     public void addAtividades(ActionEvent event) {
         try {
             FXMLLoader loader = new FXMLLoader(Main.class.getResource("addAtividade.fxml"));
@@ -140,6 +142,8 @@ public class EventoOrganizadoController extends PaginaController{
             e.printStackTrace();
         }
     }
+
+    //funcoes para colocar as informacoes nas listas
 
     private void putFeedbacks(Integer eventId){
         List<Feedback> feedbacks = feedbackService.findAllByEventId(eventId);

@@ -49,6 +49,7 @@ public class PerfilController extends PaginaController  {
     private UserService userService;
     private InscricaoService inscricaoService;
 
+    // pegar dados dos campos de texto do formulario
     private User getFormData() {
         User user = this.user;
 

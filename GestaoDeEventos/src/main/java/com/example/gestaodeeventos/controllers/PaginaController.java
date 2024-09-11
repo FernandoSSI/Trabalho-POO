@@ -56,6 +56,8 @@ public class PaginaController implements Initializable {
 
     }
 
+    //funcoes que abrem as paginas refrentes aos botoes da barra lateral
+
     public void abrirPaginaPrincipal(ActionEvent event, User user) {
         try {
             Stage currentStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
@@ -292,9 +294,6 @@ public class PaginaController implements Initializable {
             meusCertificadosController.adicionarBotaoMeusCertificados();
             meusCertificadosController.adicionarBotaoCriarEvento();
             meusCertificadosController.adicionarBotaoEventosOrganizados();
-
-
-
         } catch (IOException e) {
             e.printStackTrace();
         }

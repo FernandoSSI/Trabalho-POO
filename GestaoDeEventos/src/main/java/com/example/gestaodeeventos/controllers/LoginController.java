@@ -47,6 +47,7 @@ public class LoginController implements Initializable {
         this.userService = service;
     }
 
+    //funcao para abrir a tela de cadastro
     @FXML
     public void abrirTelaCadastro(ActionEvent event) {
         try {
@@ -61,6 +62,7 @@ public class LoginController implements Initializable {
         }
     }
 
+    //funcao para fazer login
     @FXML
     public void fazerLogin(ActionEvent event) {
         String email = emailTextField.getText();

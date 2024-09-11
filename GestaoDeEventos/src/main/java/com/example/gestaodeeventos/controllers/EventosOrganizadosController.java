@@ -55,6 +55,7 @@ public class EventosOrganizadosController extends PaginaController{
         }
     }
 
+    //criar pane de amostragem do evento
     private Pane createEventPane(Evento evento) {
         Pane eventPane = new Pane();
         eventPane.setCursor(Cursor.HAND);

@@ -17,9 +17,6 @@ public class MeusCertificadosController extends PaginaController{
     @FXML
     private ListView<String> listaCertificados;
 
-
-
-
     @Override
     public void atualizarInformacoes(){
         List<Certificado> certificados = certificadoService.findAllByUserId(user.getId());
@@ -28,9 +25,6 @@ public class MeusCertificadosController extends PaginaController{
             System.out.println(c.getAtividade().getTitulo() + " - " + c.getInscricao().getEvento().getNome());
             listaCertificados.getItems().add(c.getAtividade().getTitulo() + " - " + c.getInscricao().getEvento().getNome());
         }
-
-
-
     }
 
     @Override

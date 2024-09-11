@@ -20,16 +20,20 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 
+/**
+ * Controller responsável pelo cadastro de atividades no sistema de gestão de eventos.
+ * Implementa a interface Initializable para garantir a inicialização dos serviços ao carregar a interface.
+ */
 public class AddAtividadeController implements Initializable {
 
-    private Evento evento;
-    private Atividade atividade;
-    private List<Colaborador> colaboradores = new ArrayList<>();
-    private AtividadeService atividadeService;
-    private UserService userService;
-    private ColaboradorService colaboradorService;
+    private Evento evento; // Evento ao qual a atividade está associada
+    private Atividade atividade; // Objeto Atividade a ser criado ou atualizado
+    private List<Colaborador> colaboradores = new ArrayList<>(); // Lista de colaboradores associados à atividade
+    private AtividadeService atividadeService; // Serviço para manipulação de atividades
+    private UserService userService; // Serviço para manipulação de usuários
+    private ColaboradorService colaboradorService; // Serviço para manipulação de colaboradores
 
-
+    // Componentes da interface gráfica associados à atividade
     @FXML
     private TextField idColaborador;
     @FXML
@@ -43,16 +47,27 @@ public class AddAtividadeController implements Initializable {
     @FXML
     private ListView<String> listaColaboradores;
 
+    /**
+     * Retorna o evento ao qual a atividade está associada.
+     * @return Evento atual.
+     */
     public Evento getEvento() {
         return evento;
     }
 
+    /**
+     * Define o evento ao qual a atividade está associada.
+     * @param evento O evento a ser associado à atividade.
+     */
     public void setEvento(Evento evento) {
         this.evento = evento;
     }
 
+    /**
+     * Obtém os dados do formulário e cria um objeto Atividade.
+     * @return Atividade criada a partir dos dados do formulário.
+     */
     private Atividade getFormData(){
-
         Atividade atividade = new Atividade();
         atividade.setDescricao(descricaoTextArea.getText());
         atividade.setTitulo(nomeTextField.getText());
@@ -68,15 +83,24 @@ public class AddAtividadeController implements Initializable {
         return atividade;
     }
 
+    /**
+     * Manipula o evento de cadastro de uma nova atividade.
+     * Salva ou atualiza a atividade e fecha a janela atual.
+     * @param event Evento de ação disparado pelo botão de cadastro.
+     */
     public void cadastrarAtividadade(ActionEvent event) {
         this.atividade = getFormData();
         Integer id = atividadeService.saveOrUpdate(atividade);
 
-
+        // Fecha a janela atual após o cadastro
         Stage stage = (Stage) listaColaboradores.getScene().getWindow();
         stage.close();
     }
 
+    /**
+     * Manipula o evento de adicionar um colaborador à lista de colaboradores da atividade.
+     * @param event Evento de ação disparado pelo botão de adicionar colaborador.
+     */
     public void addColaborador(ActionEvent event) {
         Integer id = Integer.parseInt(idColaborador.getText());
         User user = userService.findById(id);
@@ -88,10 +112,11 @@ public class AddAtividadeController implements Initializable {
             colaboradores.add(colaborador);
             atualizarInformacoes();
         }
-
-
     }
 
+    /**
+     * Atualiza as informações na interface gráfica, como a lista de colaboradores.
+     */
     public void atualizarInformacoes() {
         idColaborador.clear();
         for (Colaborador colaborador : colaboradores) {
@@ -99,6 +124,12 @@ public class AddAtividadeController implements Initializable {
         }
     }
 
+    /**
+     * Método de inicialização chamado após o carregamento da interface.
+     * Inicializa os serviços necessários para a manipulação das entidades.
+     * @param url URL da localização do FXML.
+     * @param resourceBundle Recursos utilizados na interface.
+     */
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         this.atividadeService = new AtividadeService();

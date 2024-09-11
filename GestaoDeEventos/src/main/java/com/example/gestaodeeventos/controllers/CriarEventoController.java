@@ -28,12 +28,16 @@ import java.util.ResourceBundle;
 public class CriarEventoController extends PaginaController {
 
 
+    // services necessarios para o controller
     private EventoService eventoService;
     private OrganizadorService organizadorService;
+
+    //entities necessarias para o controller
     private Instituicao instituicao;
     private Categoria categoria;
     private List<Organizador> organizadores = new ArrayList<>();
 
+    //elementos da view
     @FXML
     private TextField nomeEventoTextField;
     @FXML
@@ -48,7 +52,6 @@ public class CriarEventoController extends PaginaController {
     private Text nomeCategoria;
     @FXML
     private TextField idOrganizadores;
-
     @FXML
     private RadioButton presecialBtn;
     @FXML
@@ -61,6 +64,7 @@ public class CriarEventoController extends PaginaController {
     private ListView<String> listaOrganizadores;
     private ToggleGroup modalidadeGroup;
 
+    // funcao para abrir a pagina de adicionar instituicoes
     public void addInstituicao(ActionEvent event) {
         try {
             FXMLLoader loader = new FXMLLoader(Main.class.getResource("adicionarInstituicao.fxml"));
@@ -95,6 +99,7 @@ public class CriarEventoController extends PaginaController {
         }
     }
 
+    // funcao para abrir a pagina de adicionar Categorias
     public void addCategorias(ActionEvent event) {
         try {
             FXMLLoader loader = new FXMLLoader(Main.class.getResource("adicionarCategoria.fxml"));
@@ -131,6 +136,7 @@ public class CriarEventoController extends PaginaController {
         }
     }
 
+    // funcao para adicionar organizadores
     public void addOrganizadores(ActionEvent event) {
         String id = idOrganizadores.getText();
 
@@ -152,6 +158,7 @@ public class CriarEventoController extends PaginaController {
         idOrganizadores.clear();
     }
 
+    //funcao para criar o evento
     public void criarEvento(ActionEvent event) {
 
         Evento evento = eventoGetFormData();
@@ -162,6 +169,7 @@ public class CriarEventoController extends PaginaController {
 
     }
 
+    // funcao para pegar as informacoes dos campos de escrita
     private Evento eventoGetFormData(){
         Evento evento = new Evento();
         evento.setNome(nomeEventoTextField.getText());
@@ -186,6 +194,7 @@ public class CriarEventoController extends PaginaController {
         return evento;
     }
 
+    // limpar campos
     private void limparCampos() {
         nomeEventoTextField.clear();
         expectativaTextField.clear();
@@ -198,12 +207,6 @@ public class CriarEventoController extends PaginaController {
         listaOrganizadores.getItems().clear();
         modalidadeGroup.selectToggle(null);
         organizadores.clear();
-    }
-
-
-    @Override
-    public void atualizarInformacoes() {
-
     }
 
     @Override

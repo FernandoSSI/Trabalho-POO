@@ -1,0 +1,1 @@
+INDEX VERSION 1.132+C:\Users\Fernandes\Documents\ESTUDO\Trabalho-POO\.metadata\.plugins\org.eclipse.jdt.core

@@ -9,6 +9,7 @@ public class DB {
 
     private static Connection conn = null;
 
+    // conectar com o banco de dados
     public static Connection getConnection() {
         if (conn == null) {
             try {
@@ -23,6 +24,7 @@ public class DB {
         return conn;
     }
 
+    // criar tabela se nao existem
     private static void createTablesIfNotExist() {
         String createUserTableSQL = "CREATE TABLE IF NOT EXISTS user (" +
                 "id INTEGER PRIMARY KEY AUTOINCREMENT, " +
@@ -146,6 +148,7 @@ public class DB {
         }
     }
 
+    // fechar conexao
     public static void closeConnection() {
         if (conn != null) {
             try {
@@ -156,6 +159,7 @@ public class DB {
         }
     }
 
+    // verificar se o user e organizador
     public static boolean isOrganizer(int userId) {
         String query = "SELECT COUNT(*) FROM organizador WHERE id = ?";
         try (PreparedStatement stmt = conn.prepareStatement(query)) {
@@ -170,6 +174,7 @@ public class DB {
         return false;
     }
 
+    // verificar se o user e colaborador
     public static boolean isColaborator(Integer id) {
         String query = "SELECT COUNT(*) FROM colaborador WHERE id = ?";
         try (PreparedStatement stmt = conn.prepareStatement(query)) {

@@ -16,12 +16,17 @@ import java.net.URL;
 import java.util.List;
 import java.util.ResourceBundle;
 
+/**
+ * Controller responsável pelo cadastro e seleção de instituições no sistema de gestão de eventos.
+ * Implementa a interface Initializable para garantir a inicialização dos serviços ao carregar a interface.
+ */
 public class AddInstituicaoController implements Initializable {
 
-    private InstituicaoService instituicaoService;
-    private List<Instituicao> instituicoes;
-    private Instituicao instituicao;
+    private InstituicaoService instituicaoService; // Serviço para manipulação de instituições
+    private List<Instituicao> instituicoes; // Lista de instituições disponíveis
+    private Instituicao instituicao; // Instituição selecionada
 
+    // Componentes da interface gráfica associados à instituição
     @FXML
     public TextField nomeTextField;
     @FXML
@@ -48,10 +53,19 @@ public class AddInstituicaoController implements Initializable {
     @FXML
     private ListView<String> listaInstituicoes;
 
+    /**
+     * Retorna a instituição atualmente selecionada.
+     * @return Instituição selecionada.
+     */
     public Instituicao getInstituicao() {
         return instituicao;
     }
 
+    /**
+     * Manipula o evento de cadastro de uma nova instituição.
+     * Salva ou atualiza a instituição e atualiza a lista de instituições na interface.
+     * @param event Evento de ação disparado pelo botão de cadastro.
+     */
     @FXML
     public void CadastrarInstituicao(ActionEvent event) {
         try {
@@ -65,21 +79,21 @@ public class AddInstituicaoController implements Initializable {
             instituicao.setNumeroResidencial(numeroTextField.getText());
             instituicao.setTelefone(telefoneTextField.getText());
 
-            System.out.println(emailTextField.getText());
-
             instituicao.setEmail(emailTextField.getText());
 
-            instituicaoService.saveOrUpdate(instituicao);
+            instituicaoService.saveOrUpdate(instituicao); // Salva ou atualiza a instituição
+            atualizarInformacoes(""); // Atualiza a lista de instituições
 
-            atualizarInformacoes("");
-
-            limparCampos();
+            limparCampos(); // Limpa os campos de entrada após o cadastro
 
         } catch (Exception e) {
-            e.printStackTrace();
+            e.printStackTrace(); // Log de erro em caso de falha
         }
     }
 
+    /**
+     * Limpa os campos de entrada no formulário de cadastro de instituições.
+     */
     public void limparCampos() {
         nomeTextField.clear();
         cnpjTextField.clear();
@@ -92,47 +106,61 @@ public class AddInstituicaoController implements Initializable {
         emailTextField.clear();
     }
 
+    /**
+     * Manipula o evento de seleção de uma instituição na lista.
+     * Define a instituição selecionada e fecha a janela atual.
+     * @param event Evento de ação disparado pela seleção de uma instituição.
+     */
     public void SelecionarInstituicao(ActionEvent event) {
         String selectedItem = listaInstituicoes.getSelectionModel().getSelectedItem();
         if (selectedItem != null) {
-            instituicao = instituicaoService.findByName(selectedItem);
-            instituicaoSelecionada.setText(selectedItem);
+            instituicao = instituicaoService.findByName(selectedItem); // Busca a instituição pelo nome
+            instituicaoSelecionada.setText(selectedItem); // Exibe o nome da instituição selecionada
 
             Stage stage = (Stage) listaInstituicoes.getScene().getWindow();
-            stage.close();
+            stage.close(); // Fecha a janela após a seleção
         }
     }
 
+    /**
+     * Atualiza a lista de instituições na interface gráfica, filtrando pelo nome se necessário.
+     * @param filtro Termo a ser usado para filtrar as instituições. Se for nulo ou vazio, todas as instituições são listadas.
+     */
     public void atualizarInformacoes(String filtro) {
         listaInstituicoes.getItems().clear();
-        instituicoes = instituicaoService.findAll();
+        instituicoes = instituicaoService.findAll(); // Busca todas as instituições
         for (Instituicao instituicao : instituicoes) {
             if (filtro == null || filtro.isEmpty() || instituicao.getNome().toLowerCase().contains(filtro.toLowerCase())) {
-                listaInstituicoes.getItems().add(instituicao.getNome());
+                listaInstituicoes.getItems().add(instituicao.getNome()); // Adiciona a instituição à lista se corresponder ao filtro
             }
         }
     }
 
+    /**
+     * Método de inicialização chamado após o carregamento da interface.
+     * Inicializa o serviço de instituições e configura os listeners para interação com a interface.
+     * @param url URL da localização do FXML.
+     * @param resourceBundle Recursos utilizados na interface.
+     */
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         this.instituicaoService = new InstituicaoService();
-        atualizarInformacoes(""); // Inicializa sem filtro
+        atualizarInformacoes(""); // Atualiza a lista de instituições ao iniciar
 
-        // Adiciona o listener para o campo de pesquisa
+        // Listener para o campo de pesquisa de instituições
         pesquisaInstituicaoTextField.textProperty().addListener(new ChangeListener<String>() {
             @Override
             public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
-                atualizarInformacoes(newValue); // Atualiza a lista com o filtro de pesquisa
+                atualizarInformacoes(newValue); // Atualiza a lista conforme o filtro de pesquisa
             }
         });
 
+        // Listener para clique na lista de instituições
         listaInstituicoes.setOnMouseClicked(event -> {
             String selectedItem = listaInstituicoes.getSelectionModel().getSelectedItem();
             if (selectedItem != null) {
-                instituicaoSelecionada.setText(selectedItem);
+                instituicaoSelecionada.setText(selectedItem); // Exibe o nome da instituição selecionada
             }
         });
     }
-
-
 }

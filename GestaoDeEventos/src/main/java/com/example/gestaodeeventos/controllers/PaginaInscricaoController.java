@@ -60,6 +60,7 @@ public class PaginaInscricaoController extends PaginaController{
         this.evento = evento;
     }
 
+    //voltar para pagina de inscicoes
     public void voltar(ActionEvent event) {
         try {
             Stage currentStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
@@ -86,9 +87,6 @@ public class PaginaInscricaoController extends PaginaController{
             inscricoesController.atualizarInformacoes();
             inscricoesController.adicionarBotaoCriarEvento();
             inscricoesController.adicionarBotaoEventosOrganizados();
-
-
-
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -102,9 +100,7 @@ public class PaginaInscricaoController extends PaginaController{
             inscricao.setParticipante(user);
             inscricaoService.createInscricao(inscricao);
         }
-
         inscricaoPane.setVisible(true);
-
     }
 
     @Override
@@ -113,16 +109,11 @@ public class PaginaInscricaoController extends PaginaController{
             nomeEvento.setText(evento.getNome());
             inscricaoTitulo.setText(inscricaoTitulo.getText() + evento.getNome());
             nomeParticipante.setText(nomeParticipante.getText() + user.getNome());
-            //inscricaoId.setText();
-
             if(inscricaoService.findInscricaoById(user.getId(), evento.getId()) != null){
                 inscricaoPane.setVisible(true);
             }
         }
-
-
     }
-
 
     public void cancelarInscricao(ActionEvent event) {
         try {
@@ -151,8 +142,6 @@ public class PaginaInscricaoController extends PaginaController{
             inscricoesController.adicionarBotaoCriarEvento();
             inscricoesController.adicionarBotaoEventosOrganizados();
             inscricoesController.adicionarBotaoMeusCertificados();
-
-
         } catch (IOException e) {
             e.printStackTrace();
         }

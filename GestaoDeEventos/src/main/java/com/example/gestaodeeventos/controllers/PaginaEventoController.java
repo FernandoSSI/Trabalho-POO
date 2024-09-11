@@ -68,6 +68,7 @@ public class PaginaEventoController extends PaginaController{
         this.evento = evento;
     }
 
+    // voltar para a pagina de eventos
     public void voltar(ActionEvent event) {
         try {
             Stage currentStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
@@ -102,6 +103,7 @@ public class PaginaEventoController extends PaginaController{
 
     }
 
+    // funcao para se inscrever no evento
     public void inscrever(ActionEvent event) {
         if(inscricaoService.findInscricaoById(user.getId(), evento.getId()) == null){
             Inscricao inscricao = new Inscricao();
@@ -157,6 +159,7 @@ public class PaginaEventoController extends PaginaController{
     }
 
 
+    // funcao para abrir a pagina de atividades
     public void abrirAtividades(ActionEvent event) {
         try {
             Stage currentStage = (Stage) ((Node) event.getSource()).getScene().getWindow();

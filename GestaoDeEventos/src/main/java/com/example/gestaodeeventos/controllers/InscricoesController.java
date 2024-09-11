@@ -34,6 +34,7 @@ public class InscricoesController extends PaginaController{
     @FXML
     private GridPane eventosGrid;
 
+    //criar pane de amostragem do evento
     private Pane createEventPane(Evento evento) {
         Pane eventPane = new Pane();
         eventPane.setCursor(Cursor.HAND);

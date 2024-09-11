@@ -42,6 +42,7 @@ public class ListaAtividadesController extends PaginaController{
     @FXML
     public ListView<Atividade> listaAtividades;
 
+    // Funcao de volta para pagina do evento
     public void voltar(ActionEvent event) {
         try {
             Stage currentStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
