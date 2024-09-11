@@ -21,6 +21,7 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.List;
 import java.util.ResourceBundle;
 
 public class PaginaEventoController extends PaginaController{
@@ -44,8 +45,6 @@ public class PaginaEventoController extends PaginaController{
     @FXML
     private Text nomeParticipante;
     @FXML
-    private Text inscricaoId;
-    @FXML
     private Text mapaUrl;
     @FXML
     private Text linkLabel;
@@ -53,8 +52,6 @@ public class PaginaEventoController extends PaginaController{
     private Button inscrevaseBtn;
     @FXML
     private Label nomeEvento;
-    @FXML
-    private Button voltarBtn;
     @FXML
     private Pane inscricaoPane;
 
@@ -109,6 +106,8 @@ public class PaginaEventoController extends PaginaController{
         }
 
         inscricaoPane.setVisible(true);
+        inscrevaseBtn.setVisible(false);
+
 
     }
 
@@ -145,6 +144,39 @@ public class PaginaEventoController extends PaginaController{
     public void initialize(URL url, ResourceBundle resourceBundle) {
         this.inscricaoService = new InscricaoService();
 
+    }
+
+
+    public void abrirAtividades(ActionEvent event) {
+        try {
+            Stage currentStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            double currentX = currentStage.getX();
+            double currentY = currentStage.getY();
+
+            FXMLLoader loader = new FXMLLoader(Main.class.getResource("listaAtividades.fxml"));
+            Parent root = loader.load();
+
+            ListaAtividadesController listaAtividadesController = loader.getController();
+            listaAtividadesController.setUser(user);
+            listaAtividadesController.setEvento(evento);
+
+            Scene scene = new Scene(root);
+            Stage stage = currentStage;
+
+            stage.setScene(scene);
+
+            stage.setX(currentX);
+            stage.setY(currentY);
+
+            stage.show();
+
+            listaAtividadesController.atualizarInformacoes();
+            listaAtividadesController.adicionarBotaoCriarEvento();
+            listaAtividadesController.adicionarBotaoEventosOrganizados();
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
 

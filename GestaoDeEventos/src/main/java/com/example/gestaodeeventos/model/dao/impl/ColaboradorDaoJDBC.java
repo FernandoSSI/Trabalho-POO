@@ -104,6 +104,40 @@ public class ColaboradorDaoJDBC implements ColaboradorDao {
     }
 
     @Override
+    public List<Colaborador> findAllByAtividadeId(Integer atividadeId) {
+        List<Colaborador> colaboradores = new ArrayList<>();
+        String sql = "SELECT c.* FROM colaborador c " +
+                "INNER JOIN atividade_colaborador ac ON c.id = ac.colaborador_id " +
+                "WHERE ac.atividade_id = ?";
+
+        try (PreparedStatement stmt = con.prepareStatement(sql)) {
+            stmt.setInt(1, atividadeId);
+            ResultSet rs = stmt.executeQuery();
+            while (rs.next()) {
+                UserService userService = new UserService();
+                User user = userService.findById(rs.getInt("id"));
+                if (user == null) {
+                    continue;  // Pula para o próximo registro se o usuário não for encontrado
+                }
+                Colaborador colaborador = new Colaborador();
+                colaborador.setId(user.getId());
+                colaborador.setNome(user.getNome());
+                colaborador.setEmail(user.getEmail());
+                colaborador.setSenha(user.getSenha());
+                colaborador.setCpf(user.getCpf());
+                colaborador.setCep(user.getCep());
+                colaborador.setData_nascimento(user.getData_nascimento());
+
+                colaboradores.add(colaborador);
+            }
+        } catch (SQLException e) {
+            throw new DbException(e.getMessage());
+        }
+
+        return colaboradores;
+    }
+
+    @Override
     public List<Colaborador> findAll() {
         PreparedStatement st = null;
         ResultSet resultSet = null;

@@ -130,9 +130,6 @@ public class EventosOrganizadosController extends PaginaController{
         return eventPane;
     }
 
-
-
-    // gerador de cores aleatorias
     private Color getRandomPastelColor() {
         float r = getRandomPastelComponent();
         float g = getRandomPastelComponent();

@@ -10,6 +10,9 @@ public interface ColaboradorDao {
     void update(Colaborador obj);
     void deleteById(Integer id);
     Colaborador findById(Integer id);
+
+    List<Colaborador> findAllByAtividadeId(Integer id);
+
     List<Colaborador> findAll();
 
     List<Colaborador> findAllByEventId(int eventId);

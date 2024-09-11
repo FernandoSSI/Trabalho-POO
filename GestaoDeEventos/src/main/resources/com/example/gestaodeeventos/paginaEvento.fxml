@@ -101,6 +101,14 @@
                   <Cursor fx:constant="HAND" />
                </cursor>
             </Button>
+            <Button layoutX="461.0" layoutY="460.0" mnemonicParsing="false" onAction="#abrirAtividades" prefHeight="50.0" prefWidth="314.0" style="-fx-background-color: #2F3D67; -fx-background-radius: 20; -fx-border-radius: 20;" text="VER ATIVIDADES" textFill="WHITE">
+               <font>
+                  <Font size="18.0" />
+               </font>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </Button>
          </children></AnchorPane>
     </center>
     <top>

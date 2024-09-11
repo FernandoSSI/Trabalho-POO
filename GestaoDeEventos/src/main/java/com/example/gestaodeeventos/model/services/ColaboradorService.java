@@ -26,6 +26,11 @@ public class ColaboradorService {
         }
     }
 
+    public List<Colaborador> findByAtividadeId(Integer id) {
+        return dao.findAllByAtividadeId(id);
+    }
+
+
     public Colaborador findById(Integer id) {
         Colaborador colaborador = dao.findById(id);
         if (colaborador != null){
