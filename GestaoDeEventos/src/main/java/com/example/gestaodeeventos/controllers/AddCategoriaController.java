@@ -108,7 +108,7 @@ public class AddCategoriaController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        this.categoriaService = new CategoriaService();
+        this.categoriaService = CategoriaService.getInstance();
         atualizarInformacoes(""); // Atualiza a lista de categorias ao iniciar
 
         // Listener para o campo de pesquisa de categorias

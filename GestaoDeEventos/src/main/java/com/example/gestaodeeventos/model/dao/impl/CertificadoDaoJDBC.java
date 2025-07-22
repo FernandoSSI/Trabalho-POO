@@ -196,13 +196,13 @@ public class CertificadoDaoJDBC implements CertificadoDao {
         Integer userId = rs.getInt("inscricao_user_id");
         Integer eventoId = rs.getInt("inscricao_evento_id");
 
-        User participante = new UserService().findById(userId);
-        Evento evento = new EventoService().findById(eventoId);
+        User participante = UserService.getInstance().findById(userId);
+        Evento evento = EventoService.getInstance().findById(eventoId);
 
         return new Inscricao(participante, evento);
     }
 
     private Atividade instantiateAtividade(ResultSet rs) throws SQLException {
-        return new AtividadeService().findById(rs.getInt("atividade_id"));
+        return AtividadeService.getInstance().findById(rs.getInt("atividade_id"));
     }
 }

@@ -10,6 +10,16 @@ public class EventoService {
 
 
     private EventoDao dao = DaoFactory.createEventoDao();
+    private static EventoService instance;
+
+    private EventoService() {}
+
+    public static synchronized EventoService getInstance() {
+        if (instance == null) {
+            instance = new EventoService();
+        }
+        return instance;
+    }
 
     public List<Evento> findAllByOrgId(Integer id) {
         return dao.findAllByOrgId(id);

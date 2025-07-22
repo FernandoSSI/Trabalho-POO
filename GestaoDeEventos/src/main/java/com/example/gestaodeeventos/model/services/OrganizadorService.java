@@ -10,7 +10,18 @@ import java.util.List;
 public class OrganizadorService {
 
     private OrganizadorDao dao = DaoFactory.createOrganizadorDao();
-    private UserService userService = new UserService();
+    private UserService userService = UserService.getInstance(); // Singleton
+    private static OrganizadorService instance;
+
+    private OrganizadorService() {}
+
+    public static synchronized OrganizadorService getInstance() {
+        if (instance == null) {
+            instance = new OrganizadorService();
+        }
+        return instance;
+    }
+
 
     public List<Organizador> findAll() {
         return dao.findAll();

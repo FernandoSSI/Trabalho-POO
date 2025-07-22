@@ -11,7 +11,17 @@ import java.util.List;
 
 public class ColaboradorService {
     private ColaboradorDao dao = DaoFactory.createColaboradorDao();
-    private UserService userService = new UserService();
+    private UserService userService = UserService.getInstance();
+    private static ColaboradorService instance;
+
+    private ColaboradorService() {}
+
+    public static synchronized ColaboradorService getInstance() {
+        if (instance == null) {
+            instance = new ColaboradorService();
+        }
+        return instance;
+    }
 
     public List<Colaborador> findAll() {
         return dao.findAll();

@@ -160,8 +160,8 @@ public class PaginaInscricaoController extends PaginaController{
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        this.inscricaoService = new InscricaoService();
-        this.feedbackService = new FeedbackService();
+        this.inscricaoService = InscricaoService.getInstance();
+        this.feedbackService = FeedbackService.getInstance();
 
     }
 

@@ -96,7 +96,7 @@ public class LoginController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        this.userService = new UserService();
-        this.organizadorService = new OrganizadorService();
+        this.userService = UserService.getInstance();
+        this.organizadorService = OrganizadorService.getInstance();
     }
 }

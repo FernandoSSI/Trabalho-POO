@@ -4,15 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="b0fd218f-3f9b-43cf-93c5-1d275a2521f6" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/GestorEventos/.idea/uiDesigner.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/GestorEventos/src/main/java/com/gestoreventostest/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GestorEventos/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/GestorEventos/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GestorEventos/src/main/java/com/example/gestoreventos/Main.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/GestorEventos/src/main/java/com/example/gestoreventos/controllers/LoginController.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/GestorEventos/src/main/java/module-info.java" beforeDir="false" afterPath="$PROJECT_DIR$/GestorEventos/src/main/java/module-info.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GestorEventos/src/main/resources/com/example/gestoreventos/login.fxml" beforeDir="false" />
-    </list>
+    <list default="true" id="b0fd218f-3f9b-43cf-93c5-1d275a2521f6" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -21,13 +13,9 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
-  <component name="MavenImportPreferences">
-    <option name="generalSettings">
-      <MavenGeneralSettings>
-        <option name="useMavenConfig" value="true" />
-      </MavenGeneralSettings>
-    </option>
-  </component>
+  <component name="ProjectColorInfo"><![CDATA[{
+  "associatedIndex": 3
+}]]></component>
   <component name="ProjectId" id="2fVPiPStUZ61erMwNLJ1rKnBMns" />
   <component name="ProjectLevelVcsManager">
     <ConfirmationsSetting value="2" id="Add" />
@@ -40,12 +28,24 @@
   "keyToString": {
     "ASKED_ADD_EXTERNAL_FILES": "true",
     "ASKED_SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "ModuleVcsDetector.initialDetectionPerformed": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.git.unshallow": "true",
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "git-widget-placeholder": "main",
-    "last_opened_file_path": "C:/Users/Fernandes/Documents/ESTUDO/Trabalho-POO"
+    "last_opened_file_path": "C:/Users/Fernando/Documents/PROGRAMMING/Trabalho-POO",
+    "nodejs_package_manager_path": "npm",
+    "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
+  <component name="SharedIndexes">
+    <attachedChunks>
+      <set>
+        <option value="bundled-jdk-9823dce3aa75-fbdcb00ec9e3-intellij.indexing.shared.core-IU-251.26927.53" />
+        <option value="bundled-js-predefined-d6986cc7102b-09060db00ec0-JavaScript-IU-251.26927.53" />
+      </set>
+    </attachedChunks>
+  </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
@@ -54,8 +54,12 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1713883398672</updated>
+      <workItem from="1753140752581" duration="23000" />
     </task>
     <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />

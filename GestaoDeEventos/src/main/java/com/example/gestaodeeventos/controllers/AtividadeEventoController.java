@@ -114,6 +114,6 @@ public class AtividadeEventoController extends PaginaController {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         // Inicializa o serviço de colaboradores
-        this.colaboradorService = new ColaboradorService();
+        this.colaboradorService = ColaboradorService.getInstance();
     }
 }

@@ -241,13 +241,13 @@ public class EventoOrganizadoController extends PaginaController{
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        this.inscricaoService = new InscricaoService();
-        this.feedbackService = new FeedbackService();
-        this.eventoService = new EventoService();
-        this.colaboradorService = new ColaboradorService();
-        this.organizadorService = new OrganizadorService();
-        this.userService = new UserService();
-        this.atividadeService = new AtividadeService();
+        this.inscricaoService = InscricaoService.getInstance();
+        this.feedbackService = FeedbackService.getInstance();
+        this.eventoService = EventoService.getInstance();
+        this.colaboradorService = ColaboradorService.getInstance();
+        this.organizadorService = OrganizadorService.getInstance();
+        this.userService = UserService.getInstance();
+        this.atividadeService = AtividadeService.getInstance();
 
     }
 

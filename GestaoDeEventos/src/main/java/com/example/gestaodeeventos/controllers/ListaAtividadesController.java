@@ -141,7 +141,7 @@ public class ListaAtividadesController extends PaginaController{
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        this.atividadeService = new AtividadeService();
+        this.atividadeService = AtividadeService.getInstance();
 
     }
 }

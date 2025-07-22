@@ -9,6 +9,16 @@ import java.util.List;
 public class FeedbackService {
 
     private FeedbackDao dao = DaoFactory.createFeedbackDao();
+    private static FeedbackService instance;
+
+    private FeedbackService() {}
+
+    public static synchronized FeedbackService getInstance() {
+        if (instance == null) {
+            instance = new FeedbackService();
+        }
+        return instance;
+    }
 
     public void saveOrUpdate(Feedback feedback) {
         if (feedback.getId() == null) {

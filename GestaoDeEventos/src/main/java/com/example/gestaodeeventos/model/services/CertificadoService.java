@@ -9,6 +9,16 @@ import java.util.List;
 public class CertificadoService {
 
     private CertificadoDao dao = DaoFactory.createCertificadoDao();
+    private static CertificadoService instance;
+
+    private CertificadoService() {}
+
+    public static synchronized CertificadoService getInstance() {
+        if (instance == null) {
+            instance = new CertificadoService();
+        }
+        return instance;
+    }
 
     public void saveOrUpdate(Certificado obj) {
         if (obj.getId() == null) {

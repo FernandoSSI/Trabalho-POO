@@ -8,6 +8,16 @@ import java.util.List;
 
 public class CategoriaService {
     private CategoriaDao dao = DaoFactory.createCategoriaDao();
+    private static CategoriaService instance;
+
+    private CategoriaService() {}
+
+    public static synchronized CategoriaService getInstance() {
+        if (instance == null) {
+            instance = new CategoriaService();
+        }
+        return instance;
+    }
 
     public List<Categoria> findAll() {
         return dao.findAll();

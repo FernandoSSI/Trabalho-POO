@@ -134,8 +134,8 @@ public class FeedbackDaoJDBC implements FeedbackDao {
             while (rs.next()) {
                 Feedback feedback = new Feedback();
                 feedback.setId(rs.getInt("id"));
-                feedback.setUsuario(new UserService().findById(rs.getInt("user_id")));
-                feedback.setEvento(new EventoService().findById(rs.getInt("evento_id")));
+                feedback.setUsuario(UserService.getInstance().findById(rs.getInt("user_id")));
+                feedback.setEvento(EventoService.getInstance().findById(rs.getInt("evento_id")));
                 feedback.setComentario(rs.getString("comentario"));
 
                 feedbacks.add(feedback);
@@ -152,9 +152,9 @@ public class FeedbackDaoJDBC implements FeedbackDao {
     }
 
     private Feedback instantiateFeedback(ResultSet rs) throws SQLException {
-        User user = new UserService().findById(rs.getInt("user_id"));
+        User user = UserService.getInstance().findById(rs.getInt("user_id"));
 
-        Evento evento = new EventoService().findById(rs.getInt("eventoId"));
+        Evento evento = EventoService.getInstance().findById(rs.getInt("eventoId"));
 
         Feedback obj = new Feedback();
         obj.setId(rs.getInt("id"));

@@ -211,8 +211,8 @@ public class CriarEventoController extends PaginaController {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        this.organizadorService = new OrganizadorService();
-        this.eventoService = new EventoService();
+        this.organizadorService = OrganizadorService.getInstance();
+        this.eventoService = EventoService.getInstance();
         modalidadeGroup = new ToggleGroup();
         presecialBtn.setToggleGroup(modalidadeGroup);
         hibridoBtn.setToggleGroup(modalidadeGroup);

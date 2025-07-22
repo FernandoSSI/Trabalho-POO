@@ -132,8 +132,8 @@ public class AddAtividadeController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        this.atividadeService = new AtividadeService();
-        this.userService = new UserService();
-        this.colaboradorService = new ColaboradorService();
+        this.atividadeService = AtividadeService.getInstance();
+        this.userService = UserService.getInstance();
+        this.colaboradorService = ColaboradorService.getInstance();
     }
 }

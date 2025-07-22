@@ -120,8 +120,8 @@ public class PerfilController extends PaginaController  {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        this.userService = new UserService();
-        this.inscricaoService = new InscricaoService();
+        this.userService = UserService.getInstance();
+        this.inscricaoService = InscricaoService.getInstance();
         initializeNodes();
 
     }

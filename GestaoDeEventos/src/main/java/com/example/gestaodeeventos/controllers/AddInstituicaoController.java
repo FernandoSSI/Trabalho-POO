@@ -144,7 +144,7 @@ public class AddInstituicaoController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        this.instituicaoService = new InstituicaoService();
+        this.instituicaoService = InstituicaoService.getInstance();
         atualizarInformacoes(""); // Atualiza a lista de instituições ao iniciar
 
         // Listener para o campo de pesquisa de instituições

@@ -5,6 +5,7 @@ import com.example.gestaodeeventos.model.entities.Atividade;
 import com.example.gestaodeeventos.model.entities.Colaborador;
 import com.example.gestaodeeventos.model.entities.Evento;
 import com.example.gestaodeeventos.model.services.EventoService;
+import com.example.gestaodeeventos.model.services.FeedbackService;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -157,7 +158,7 @@ public class AtividadeDaoJDBC implements AtividadeDao {
     }
 
     private Evento instantiateEvento(ResultSet rs) throws SQLException {
-        Evento evento = new EventoService().findById(rs.getInt("evento_id"));
+        Evento evento = EventoService.getInstance().findById(rs.getInt("evento_id"));
         return evento;
     }
 

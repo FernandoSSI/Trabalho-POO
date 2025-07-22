@@ -29,7 +29,7 @@ public class MeusCertificadosController extends PaginaController{
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        this.certificadoService = new CertificadoService();
+        this.certificadoService = CertificadoService.getInstance();
 
     }
 }

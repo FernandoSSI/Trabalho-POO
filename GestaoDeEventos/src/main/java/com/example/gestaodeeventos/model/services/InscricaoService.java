@@ -10,6 +10,16 @@ import java.util.List;
 public class InscricaoService {
 
     private InscricaoDao dao = DaoFactory.createInscricaoDao();
+    private static InscricaoService instance;
+
+    private InscricaoService() {}
+
+    public static synchronized InscricaoService getInstance() {
+        if (instance == null) {
+            instance = new InscricaoService();
+        }
+        return instance;
+    }
 
     public void createInscricao(Inscricao inscricao) {
         dao.insert(inscricao);

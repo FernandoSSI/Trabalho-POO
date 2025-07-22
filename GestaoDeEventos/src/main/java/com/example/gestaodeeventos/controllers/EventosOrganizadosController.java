@@ -155,7 +155,7 @@ public class EventosOrganizadosController extends PaginaController{
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        this.eventoService = new EventoService();
+        this.eventoService = EventoService.getInstance();
     }
 
 

@@ -8,6 +8,18 @@ import java.util.List;
 
 public class AtividadeService {
     private AtividadeDao dao = DaoFactory.createAtividadeDao();
+    private static AtividadeService instance;
+
+    // Construtor privado para evitar instanciação externa
+    private AtividadeService() {}
+
+    // Método estático para obter a instância única
+    public static synchronized AtividadeService getInstance() {
+        if (instance == null) {
+            instance = new AtividadeService();
+        }
+        return instance;
+    }
 
     public Integer saveOrUpdate(Atividade obj) {
         if (obj.getId() == null) {

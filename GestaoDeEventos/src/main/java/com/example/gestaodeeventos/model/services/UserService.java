@@ -9,6 +9,16 @@ import java.util.List;
 public class UserService {
 
     private UserDao dao = DaoFactory.createUserDao();
+    private static UserService instance;
+
+    private UserService() {}
+
+    public static synchronized UserService getInstance() {
+        if (instance == null) {
+            instance = new UserService();
+        }
+        return instance;
+    }
 
     public List<User> findAll() {
         return dao.findAll();

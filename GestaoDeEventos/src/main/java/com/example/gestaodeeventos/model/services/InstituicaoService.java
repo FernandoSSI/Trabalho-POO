@@ -10,6 +10,16 @@ public class InstituicaoService {
 
 
     private InstituicaoDao dao = DaoFactory.createInstituicaoDao();
+    private static InstituicaoService instance;
+
+    private InstituicaoService() {}
+
+    public static synchronized InstituicaoService getInstance() {
+        if (instance == null) {
+            instance = new InstituicaoService();
+        }
+        return instance;
+    }
 
     public List<Instituicao> findAll() {
         return dao.findAll();

@@ -99,7 +99,7 @@ public class CadastroController implements Initializable {
             organizador.setEventosOrganizados(new ArrayList<>());
 
             // Salva ou atualiza o organizador no banco de dados
-            OrganizadorService organizadorService = new OrganizadorService();
+            OrganizadorService organizadorService = OrganizadorService.getInstance();
             organizadorService.saveOrUpdate(organizador);
         }
 
@@ -167,7 +167,7 @@ public class CadastroController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        this.service = new UserService(); // Inicializa o serviço de usuário
+        this.service = UserService.getInstance(); // Inicializa o serviço de usuário
         initializeNodes(); // Configura as restrições dos campos de texto
     }
 }

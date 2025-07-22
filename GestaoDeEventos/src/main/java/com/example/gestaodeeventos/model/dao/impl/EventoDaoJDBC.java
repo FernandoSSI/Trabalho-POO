@@ -171,8 +171,8 @@ public class EventoDaoJDBC implements EventoDao {
                 evento.setDescricao(rs.getString("descricao"));
                 evento.setMapaURL(rs.getString("mapaURL"));
                 evento.setData(rs.getDate("data"));
-                evento.setCategoria(new CategoriaService().findByName(rs.getString("categoria_nome")));
-                evento.setInstituicao(new InstituicaoService().findById(rs.getInt("instituicao_id")));
+                evento.setCategoria(CategoriaService.getInstance().findByName(rs.getString("categoria_nome")));
+                evento.setInstituicao(InstituicaoService.getInstance().findById(rs.getInt("instituicao_id")));
                 evento.setOrganizadores(findOrganizadores(evento.getId()));
                 evento.setParticipantes(findParticipantesByEventoId(evento.getId()));
 
@@ -216,8 +216,8 @@ public class EventoDaoJDBC implements EventoDao {
                 evento.setDescricao(rs.getString("descricao"));
                 evento.setMapaURL(rs.getString("mapaURL"));
                 evento.setData(rs.getDate("data"));
-                evento.setCategoria(new CategoriaService().findByName(rs.getString("categoria_nome")));
-                evento.setInstituicao(new InstituicaoService().findById(rs.getInt("instituicao_id")));
+                evento.setCategoria(CategoriaService.getInstance().findByName(rs.getString("categoria_nome")));
+                evento.setInstituicao(InstituicaoService.getInstance().findById(rs.getInt("instituicao_id")));
                 evento.setOrganizadores(findOrganizadores(evento.getId()));
                 evento.setParticipantes(findParticipantesByEventoId(evento.getId()));
 
@@ -256,8 +256,8 @@ public class EventoDaoJDBC implements EventoDao {
                 evento.setDescricao( rs.getString("descricao"));
                 evento.setMapaURL(rs.getString("mapaURL"));
                 evento.setData(rs.getDate("data"));
-                evento.setCategoria(new CategoriaService().findByName(rs.getString("categoria_nome")));
-                evento.setInstituicao(new InstituicaoService().findById(rs.getInt("instituicao_id")));
+                evento.setCategoria(CategoriaService.getInstance().findByName(rs.getString("categoria_nome")));
+                evento.setInstituicao(InstituicaoService.getInstance().findById(rs.getInt("instituicao_id")));
                 evento.setOrganizadores(findOrganizadores(evento.getId()));
                 evento.setParticipantes(findParticipantesByEventoId(evento.getId()));
 
@@ -291,7 +291,7 @@ public class EventoDaoJDBC implements EventoDao {
             List<Organizador> organizadores = new ArrayList<>();
 
             while (rs.next()) {
-                OrganizadorService organizadorService = new OrganizadorService();
+                OrganizadorService organizadorService = OrganizadorService.getInstance();
                 Organizador organizador = organizadorService.findById(rs.getInt("id"));
                 organizadores.add(organizador);
             }

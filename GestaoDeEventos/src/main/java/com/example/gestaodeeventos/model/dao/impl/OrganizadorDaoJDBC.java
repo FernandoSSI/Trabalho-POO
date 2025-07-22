@@ -76,7 +76,7 @@ public class OrganizadorDaoJDBC implements OrganizadorDao {
             resultSet = st.executeQuery();
 
             if (resultSet.next()) {
-                UserService userService = new UserService();
+                UserService userService = UserService.getInstance();
                 User user = userService.findById(id);
                 if (user == null) {
                     return null;
@@ -137,7 +137,7 @@ public class OrganizadorDaoJDBC implements OrganizadorDao {
             stmt.setInt(1, eventId);
             ResultSet rs = stmt.executeQuery();
             while (rs.next()) {
-                UserService userService = new UserService();
+                UserService userService = UserService.getInstance();
                 User user = userService.findById(rs.getInt("id"));
                 if (user == null) {
                     return null;
